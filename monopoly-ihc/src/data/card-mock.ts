@@ -1,0 +1,324 @@
+import type { QuestionCard } from "../interfaces/question-card";
+
+export const mockQuestionCards: QuestionCard[] = [
+  {
+    id: 1,
+    text: "Pergunta 1",
+    question: "Qual é a capital da França?",
+    answer: "Paris",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 1`),
+  },
+  {
+    id: 2,
+    text: "Pergunta 2",
+    question: "Qual é a fórmula da água?",
+    answer: "H2O",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 2`),
+  },
+  {
+    id: 3,
+    text: "Pergunta 3",
+    question: "Quem escreveu 'Dom Quixote'?",
+    answer: "Miguel de Cervantes",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 3`),
+  },
+  {
+    id: 4,
+    text: "Pergunta 4",
+    question: "Qual planeta é conhecido como Planeta Vermelho?",
+    answer: "Marte",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 4`),
+  },
+  {
+    id: 5,
+    text: "Pergunta 5",
+    question: "Quem pintou a Mona Lisa?",
+    answer: "Leonardo da Vinci",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 5`),
+  },
+  {
+    id: 6,
+    text: "Pergunta 6",
+    question: "Qual é o maior oceano da Terra?",
+    answer: "Oceano Pacífico",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 6`),
+  },
+  {
+    id: 7,
+    text: "Pergunta 7",
+    question: "Qual é a raiz quadrada de 144?",
+    answer: "12",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 7`),
+  },
+  {
+    id: 8,
+    text: "Pergunta 8",
+    question: "Em que ano o homem pisou na Lua pela primeira vez?",
+    answer: "1969",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 8`),
+  },
+  {
+    id: 9,
+    text: "Pergunta 9",
+    question: "Quem desenvolveu a teoria da evolução?",
+    answer: "Charles Darwin",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 9`),
+  },
+  {
+    id: 10,
+    text: "Pergunta 10",
+    question: "Qual é a velocidade da luz no vácuo (aproximada)?",
+    answer: "300.000 km/s",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 10`),
+  },
+  {
+    id: 11,
+    text: "Pergunta 11",
+    question: "Qual é o maior país do mundo em área territorial?",
+    answer: "Rússia",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 11`),
+  },
+  {
+    id: 12,
+    text: "Pergunta 12",
+    question: "Qual é o nome da galáxia onde a Terra está localizada?",
+    answer: "Via Láctea",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 12`),
+  },
+  {
+    id: 13,
+    text: "Pergunta 13",
+    question: "Quem foi o primeiro presidente do Brasil?",
+    answer: "Deodoro da Fonseca",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 13`),
+  },
+  {
+    id: 14,
+    text: "Pergunta 14",
+    question: "Em que continente fica o Egito?",
+    answer: "África",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 14`),
+  },
+  {
+    id: 15,
+    text: "Pergunta 15",
+    question: "Qual é o maior mamífero terrestre?",
+    answer: "Elefante-africano",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 15`),
+  },
+  {
+    id: 16,
+    text: "Pergunta 16",
+    question: "Qual é o nome da estrela mais próxima da Terra?",
+    answer: "Sol",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 16`),
+  },
+  {
+    id: 17,
+    text: "Pergunta 17",
+    question: "Qual é a capital do Japão?",
+    answer: "Tóquio",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 17`),
+  },
+  {
+    id: 18,
+    text: "Pergunta 18",
+    question: "Qual é o metal mais abundante na crosta terrestre?",
+    answer: "Alumínio",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 18`),
+  },
+  {
+    id: 19,
+    text: "Pergunta 19",
+    question: "Qual é a fórmula química do sal de cozinha?",
+    answer: "NaCl",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 19`),
+  },
+  {
+    id: 20,
+    text: "Pergunta 20",
+    question: "Quem escreveu 'A Divina Comédia'?",
+    answer: "Dante Alighieri",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 20`),
+  },
+  {
+    id: 21,
+    text: "Pergunta 21",
+    question: "Qual é o rio mais longo do mundo?",
+    answer: "Rio Nilo",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 21`),
+  },
+  {
+    id: 22,
+    text: "Pergunta 22",
+    question: "Qual é o ponto de ebulição da água em graus Celsius?",
+    answer: "100°C",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 22`),
+  },
+  {
+    id: 23,
+    text: "Pergunta 23",
+    question: "Quem pintou 'A Última Ceia'?",
+    answer: "Leonardo da Vinci",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 23`),
+  },
+  {
+    id: 24,
+    text: "Pergunta 24",
+    question: "Qual é o menor país do mundo?",
+    answer: "Vaticano",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 24`),
+  },
+  {
+    id: 25,
+    text: "Pergunta 25",
+    question: "Qual é o instrumento de cordas mais comum na música clássica?",
+    answer: "Violino",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 25`),
+  },
+  {
+    id: 26,
+    text: "Pergunta 26",
+    question: "Qual é o principal gás do ar que respiramos?",
+    answer: "Nitrogênio",
+    difficulty: "medium",
+    points: 20,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 26`),
+  },
+  {
+    id: 27,
+    text: "Pergunta 27",
+    question: "Em que ano a Segunda Guerra Mundial terminou?",
+    answer: "1945",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 27`),
+  },
+  {
+    id: 28,
+    text: "Pergunta 28",
+    question: "Qual é o animal mais rápido do mundo?",
+    answer: "Falcão-peregrino",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 28`),
+  },
+  {
+    id: 29,
+    text: "Pergunta 29",
+    question: "Qual é o ponto mais alto da Terra?",
+    answer: "Monte Everest",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 29`),
+  },
+  {
+    id: 30,
+    text: "Pergunta 30",
+    question: "Quem foi o líder da Revolução Cubana?",
+    answer: "Fidel Castro",
+    difficulty: "hard",
+    points: 30,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 30`),
+  },
+  {
+    id: 31,
+    text: "Pergunta 31",
+    question: "Qual é o satélite natural da Terra?",
+    answer: "Lua",
+    difficulty: "easy",
+    points: 10,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 31`),
+  },
+  {
+    id: 32,
+    text: "Pergunta 32",
+    question: "Qual é o país que é conhecido como a 'terra do sol nascente'?",
+    answer: "Japão",
+    difficulty: "easy-medium",
+    points: 15,
+    effect: (playerId: number) =>
+      console.log(`Jogador ${playerId} respondeu a carta 32`),
+  },
+];
