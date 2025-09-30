@@ -19,18 +19,18 @@ export const cornerTiles: CornerTile[] = [
   },
   {
     id: 20,
-    text: "Parada Livre",
-    cornerType: "free",
-    effect: () => {
-      console.log("Parada Livre, nada acontece.");
-    },
-  },
-  {
-    id: 30,
     text: "Vá para a prisão",
     cornerType: "go-to-jail",
     effect: (playerId: number) => {
       console.log(`Jogador ${playerId} foi enviado para a prisão!`);
+    },
+  },
+  {
+    id: 30,
+    text: "Parada Livre",
+    cornerType: "free",
+    effect: () => {
+      console.log("Parada Livre, nada acontece.");
     },
   },
 ];

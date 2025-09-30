@@ -6,13 +6,13 @@ import { GoHome } from "react-icons/go";
 const getIconByCornerType = (cornerType: CornerTile["cornerType"]) => {
   switch (cornerType) {
     case "start":
-      return <GoHome className="rotate-45 text-8xl text-white" />;
+      return <GoHome className="rotate-45 text-5xl text-white" />;
     case "jail":
-      return <GiPrisoner className="rotate-45 text-8xl text-white" />;
+      return <GiPrisoner className="rotate-45 text-5xl text-white" />;
     case "free":
-      return <GiCoffeeCup className="rotate-45 text-8xl text-white" />;
+      return <GiCoffeeCup className="rotate-45 text-5xl text-white" />;
     case "go-to-jail":
-      return <GiPoliceOfficerHead className="rotate-45 text-8xl text-white" />;
+      return <GiPoliceOfficerHead className="rotate-45 text-5xl text-white" />;
     default:
       return null;
   }
@@ -30,19 +30,19 @@ export default function CornerCardComponent({
 }: CornerCardProps) {
   return (
     <BaseCardComponent
-      className={`relative flex h-[215px] w-[215px] flex-col items-end ${className}`}
+      className={`relative flex h-[115px] w-[115px] flex-col items-end ${className}`}
     >
-      <div className="flex h-5/6 w-5/6 items-center justify-center border-2 border-white">
+      <div className="flex h-5/6 w-5/6 items-center justify-center border-b-2 border-l-2 border-white">
         {getIconByCornerType(cornerType)}
       </div>
 
       {/* lateral text */}
-      <span className="absolute top-2/3 left-2 origin-top-left translate-y-1/2 -rotate-90 text-xs font-medium text-white uppercase">
+      <span className="text-sxs absolute top-9/12 left-1 origin-top-left translate-y-1/2 -rotate-90 font-medium text-white uppercase">
         {text}
       </span>
 
       {/* bottom text */}
-      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-xs font-medium text-white uppercase">
+      <span className="text-sxs absolute bottom-1 left-1/2 w-full -translate-x-1/2 text-center font-medium text-white uppercase">
         {text}
       </span>
     </BaseCardComponent>

@@ -7,7 +7,7 @@ export default function BaseCardComponent({
 }) {
   return (
     <div
-      className={`from-primary to-secondary border-2 border-white bg-linear-to-r text-white ${className}`}
+      className={`from-primary to-secondary border-1 border-white bg-linear-to-r text-white ${className}`}
     >
       {children}
     </div>

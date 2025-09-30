@@ -23,12 +23,14 @@ export default function CardComponent({
 }: CardComponentProps) {
   return (
     <BaseCardComponent
-      className={`flex h-[215px] w-[175px] flex-col items-center ${className}`}
+      className={`flex h-[115px] w-[105px] flex-col items-center ${className}`}
     >
-      <div className={`h-[60px] w-full ${colorByDifficulty[difficulty]}`}></div>
+      <div
+        className={`h-[30px] w-full border-b-1 border-white ${colorByDifficulty[difficulty]}`}
+      ></div>
       <div className="flex flex-1 flex-col items-center justify-between p-3">
-        <p className="text-xs font-bold uppercase">{text}</p>
-        <span className="text-xs">{points} pontos</span>
+        <p className="text-sxs font-bold uppercase">{text}</p>
+        <span className="text-xs font-medium">{points} pontos</span>
       </div>
     </BaseCardComponent>
   );

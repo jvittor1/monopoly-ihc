@@ -51,10 +51,10 @@ interface ColumnProps {
 
 function Column({ tiles, isRightColumn = false }: ColumnProps) {
   return (
-    <div className="flex h-[calc(4*var(--card-width))] flex-col items-center gap-0">
+    <div className="flex flex-col items-center gap-0">
       {tiles.map((tile, i) => {
         let rotationClass = isRightColumn ? "-rotate-90" : "rotate-90";
-        let cardSizeClass = "w-[215px] h-[175px]"; // Inverte largura/altura
+        let cardSizeClass = "w-[115px] h-[105px]"; // Inverte largura/altura
         return "cornerType" in tile ? (
           <CornerCardComponent key={i} {...tile} />
         ) : (
@@ -81,7 +81,7 @@ export default function Board() {
       <Row tiles={topRowTiles} isTopRow />
       <div className="flex items-center justify-between">
         <Column tiles={leftColumnTiles} />
-        <h1 className="-rotate-45 text-7xl font-bold text-white uppercase">
+        <h1 className="-rotate-45 text-5xl font-bold text-white uppercase">
           Monopoly <span className="text-red-400">IHC</span>
         </h1>
         <Column tiles={rightColumnTiles} isRightColumn />
