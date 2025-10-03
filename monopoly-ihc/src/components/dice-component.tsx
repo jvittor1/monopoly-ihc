@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import * as CANNON from "cannon-es";
+import { useDiceResult } from "@/contexts/dice-result-overlay-context";
+import { useGame } from "@/contexts/game-context";
 
 export default function Dice() {
+  const { showDiceResult } = useDiceResult();
+  const { movePlayer, nextTurn } = useGame();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cubeBodyRef = useRef<CANNON.Body | null>(null);
@@ -241,16 +245,25 @@ export default function Dice() {
       Math.random() * 5,
       Math.random() * 5,
     );
+
+    // espera o dado parar e mostra o resultado
+    const checkIfStopped = setInterval(() => {
+      const vel = cubeBody.velocity.length();
+      const angVel = cubeBody.angularVelocity.length();
+      if (vel < 0.05 && angVel < 0.05) {
+        const topFace = detectTopFace(cubeBody);
+        setDiceNumber(topFace);
+        showDiceResult({ value: topFace });
+        movePlayer(topFace);
+        nextTurn();
+        clearInterval(checkIfStopped);
+      }
+    }, 100);
   };
 
   return (
     <div ref={containerRef} className="absolute inset-0">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      {diceNumber && (
-        <div className="absolute top-5 left-1/2 -translate-x-1/2 transform rounded-xl bg-white/80 px-4 py-2 text-xl font-bold text-black shadow-md">
-          Número: {diceNumber}
-        </div>
-      )}
       <button
         onClick={throwDice}
         className="absolute right-5 bottom-5 rounded-xl bg-blue-600 px-6 py-2 text-white shadow-md transition hover:bg-blue-700"
