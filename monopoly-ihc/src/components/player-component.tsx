@@ -1,10 +1,14 @@
+import { motion } from "framer-motion";
+
 interface PlayerComponentProps {
   color: string;
 }
 
 export default function PlayerComponent({ color }: PlayerComponentProps) {
   return (
-    <div
+    <motion.div
+      layout
+      transition={{ duration: 0.25, ease: "easeInOut" }}
       className="relative inline-block"
       style={{ width: "30px", height: "40px" }}
     >
@@ -145,7 +149,7 @@ export default function PlayerComponent({ color }: PlayerComponentProps) {
           filter: "blur(3px)",
         }}
       />
-    </div>
+    </motion.div>
   );
 }
 
