@@ -1,8 +1,8 @@
 export type TileType =
   | "question"
   | "start"
-  | "prison"
+  | "jail"
   | "free"
-  | "go-to-prison"
+  | "go-to-jail"
   | "random"
   | "property";

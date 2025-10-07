@@ -3,7 +3,7 @@ import type { CornerTile } from "../interfaces/corner-tile";
 import BaseCardComponent from "./base-card-component";
 import { GoHome } from "react-icons/go";
 
-const getIconByCornerType = (cornerType: CornerTile["cornerType"]) => {
+const getIconByCornerType = (cornerType: CornerTile["type"]) => {
   switch (cornerType) {
     case "start":
       return <GoHome className="rotate-45 text-5xl text-white" />;
@@ -24,7 +24,7 @@ interface CornerCardProps extends CornerTile {
 
 export default function CornerCardComponent({
   text,
-  cornerType,
+  type,
   points,
   className,
 }: CornerCardProps) {
@@ -33,7 +33,7 @@ export default function CornerCardComponent({
       className={`relative flex h-[115px] w-[115px] flex-col items-end ${className}`}
     >
       <div className="flex h-5/6 w-5/6 items-center justify-center border-b-2 border-l-2 border-white">
-        {getIconByCornerType(cornerType)}
+        {getIconByCornerType(type)}
       </div>
 
       {/* lateral text */}
