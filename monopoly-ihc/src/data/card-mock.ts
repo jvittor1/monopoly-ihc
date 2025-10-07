@@ -9,6 +9,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 1`),
   },
@@ -20,6 +21,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 2`),
   },
@@ -31,6 +33,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 3`),
   },
@@ -42,6 +45,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 4`),
   },
@@ -53,6 +57,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 5`),
   },
@@ -64,6 +69,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 6`),
   },
@@ -75,6 +81,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 7`),
   },
@@ -86,6 +93,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 8`),
   },
@@ -97,6 +105,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 9`),
   },
@@ -108,6 +117,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 10`),
   },
@@ -119,6 +129,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 11`),
   },
@@ -130,6 +141,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 12`),
   },
@@ -141,6 +153,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 13`),
   },
@@ -152,6 +165,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 14`),
   },
@@ -163,6 +177,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 15`),
   },
@@ -174,6 +189,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 16`),
   },
@@ -185,6 +201,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 17`),
   },
@@ -196,6 +213,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 18`),
   },
@@ -207,6 +225,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 19`),
   },
@@ -218,6 +237,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 20`),
   },
@@ -229,6 +249,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 21`),
   },
@@ -240,6 +261,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 22`),
   },
@@ -251,6 +273,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 23`),
   },
@@ -262,6 +285,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 24`),
   },
@@ -273,6 +297,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 25`),
   },
@@ -284,6 +309,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "medium",
     points: 20,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 26`),
   },
@@ -295,6 +321,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 27`),
   },
@@ -306,6 +333,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 28`),
   },
@@ -317,6 +345,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 29`),
   },
@@ -328,6 +357,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "hard",
     points: 30,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 30`),
   },
@@ -339,6 +369,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy",
     points: 10,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 31`),
   },
@@ -350,6 +381,7 @@ export const mockQuestionCards: QuestionCard[] = [
     difficulty: "easy-medium",
     points: 15,
     type: "question",
+    kind: "question",
     effect: (playerId: number) =>
       console.log(`Jogador ${playerId} respondeu a carta 32`),
   },

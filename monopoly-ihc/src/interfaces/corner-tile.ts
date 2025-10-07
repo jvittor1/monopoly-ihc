@@ -1,6 +1,6 @@
 import type { BaseTile } from "./base-tile";
 
 export interface CornerTile extends BaseTile {
-  cornerType: "start" | "jail" | "free" | "go-to-jail";
+  kind: "corner";
   points?: number;
 }
