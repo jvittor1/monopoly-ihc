@@ -10,9 +10,9 @@ type ModalsFactoryProps = {
 const ModalsRegistry: Record<BaseTile["type"], React.FC<ModalsFactoryProps>> = {
   question: React.lazy(() => import("./modals/question-modal")),
   start: React.lazy(() => import("./modals/question-modal")),
-  prison: React.lazy(() => import("./modals/question-modal")),
+  jail: React.lazy(() => import("./modals/question-modal")),
   free: React.lazy(() => import("./modals/question-modal")),
-  "go-to-prison": React.lazy(() => import("./modals/question-modal")),
+  "go-to-jail": React.lazy(() => import("./modals/question-modal")),
   random: React.lazy(() => import("./modals/question-modal")),
   property: React.lazy(() => import("./modals/question-modal")),
 };

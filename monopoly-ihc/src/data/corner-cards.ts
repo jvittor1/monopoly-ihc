@@ -14,7 +14,7 @@ export const cornerTiles: CornerTile[] = [
     id: 10,
     text: "Prisão",
     kind: "corner",
-    type: "prison",
+    type: "jail",
     effect: (playerId: number) => {
       console.log(`Jogador ${playerId} está preso!`);
     },
@@ -23,7 +23,7 @@ export const cornerTiles: CornerTile[] = [
     id: 20,
     text: "Vá para a prisão",
     kind: "corner",
-    type: "go-to-prison",
+    type: "go-to-jail",
     effect: (playerId: number) => {
       console.log(`Jogador ${playerId} foi enviado para a prisão!`);
     },
