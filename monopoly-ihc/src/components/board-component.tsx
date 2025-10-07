@@ -1,34 +1,19 @@
-import { mockQuestionCards } from "../data/card-mock";
-import { cornerTiles } from "../data/corner-cards";
-import type { QuestionCard } from "../interfaces/question-card";
-import type { CornerTile } from "../interfaces/corner-tile";
 import CardComponent from "./card-component";
 import CornerCardComponent from "./corner-card-component";
 import type { Player } from "@/interfaces/player";
 import PlayerComponent from "./player-component";
 import { useGame } from "@/contexts/game-context";
-
-export type Tile = QuestionCard | CornerTile;
-
-const boardTiles: Tile[] = [
-  cornerTiles[0], // 0 - start (bottom left)
-  ...mockQuestionCards.slice(0, 6), // 1-6 bottom row (esquerda → direita)
-  cornerTiles[1], // 7 - bottom right
-  ...mockQuestionCards.slice(16, 20).reverse(), // 8-11 right column
-  cornerTiles[2], // 12 - top right
-  ...mockQuestionCards.slice(10, 16).reverse(), // 13-18 top row
-  cornerTiles[3], // 19 - top left
-  ...mockQuestionCards.slice(6, 10), // 20-23 left column
-];
+import { useBoard, type Tile } from "@/hooks/use-board";
 
 // -------------------- Row --------------------
 interface RowProps {
   tiles: Tile[];
   isTopRow?: boolean;
   players: Player[];
+  boardTiles: Tile[];
 }
 
-function Row({ tiles, isTopRow = false, players }: RowProps) {
+function Row({ tiles, isTopRow = false, players, boardTiles }: RowProps) {
   return (
     <div className="flex">
       {tiles.map((tile, i) => {
@@ -67,9 +52,15 @@ interface ColumnProps {
   tiles: Tile[];
   isRightColumn?: boolean;
   players: Player[];
+  boardTiles: Tile[];
 }
 
-function Column({ tiles, isRightColumn = false, players }: ColumnProps) {
+function Column({
+  tiles,
+  isRightColumn = false,
+  players,
+  boardTiles,
+}: ColumnProps) {
   return (
     <div className="flex flex-col items-center gap-0">
       {tiles.map((tile, i) => {
@@ -108,7 +99,7 @@ function Column({ tiles, isRightColumn = false, players }: ColumnProps) {
 // -------------------- Board --------------------
 export default function Board() {
   const { players } = useGame();
-
+  const { boardTiles } = useBoard();
   const bottomRowTiles = boardTiles.slice(0, 8);
   const rightColumnTiles = boardTiles.slice(8, 12).reverse();
   const topRowTiles = boardTiles.slice(12, 20).reverse();
@@ -116,17 +107,31 @@ export default function Board() {
 
   return (
     <div className="flex w-fit flex-col">
-      <Row tiles={topRowTiles} isTopRow players={players} />
+      <Row
+        tiles={topRowTiles}
+        isTopRow
+        players={players}
+        boardTiles={boardTiles}
+      />
 
       <div className="flex items-center justify-between">
-        <Column tiles={leftColumnTiles} players={players} />
+        <Column
+          tiles={leftColumnTiles}
+          players={players}
+          boardTiles={boardTiles}
+        />
         <h1 className="font-titan -rotate-45 text-5xl font-bold text-white uppercase">
           Monopoly <span className="text-red-400">IHC</span>
         </h1>
-        <Column tiles={rightColumnTiles} isRightColumn players={players} />
+        <Column
+          tiles={rightColumnTiles}
+          isRightColumn
+          players={players}
+          boardTiles={boardTiles}
+        />
       </div>
 
-      <Row tiles={bottomRowTiles} players={players} />
+      <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} />
     </div>
   );
 }

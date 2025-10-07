@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App.tsx";
 import { DiceResultProvider } from "./contexts/dice-result-overlay-context.tsx";
 import { GameProvider } from "./contexts/game-context.tsx";
+import { ModalProvider } from "./contexts/modal-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <GameProvider>
-      <DiceResultProvider>
-        <App />
-      </DiceResultProvider>
-    </GameProvider>
+    <ModalProvider>
+      <GameProvider>
+        <DiceResultProvider>
+          <App />
+        </DiceResultProvider>
+      </GameProvider>
+    </ModalProvider>
   </StrictMode>,
 );

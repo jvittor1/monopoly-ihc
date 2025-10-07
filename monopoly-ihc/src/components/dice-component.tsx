@@ -6,7 +6,7 @@ import { useGame } from "@/contexts/game-context";
 
 export default function Dice() {
   const { showDiceResult } = useDiceResult();
-  const { movePlayer, nextTurn } = useGame();
+  const { movePlayer, isRoundInProgress, setIsRoundInProgress } = useGame();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cubeBodyRef = useRef<CANNON.Body | null>(null);
@@ -222,6 +222,9 @@ export default function Dice() {
   }, []);
 
   const throwDice = () => {
+    setIsRoundInProgress(true);
+    // console.log("Dado lançado");
+
     const cubeBody = cubeBodyRef.current;
     if (!cubeBody) return;
 
@@ -255,7 +258,6 @@ export default function Dice() {
         setDiceNumber(topFace);
         showDiceResult({ value: topFace });
         movePlayer(topFace);
-        nextTurn();
         clearInterval(checkIfStopped);
       }
     }, 100);
@@ -267,6 +269,7 @@ export default function Dice() {
       <button
         onClick={throwDice}
         className="absolute right-5 bottom-5 rounded-xl bg-blue-600 px-6 py-2 text-white shadow-md transition hover:bg-blue-700"
+        disabled={isRoundInProgress}
       >
         Jogar dado
       </button>
