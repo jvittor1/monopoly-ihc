@@ -4,6 +4,9 @@ type EventMap = {
   showModal: { tile: Tile; playerId: number };
   closeModal: void;
   nextTurn: void;
+  showAnswer: {
+    isCorrect: boolean;
+  };
 };
 
 class EventBus<T extends Record<string, any>> {

@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import type { ReactNode } from "react";
-import { ModalFactory } from "@/components/modals-factory";
+import { ModalFactory } from "@/factories/modals-factory";
 import type { Tile } from "@/hooks/use-board";
 import { eventBus } from "@/utils/event-emitter";
 
@@ -39,7 +39,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
     }
     setModalContent(
       <Suspense fallback={<div className="text-white">Carregando...</div>}>
-        <ModalComponent tile={tile} playerId={playerId} />
+        <ModalComponent tile={tile as any} playerId={playerId} />
       </Suspense>,
     );
   };

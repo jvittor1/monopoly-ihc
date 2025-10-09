@@ -1,40 +1,17 @@
+import { createCornerTile } from "@/utils/create-corner-tiles";
 import type { CornerTile } from "../interfaces/corner-tile";
 
 export const cornerTiles: CornerTile[] = [
-  {
-    id: 1,
-    text: "Início",
-    kind: "corner",
-    type: "start",
-    effect: (playerId: number) => {
-      console.log(`Jogador ${playerId} passou pelo início!`);
-    },
-  },
-  {
-    id: 10,
-    text: "Prisão",
-    kind: "corner",
-    type: "jail",
-    effect: (playerId: number) => {
-      console.log(`Jogador ${playerId} está preso!`);
-    },
-  },
-  {
-    id: 20,
-    text: "Vá para a prisão",
-    kind: "corner",
-    type: "go-to-jail",
-    effect: (playerId: number) => {
-      console.log(`Jogador ${playerId} foi enviado para a prisão!`);
-    },
-  },
-  {
-    id: 30,
-    text: "Parada Livre",
-    kind: "corner",
-    type: "free",
-    effect: () => {
-      console.log("Parada Livre, nada acontece.");
-    },
-  },
+  createCornerTile(1, "Início", "start", (playerId: number) => {
+    console.log(`Jogador ${playerId} passou pelo início!`);
+  }),
+  createCornerTile(10, "Prisão", "jail", (playerId: number) => {
+    console.log(`Jogador ${playerId} está preso!`);
+  }),
+  createCornerTile(20, "Vá para a prisão", "go-to-jail", (playerId: number) => {
+    console.log(`Jogador ${playerId} foi enviado para a prisão!`);
+  }),
+  createCornerTile(30, "Parada Livre", "free", () => {
+    console.log("Parada Livre, nada acontece.");
+  }),
 ];

@@ -28,8 +28,8 @@ function Row({ tiles, isTopRow = false, players, boardTiles }: RowProps) {
 
         return (
           <div className="relative" key={i}>
-            {tile.kind === "corner" ? (
-              <CornerCardComponent {...tile} />
+            {tile.isCorner ? (
+              <CornerCardComponent {...tile} className={rotationClass} />
             ) : (
               <CardComponent {...tile} className={rotationClass} />
             )}
@@ -74,7 +74,7 @@ function Column({
 
         return (
           <div className="relative" key={i}>
-            {tile.kind === "corner" ? (
+            {tile.isCorner ? (
               <CornerCardComponent {...tile} className={rotationClass} />
             ) : (
               <CardComponent

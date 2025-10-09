@@ -4,7 +4,14 @@ export interface QuestionCard extends BaseTile {
   question: string;
   answer: string;
   difficulty: "easy" | "easy-medium" | "medium" | "hard";
-  kind: "question";
+  alternatives: Alternative[];
+  correctAlternative: number;
+  isCorner: false;
   points: number;
   ownerId?: number;
 }
+
+export type Alternative = {
+  id: number;
+  text: string;
+};
