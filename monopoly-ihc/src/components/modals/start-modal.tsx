@@ -2,6 +2,7 @@ import type { CornerTile } from "@/interfaces/corner-tile";
 import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, Sparkles, CirclePoundSterling } from "lucide-react";
+import { TIME } from "../../constants/time";
 
 interface StartModalProps {
   tile: CornerTile;
@@ -18,7 +19,7 @@ export default function StartModal({ tile, playerId }: StartModalProps) {
   console.log("Tile:", tile);
   console.log("Player ID:", playerId);
 
-  setTimeout(handleContinue, 5000);
+  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
   // Valor que o jogador recebe ao passar pelo início
   const bonusAmount = 200;
 

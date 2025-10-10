@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import DiceResultOverlay from "@/components/dice-result-overlay-component";
+import { TIME } from "@/constants/time";
 
 interface DiceResultOverlayProps {
   value: number;
@@ -37,7 +38,10 @@ export const DiceResultProvider: React.FC<DiceResultProviderProps> = ({
   useEffect(() => {
     if (!overlay) return;
 
-    const timeout = setTimeout(() => setOverlay(null), overlay.timer ?? 1800);
+    const timeout = setTimeout(
+      () => setOverlay(null),
+      overlay.timer ?? TIME.BASIC_DELAY,
+    );
     return () => clearTimeout(timeout);
   }, [overlay]);
 

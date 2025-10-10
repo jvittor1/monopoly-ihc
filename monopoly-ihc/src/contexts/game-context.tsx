@@ -3,6 +3,7 @@ import type { Player } from "@/interfaces/player";
 import { playerMock } from "@/data/player-mock";
 import { useBoard } from "@/hooks/use-board";
 import { eventBus } from "@/utils/event-emitter";
+import { TIME } from "@/constants/time";
 // import { useModal } from "./modal-context";
 
 type GameContextType = {
@@ -64,7 +65,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         }
       }
 
-      setTimeout(moveStep, 1800);
+      setTimeout(moveStep, TIME.MEDIUM_DELAY);
     });
   }
 

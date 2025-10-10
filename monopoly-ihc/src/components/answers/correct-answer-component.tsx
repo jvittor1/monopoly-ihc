@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, TrendingUp } from "lucide-react";
+import { TIME } from "../../constants/time";
 
 interface CorrectAnswerModalProps {
   onClose: () => void;
@@ -10,7 +11,7 @@ export default function CorrectAnswerModal({
 }: CorrectAnswerModalProps) {
   setTimeout(() => {
     onClose();
-  }, 5000);
+  }, TIME.EXTRA_LONG_DELAY);
 
   console.log("Renderizando CorrectAnswerModal");
 

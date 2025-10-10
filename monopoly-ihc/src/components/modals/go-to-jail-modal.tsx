@@ -2,6 +2,7 @@ import type { CornerTile } from "@/interfaces/corner-tile";
 import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldAlert, Zap, ArrowRight, Lock } from "lucide-react";
+import { TIME } from "../../constants/time";
 
 interface GoToJailModalProps {
   tile: CornerTile;
@@ -14,7 +15,7 @@ export default function GoToJailModal({ tile, playerId }: GoToJailModalProps) {
     eventBus.emit("nextTurn");
   };
 
-  setTimeout(handleContinue, 5000);
+  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
 
   console.log("Tile:", tile);
   console.log("Player ID:", playerId);

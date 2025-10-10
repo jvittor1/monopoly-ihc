@@ -1,0 +1,6 @@
+export const TIME = {
+  BASIC_DELAY: 1800,
+  MEDIUM_DELAY: 2200,
+  LONG_DELAY: 3000,
+  EXTRA_LONG_DELAY: 5000,
+};
