@@ -28,9 +28,26 @@ export default function CornerCardComponent({
   points,
   className,
 }: CornerCardProps) {
+  const getDegreeByCornerType = (type: CornerTile["type"]) => {
+    switch (type) {
+      case "start":
+        return "rotate-0";
+      case "jail":
+        return "rotate-[90deg]";
+      case "free":
+        return "rotate-[180deg]";
+      case "go-to-jail":
+        return "rotate-[270deg]";
+      default:
+        return "rotate-0";
+    }
+  };
+  console.log(type);
+  console.log(getDegreeByCornerType(type));
+
   return (
     <BaseCardComponent
-      className={`relative flex h-[115px] w-[115px] flex-col items-end ${className}`}
+      className={`relative flex h-[115px] ${getDegreeByCornerType(type)} w-[115px] flex-col items-end ${className}`}
     >
       <div className="flex h-5/6 w-5/6 items-center justify-center border-b-2 border-l-2 border-white">
         {getIconByCornerType(type)}

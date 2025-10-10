@@ -23,13 +23,14 @@ function Row({ tiles, isTopRow = false, players, boardTiles }: RowProps) {
         );
 
         let rotationClass = "";
-        if (isTopRow && i > 0 && i < tiles.length - 1)
-          rotationClass = "-rotate-180";
+        if (isTopRow && !tile.isCorner) {
+          rotationClass = "rotate-180";
+        }
 
         return (
           <div className="relative" key={i}>
             {tile.isCorner ? (
-              <CornerCardComponent {...tile} className={rotationClass} />
+              <CornerCardComponent {...tile} />
             ) : (
               <CardComponent {...tile} className={rotationClass} />
             )}
@@ -75,7 +76,7 @@ function Column({
         return (
           <div className="relative" key={i}>
             {tile.isCorner ? (
-              <CornerCardComponent {...tile} className={rotationClass} />
+              <CornerCardComponent {...tile} />
             ) : (
               <CardComponent
                 {...tile}
@@ -100,14 +101,43 @@ function Column({
 export default function Board() {
   const { players } = useGame();
   const { boardTiles } = useBoard();
-  const bottomRowTiles = boardTiles.slice(0, 8);
-  const rightColumnTiles = boardTiles.slice(8, 12).reverse();
-  const topRowTiles = boardTiles.slice(12, 20).reverse();
-  const leftColumnTiles = boardTiles.slice(20, 24);
+
+  console.log("-------------boardTiles-------------", boardTiles);
+
+  const rightColumnTiles = boardTiles.slice(0, 6).reverse();
+  const topRowTiles = boardTiles.slice(6, 12);
+  const leftColumnTiles = boardTiles.slice(12, 18);
+  const bottomRowTiles = boardTiles.slice(18, 24).reverse();
 
   return (
-    <div className="flex w-fit flex-col">
-      <Row
+    <div className="flex w-fit flex-row">
+      <Column
+        tiles={rightColumnTiles}
+        // isRightColumn
+        players={players}
+        boardTiles={boardTiles}
+      />
+
+      <div className="flex flex-col items-center justify-between">
+        <Row
+          tiles={topRowTiles}
+          isTopRow
+          players={players}
+          boardTiles={boardTiles}
+        />
+        <h1 className="font-titan my-4 -rotate-45 text-5xl font-bold text-white uppercase">
+          Monopoly <span className="text-red-400">IHC</span>
+        </h1>
+        <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} />
+      </div>
+      <Column
+        tiles={leftColumnTiles}
+        isRightColumn
+        players={players}
+        boardTiles={boardTiles}
+      />
+
+      {/* <Row
         tiles={topRowTiles}
         isTopRow
         players={players}
@@ -131,7 +161,7 @@ export default function Board() {
         />
       </div>
 
-      <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} />
+      <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} /> */}
     </div>
   );
 }
