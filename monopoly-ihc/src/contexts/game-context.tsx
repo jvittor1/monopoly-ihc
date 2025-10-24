@@ -11,6 +11,7 @@ type GameContextType = {
   currentPlayer: Player;
   movePlayer: (steps: number) => Promise<void>;
   nextTurn: () => void;
+  round: number;
   isRoundInProgress?: boolean;
   setIsRoundInProgress: (inProgress: boolean) => void;
 };
@@ -31,6 +32,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [players, setPlayers] = useState<Player[]>(playerMock);
   const [turnIndex, setTurnIndex] = useState(0);
   const [isRoundInProgress, setIsRoundInProgress] = useState(false);
+  const [round, setRound] = useState(1);
 
   const { getTileByIndex } = useBoard();
   // const { showModalForTile } = useModal();
@@ -72,6 +74,9 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const nextTurn = () => {
     setIsRoundInProgress(false);
     setTurnIndex((prev) => (prev + 1) % players.length);
+    if (turnIndex === players.length - 1) {
+      setRound((prev) => prev + 1);
+    }
   };
 
   useEffect(() => {
@@ -93,6 +98,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         nextTurn,
         isRoundInProgress,
         setIsRoundInProgress,
+        round,
       }}
     >
       {children}

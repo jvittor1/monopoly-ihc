@@ -110,7 +110,7 @@ export default function Board() {
   const bottomRowTiles = boardTiles.slice(18, 24).reverse();
 
   return (
-    <div className="flex w-fit flex-row">
+    <div className="flex w-fit flex-row justify-center">
       <Column
         tiles={rightColumnTiles}
         // isRightColumn
