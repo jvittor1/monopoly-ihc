@@ -1,4 +1,4 @@
-import type { TileType } from "./tile-type";
+import type { TileType } from "../types/tile-type";
 
 export interface BaseTile {
   id: number;

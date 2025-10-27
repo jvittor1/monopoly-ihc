@@ -1,12 +1,10 @@
 import type { Tile } from "@/hooks/use-board";
 import type { CornerTile } from "@/interfaces/corner-tile";
 import type { QuestionCard } from "@/interfaces/question-card";
+import type { BaseModalProps } from "@/types/modal-type";
 import React from "react";
 
-type ModalComponentForTile<T extends Tile> = React.FC<{
-  tile: T;
-  playerId: number;
-}>;
+type ModalComponentForTile<T extends Tile> = React.FC<BaseModalProps<T>>;
 
 const ModalsRegistry = {
   question: React.lazy(
@@ -31,7 +29,6 @@ const ModalsRegistry = {
     () => import("../components/modals/question-modal"),
   ) as ModalComponentForTile<QuestionCard>,
 };
-
-export function ModalFactory(tile: Tile) {
-  return ModalsRegistry[tile.type] || null;
+export function ModalFactory<T extends Tile>(tile: T) {
+  return ModalsRegistry[tile.type] as React.FC<BaseModalProps<T>>;
 }

@@ -1,26 +1,25 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
-import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Coffee, Sparkles, Smile } from "lucide-react";
 import { TIME } from "../../constants/time";
+import type { BaseModalProps } from "@/types/modal-type";
 
-interface FreeParkingModalProps {
-  tile: CornerTile;
-  playerId: number;
-}
+type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
 export default function FreeParkingModal({
   tile,
   playerId,
+  onClose,
+  onAction,
 }: FreeParkingModalProps) {
   const handleContinue = () => {
-    eventBus.emit("closeModal");
-    eventBus.emit("nextTurn");
+    if (onClose) onClose();
+    if (onAction) onAction();
   };
 
   setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-  console.log("Tile:", tile);
-  console.log("Player ID:", playerId);
+  // console.log("Tile:", tile);
+  // console.log("Player ID:", playerId);
 
   return (
     <AnimatePresence>

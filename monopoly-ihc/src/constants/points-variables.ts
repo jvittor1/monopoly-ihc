@@ -1,0 +1,4 @@
+export const POINTS_VARIABLES = {
+  START: 200,
+  JAIL_TURNS_QUANTITY: 2,
+};

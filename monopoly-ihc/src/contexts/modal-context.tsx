@@ -1,19 +1,16 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  Suspense,
-  useEffect,
-} from "react";
-import type { ReactNode } from "react";
+import React, { createContext, useContext, useState, Suspense } from "react";
 import { ModalFactory } from "@/factories/modals-factory";
 import type { Tile } from "@/hooks/use-board";
-import { eventBus } from "@/utils/event-emitter";
+import type { BaseModalProps } from "@/types/modal-type";
 
-interface ModalContextType {
-  showModalForTile: (tile: Tile, playerId: number) => void;
+export type ModalContextType = {
+  showModalForTile: (
+    tile: Tile,
+    playerId: number,
+    options?: Pick<BaseModalProps, "onClose" | "onAction">,
+  ) => void;
   closeModal: () => void;
-}
+};
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
@@ -23,53 +20,40 @@ export const useModal = () => {
   return ctx;
 };
 
-export function ModalProvider({ children }: { children: ReactNode }) {
+export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(
     null,
   );
 
   const closeModal = () => setModalContent(null);
 
-  const showModalForTile = (tile: Tile, playerId: number) => {
+  const showModalForTile = (
+    tile: Tile,
+    playerId: number,
+    options?: Pick<BaseModalProps, "onClose" | "onAction">,
+  ) => {
     const ModalComponent = ModalFactory(tile);
+    if (!ModalComponent) return;
 
-    if (!ModalComponent) {
-      console.warn(`Nenhum modal encontrado para tile do tipo "${tile.type}"`);
-      return;
-    }
+    console.log("Showing modal for tile:", tile);
+
     setModalContent(
       <Suspense fallback={<div className="text-white">Carregando...</div>}>
-        <ModalComponent tile={tile as any} playerId={playerId} />
+        <ModalComponent
+          tile={tile}
+          playerId={playerId}
+          onClose={() => {
+            closeModal();
+            options?.onClose?.();
+          }}
+          onAction={(payload) => {
+            closeModal();
+            options?.onAction?.(payload);
+          }}
+        />
       </Suspense>,
     );
   };
-
-  useEffect(() => {
-    const handleShowModal = ({
-      tile,
-      playerId,
-    }: {
-      tile: Tile;
-      playerId: number;
-    }) => {
-      showModalForTile(tile, playerId);
-    };
-
-    eventBus.on("showModal", handleShowModal);
-    return () => {
-      eventBus.off("showModal", handleShowModal);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleCloseModal = () => {
-      closeModal();
-    };
-    eventBus.on("closeModal", handleCloseModal);
-    return () => {
-      eventBus.off("closeModal", handleCloseModal);
-    };
-  }, []);
 
   return (
     <ModalContext.Provider value={{ showModalForTile, closeModal }}>

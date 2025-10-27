@@ -4,16 +4,18 @@ import { TIME } from "../../constants/time";
 
 interface IncorrectAnswerModalProps {
   onClose: () => void;
+  tilePoints?: number;
 }
 
 export default function IncorrectAnswerModal({
   onClose,
+  tilePoints,
 }: IncorrectAnswerModalProps) {
   setTimeout(() => {
     onClose();
   }, TIME.EXTRA_LONG_DELAY);
 
-  console.log("Renderizando IncorrectAnswerModal");
+  // console.log("Renderizando IncorrectAnswerModal");
 
   return (
     <AnimatePresence>
@@ -86,7 +88,9 @@ export default function IncorrectAnswerModal({
               className="mb-6 flex items-center justify-center gap-2 rounded-lg border border-red-500/30 bg-slate-800/40 p-4 backdrop-blur-sm"
             >
               <TrendingDown className="h-6 w-6 text-red-400" />
-              <p className="text-xl font-bold text-red-300">0 pontos</p>
+              <p className="text-xl font-bold text-red-300">
+                - {tilePoints} pontos
+              </p>
             </motion.div>
           </div>
 

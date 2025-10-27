@@ -1,24 +1,26 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
-import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldAlert, Zap, ArrowRight, Lock } from "lucide-react";
 import { TIME } from "../../constants/time";
+import type { BaseModalProps } from "@/types/modal-type";
 
-interface GoToJailModalProps {
-  tile: CornerTile;
-  playerId: number;
-}
+type GoToJailModalProps = BaseModalProps<CornerTile>;
 
-export default function GoToJailModal({ tile, playerId }: GoToJailModalProps) {
+export default function GoToJailModal({
+  tile,
+  playerId,
+  onClose,
+  onAction,
+}: GoToJailModalProps) {
   const handleContinue = () => {
-    eventBus.emit("closeModal");
-    eventBus.emit("nextTurn");
+    if (onClose) onClose();
+    if (onAction) onAction();
   };
 
   setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
 
-  console.log("Tile:", tile);
-  console.log("Player ID:", playerId);
+  // console.log("Tile:", tile);
+  // console.log("Player ID:", playerId);
 
   return (
     <AnimatePresence>

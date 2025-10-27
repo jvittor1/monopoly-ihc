@@ -1,6 +1,6 @@
 import type { BaseTile } from "@/interfaces/base-tile";
 import type { CornerTile } from "@/interfaces/corner-tile";
-import type { TileType } from "@/interfaces/tile-type";
+import type { TileType } from "@/types/tile-type";
 
 export function createCornerTile(
   id: number,

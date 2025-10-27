@@ -1,26 +1,28 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
-import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, AlertTriangle, Timer } from "lucide-react";
 import { TIME } from "../../constants/time";
+import type { BaseModalProps } from "@/types/modal-type";
 
-interface JailModalProps {
-  tile: CornerTile;
-  playerId: number;
-}
+type JailModalProps = BaseModalProps<CornerTile>;
 
-export default function JailModal({ tile, playerId }: JailModalProps) {
+export default function JailModal({
+  tile,
+  playerId,
+  onClose,
+  onAction,
+}: JailModalProps) {
   // Número de turnos que o jogador fica preso
   const TURNS_IN_JAIL = 2;
 
   const handleContinue = () => {
-    eventBus.emit("closeModal");
-    eventBus.emit("nextTurn");
+    if (onClose) onClose();
+    if (onAction) onAction();
   };
 
   setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-  console.log("Tile:", tile);
-  console.log("Player ID:", playerId);
+  // console.log("Tile:", tile);
+  // console.log("Player ID:", playerId);
 
   return (
     <AnimatePresence>

@@ -7,7 +7,7 @@ interface DiceResultOverlayProps {
   timer?: number;
 }
 
-type DiceResultContextType = {
+export type DiceResultContextType = {
   showDiceResult: (options: DiceResultOverlayProps) => void;
 };
 

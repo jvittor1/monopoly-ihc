@@ -42,8 +42,8 @@ export default function CornerCardComponent({
         return "rotate-0";
     }
   };
-  console.log(type);
-  console.log(getDegreeByCornerType(type));
+  // console.log(type);
+  // console.log(getDegreeByCornerType(type));
 
   return (
     <BaseCardComponent

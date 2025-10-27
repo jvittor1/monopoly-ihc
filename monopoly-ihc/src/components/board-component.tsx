@@ -102,7 +102,7 @@ export default function Board() {
   const { players } = useGame();
   const { boardTiles } = useBoard();
 
-  console.log("-------------boardTiles-------------", boardTiles);
+  // console.log("-------------boardTiles-------------", boardTiles);
 
   const rightColumnTiles = boardTiles.slice(0, 6).reverse();
   const topRowTiles = boardTiles.slice(6, 12);

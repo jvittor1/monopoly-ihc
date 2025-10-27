@@ -1,15 +1,18 @@
 import type { QuestionCard } from "@/interfaces/question-card";
-import { eventBus } from "@/utils/event-emitter";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CheckCircle2, Clock } from "lucide-react";
 
-interface QuestionModalProps {
-  tile: QuestionCard;
-  playerId: number;
-}
+import type { BaseModalProps } from "@/types/modal-type";
 
-export default function QuestionModal({ tile, playerId }: QuestionModalProps) {
+type QuestionModalProps = BaseModalProps<QuestionCard>;
+
+export default function QuestionModal({
+  tile,
+  playerId,
+  onClose,
+  onAction,
+}: QuestionModalProps) {
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
@@ -30,25 +33,25 @@ export default function QuestionModal({ tile, playerId }: QuestionModalProps) {
   }, []);
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      setTimeout(() => {
-        handleClose();
-      }, 1500);
+    if (timeLeft === 0 && !isClosed) {
+      const timeout = setTimeout(handleClose, 1500);
+      return () => clearTimeout(timeout);
     }
-  }, [timeLeft]);
+  }, [timeLeft, isClosed]);
 
   const handleClose = () => {
     if (isClosed) return;
     setIsClosed(true);
-    eventBus.emit("closeModal");
+    if (onClose) onClose();
   };
 
   const submitAnswer = () => {
     handleClose();
     if (selected === null) setSelected(-1);
-    eventBus.emit("showAnswer", {
-      isCorrect: tile.correctAlternative === selected,
-    });
+    const isCorrect = selected === tile.correctAlternative;
+    if (onAction) {
+      onAction({ playerId, isCorrect });
+    }
   };
 
   const percentage = (timeLeft / TOTAL_TIME) * 100;

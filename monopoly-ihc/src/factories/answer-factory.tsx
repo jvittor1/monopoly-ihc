@@ -15,6 +15,9 @@ const AnswersRegistry = {
   ),
 };
 
-export function AnswerFactory(isCorrect: boolean): AnswerComponent {
+export function AnswerFactory(
+  isCorrect: boolean,
+  tilePoints?: number,
+): AnswerComponent {
   return isCorrect ? AnswersRegistry.correct : AnswersRegistry.incorrect;
 }

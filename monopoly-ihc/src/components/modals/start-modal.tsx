@@ -1,27 +1,28 @@
+import { POINTS_VARIABLES } from "@/constants/points-variables";
 import type { CornerTile } from "@/interfaces/corner-tile";
-import { eventBus } from "@/utils/event-emitter";
+import type { BaseModalProps } from "@/types/modal-type";
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, Sparkles, CirclePoundSterling } from "lucide-react";
-import { TIME } from "../../constants/time";
 
-interface StartModalProps {
-  tile: CornerTile;
-  playerId: number;
-}
+type StartModalProps = BaseModalProps<CornerTile>;
 
-export default function StartModal({ tile, playerId }: StartModalProps) {
+export default function StartModal({
+  tile,
+  playerId,
+  onClose,
+  onAction,
+}: StartModalProps) {
+  // console.log("StartModal rendered");
+  // console.log("Tile:", tile);
+  // console.log("Player ID:", playerId);
+
   const handleContinue = () => {
-    eventBus.emit("closeModal");
-    eventBus.emit("nextTurn");
+    if (onAction) onAction({ playerId, bonus: 200 });
+    if (onClose) onClose();
   };
 
-  console.log("StartModal rendered");
-  console.log("Tile:", tile);
-  console.log("Player ID:", playerId);
-
-  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
   // Valor que o jogador recebe ao passar pelo início
-  const bonusAmount = 200;
+  const bonusAmount = POINTS_VARIABLES.START;
 
   return (
     <AnimatePresence>

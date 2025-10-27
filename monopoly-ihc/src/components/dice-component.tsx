@@ -4,9 +4,13 @@ import * as CANNON from "cannon-es";
 import { useDiceResult } from "@/contexts/dice-result-overlay-context";
 import { useGame } from "@/contexts/game-context";
 
-export default function Dice() {
+interface DiceProps {
+  onDiceResult: (value: number) => void;
+}
+
+export default function Dice({ onDiceResult }: DiceProps) {
   const { showDiceResult } = useDiceResult();
-  const { movePlayer, isRoundInProgress, setIsRoundInProgress } = useGame();
+  const { isRoundInProgress, setIsRoundInProgress } = useGame();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cubeBodyRef = useRef<CANNON.Body | null>(null);
@@ -257,10 +261,10 @@ export default function Dice() {
       const vel = cubeBody.velocity.length();
       const angVel = cubeBody.angularVelocity.length();
       if (vel < 0.05 && angVel < 0.05) {
-        const topFace = detectTopFace(cubeBody);
-        setDiceNumber(topFace);
-        showDiceResult({ value: topFace });
-        movePlayer(topFace);
+        const result = detectTopFace(cubeBody);
+        setDiceNumber(result);
+        showDiceResult({ value: result });
+        onDiceResult(result);
         clearInterval(checkIfStopped);
       }
     }, 100);
@@ -283,7 +287,7 @@ export default function Dice() {
         onChange={(e) => setNumberOfMoves(Number(e.target.value))}
       />
       <button
-        onClick={() => movePlayer(numberOfMoves)}
+        onClick={() => onDiceResult(numberOfMoves)}
         className="absolute bottom-5 left-5 rounded-xl bg-green-600 px-6 py-2 text-white shadow-md transition hover:bg-green-700"
       >
         Mover X casas

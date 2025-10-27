@@ -5,7 +5,12 @@ import type { CornerTile } from "@/interfaces/corner-tile";
 
 export type Tile = QuestionCard | CornerTile;
 
-export function useBoard() {
+export type BoardHookReturn = {
+  boardTiles: Tile[];
+  getTileByIndex: (index: number) => Tile;
+};
+
+export function useBoard(): BoardHookReturn {
   const boardTiles: Tile[] = [
     cornerTiles[0], // Canto Inferior Esquerdo (Início)
     ...mockQuestionCards.slice(0, 4), // 4 tiles subindo

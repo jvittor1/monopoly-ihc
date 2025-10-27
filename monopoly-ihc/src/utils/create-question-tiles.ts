@@ -1,6 +1,6 @@
 import type { BaseTile } from "@/interfaces/base-tile";
 import type { Alternative, QuestionCard } from "@/interfaces/question-card";
-import type { TileType } from "@/interfaces/tile-type";
+import type { TileType } from "@/types/tile-type";
 
 export function createQuestionCard(data: {
   id: number;

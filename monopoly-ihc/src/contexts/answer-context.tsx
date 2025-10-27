@@ -1,17 +1,16 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  Suspense,
-  useEffect,
-} from "react";
+import React, { createContext, useContext, useState, Suspense } from "react";
 import { AnswerFactory } from "@/factories/answer-factory";
-import { eventBus } from "@/utils/event-emitter";
 
-interface AnswerContextType {
-  showAnswer: (isCorrect: boolean) => void;
+export type AnswerContextType = {
+  showAnswer: (
+    isCorrect: boolean,
+    playerId: number,
+    tileId: number,
+    tilePoints?: number,
+    onClose?: () => void,
+  ) => void;
   closeAnswer: () => void;
-}
+};
 
 const AnswerContext = createContext<AnswerContextType | undefined>(undefined);
 
@@ -28,32 +27,33 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
 
   const closeAnswer = () => setAnswerContent(null);
 
-  const showAnswer = (isCorrect: boolean) => {
-    const AnswerComponent = AnswerFactory(isCorrect);
+  const showAnswer = (
+    isCorrect: boolean,
+    playerId: number,
+    tileId: number,
+    tilePoints?: number,
+    onClose?: () => void,
+  ) => {
+    const AnswerComponent = AnswerFactory(
+      isCorrect,
+      tilePoints,
+    ) as React.ComponentType<{
+      tilePoints?: number;
+      onClose?: () => void;
+    }>;
 
     setAnswerContent(
       <Suspense fallback={<div className="text-white">Carregando...</div>}>
         <AnswerComponent
+          tilePoints={tilePoints}
           onClose={() => {
             closeAnswer();
-            eventBus.emit("nextTurn");
+            onClose?.();
           }}
         />
       </Suspense>,
     );
   };
-
-  // Aqui ouvimos o evento do eventBus
-  useEffect(() => {
-    const handleShowAnswer = ({ isCorrect }: { isCorrect: boolean }) => {
-      showAnswer(isCorrect);
-    };
-
-    eventBus.on("showAnswer", handleShowAnswer);
-    return () => {
-      eventBus.off("showAnswer", handleShowAnswer);
-    };
-  }, []);
 
   return (
     <AnswerContext.Provider value={{ showAnswer, closeAnswer }}>
