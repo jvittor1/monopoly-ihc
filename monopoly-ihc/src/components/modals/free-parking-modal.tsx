@@ -3,23 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Coffee, Sparkles, Smile } from "lucide-react";
 import { TIME } from "../../constants/time";
 import type { BaseModalProps } from "@/types/modal-type";
+import { useEffect } from "react";
 
 type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
-export default function FreeParkingModal({
-  tile,
-  playerId,
-  onClose,
-  onAction,
-}: FreeParkingModalProps) {
+export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
   const handleContinue = () => {
-    if (onClose) onClose();
     if (onAction) onAction();
   };
 
-  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-  // console.log("Tile:", tile);
-  // console.log("Player ID:", playerId);
+  useEffect(() => {
+    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>

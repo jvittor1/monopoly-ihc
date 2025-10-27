@@ -3,24 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShieldAlert, Zap, ArrowRight, Lock } from "lucide-react";
 import { TIME } from "../../constants/time";
 import type { BaseModalProps } from "@/types/modal-type";
+import { useEffect } from "react";
 
 type GoToJailModalProps = BaseModalProps<CornerTile>;
 
-export default function GoToJailModal({
-  tile,
-  playerId,
-  onClose,
-  onAction,
-}: GoToJailModalProps) {
+export default function GoToJailModal({ onAction }: GoToJailModalProps) {
   const handleContinue = () => {
-    if (onClose) onClose();
     if (onAction) onAction();
   };
 
-  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-
-  // console.log("Tile:", tile);
-  // console.log("Player ID:", playerId);
+  useEffect(() => {
+    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>

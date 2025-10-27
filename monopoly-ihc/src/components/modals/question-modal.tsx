@@ -10,13 +10,11 @@ type QuestionModalProps = BaseModalProps<QuestionCard>;
 export default function QuestionModal({
   tile,
   playerId,
-  onClose,
   onAction,
 }: QuestionModalProps) {
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
-  const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -33,20 +31,13 @@ export default function QuestionModal({
   }, []);
 
   useEffect(() => {
-    if (timeLeft === 0 && !isClosed) {
-      const timeout = setTimeout(handleClose, 1500);
+    if (timeLeft === 0) {
+      const timeout = setTimeout(submitAnswer, 1500);
       return () => clearTimeout(timeout);
     }
-  }, [timeLeft, isClosed]);
-
-  const handleClose = () => {
-    if (isClosed) return;
-    setIsClosed(true);
-    if (onClose) onClose();
-  };
+  }, [timeLeft]);
 
   const submitAnswer = () => {
-    handleClose();
     if (selected === null) setSelected(-1);
     const isCorrect = selected === tile.correctAlternative;
     if (onAction) {

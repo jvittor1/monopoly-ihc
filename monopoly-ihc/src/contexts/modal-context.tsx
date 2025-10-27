@@ -7,7 +7,7 @@ export type ModalContextType = {
   showModalForTile: (
     tile: Tile,
     playerId: number,
-    options?: Pick<BaseModalProps, "onClose" | "onAction">,
+    options?: Pick<BaseModalProps, "onAction">,
   ) => void;
   closeModal: () => void;
 };
@@ -30,7 +30,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   const showModalForTile = (
     tile: Tile,
     playerId: number,
-    options?: Pick<BaseModalProps, "onClose" | "onAction">,
+    options?: Pick<BaseModalProps, "onAction">,
   ) => {
     const ModalComponent = ModalFactory(tile);
     if (!ModalComponent) return;
@@ -42,10 +42,6 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         <ModalComponent
           tile={tile}
           playerId={playerId}
-          onClose={() => {
-            closeModal();
-            options?.onClose?.();
-          }}
           onAction={(payload) => {
             closeModal();
             options?.onAction?.(payload);

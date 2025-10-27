@@ -3,26 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Lock, AlertTriangle, Timer } from "lucide-react";
 import { TIME } from "../../constants/time";
 import type { BaseModalProps } from "@/types/modal-type";
+import { POINTS_VARIABLES } from "@/constants/points-variables";
+import { useEffect } from "react";
 
 type JailModalProps = BaseModalProps<CornerTile>;
 
-export default function JailModal({
-  tile,
-  playerId,
-  onClose,
-  onAction,
-}: JailModalProps) {
-  // Número de turnos que o jogador fica preso
-  const TURNS_IN_JAIL = 2;
-
+export default function JailModal({ onAction }: JailModalProps) {
   const handleContinue = () => {
-    if (onClose) onClose();
     if (onAction) onAction();
   };
 
-  setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-  // console.log("Tile:", tile);
-  // console.log("Player ID:", playerId);
+  useEffect(() => {
+    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -162,10 +156,12 @@ export default function JailModal({
                 }}
               >
                 <p className="text-5xl font-bold text-orange-50">
-                  {TURNS_IN_JAIL}
+                  {POINTS_VARIABLES.JAIL_TURNS_QUANTITY}
                 </p>
                 <p className="mt-1 text-sm text-orange-300">
-                  {TURNS_IN_JAIL > 1 ? "turnos perdidos" : "turno perdido"}
+                  {POINTS_VARIABLES.JAIL_TURNS_QUANTITY > 1
+                    ? "turnos perdidos"
+                    : "turno perdido"}
                 </p>
               </motion.div>
             </motion.div>

@@ -42,9 +42,11 @@ export async function ActionsByType({
 
     case "start":
       modal.showModalForTile(tile, playerId, {
-        onClose: () => game.nextTurn(),
+        onAction: () => {
+          player.addMoney(POINTS_VARIABLES.START, playerId);
+          game.nextTurn();
+        },
       });
-      player.addMoney(POINTS_VARIABLES.START, playerId);
       break;
 
     case "jail":
@@ -90,7 +92,7 @@ export async function ActionsByType({
 
     default:
       modal.showModalForTile(tile, playerId, {
-        onClose: () => game.nextTurn(),
+        onAction: () => game.nextTurn(),
       });
       break;
   }
