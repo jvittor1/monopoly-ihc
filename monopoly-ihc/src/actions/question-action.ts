@@ -1,12 +1,12 @@
-import type { Tile } from "@/hooks/use-board";
 import type { Contexts } from "@/types/contexts-type";
+import type { Tile } from "@/types/tile";
 
 export async function handleQuestionAction(
   tile: Tile,
   playerId: number,
   contexts: Contexts,
 ): Promise<void> {
-  const { modal, answer, player } = contexts;
+  const { modal, answer, player, board } = contexts;
 
   let isAnswerCorrect = false;
   let questionPayload: any = null;
@@ -22,9 +22,10 @@ export async function handleQuestionAction(
     await answer.showAnswer(isAnswerCorrect, tile.points!);
 
     if (!isAnswerCorrect) {
-      player.addPropertyToPlayer(playerId, tile.id);
+      player.removeMoney(tile.points!, playerId);
     } else {
-      player.addMoney(tile.points!, playerId);
+      player.addPropertyToPlayer(playerId, tile.id);
+      board.updateTile(tile.id, playerId);
     }
   }
 }

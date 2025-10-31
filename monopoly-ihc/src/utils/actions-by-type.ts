@@ -5,8 +5,8 @@ import { handlePropertyAction } from "@/actions/property-action";
 import { handleQuestionAction } from "@/actions/question-action";
 import { handleStartAction } from "@/actions/start-action";
 
-import type { Tile } from "@/hooks/use-board";
 import type { Contexts } from "@/types/contexts-type";
+import type { Tile } from "@/types/tile";
 
 interface ActionsProps {
   tile: Tile;

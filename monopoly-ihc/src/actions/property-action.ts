@@ -1,5 +1,5 @@
-import type { Tile } from "@/hooks/use-board";
 import type { Contexts } from "@/types/contexts-type";
+import type { Tile } from "@/types/tile";
 
 export async function handlePropertyAction(
   tile: Tile,
@@ -14,7 +14,8 @@ export async function handlePropertyAction(
 
   await modal.showModalForTile(tile, playerId, {
     onAction: async () => {
-      player.removeMoney(tile.rentPrice!, playerId);
+      if (tile.ownerId !== playerId)
+        player.removeMoney(tile.rentPrice!, playerId);
     },
   });
 }

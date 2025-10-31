@@ -18,6 +18,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Roma" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 2,
@@ -35,6 +37,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "O2" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 3,
@@ -52,6 +56,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Gabriel García Márquez" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 4,
@@ -69,6 +75,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Urano" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 5,
@@ -86,6 +94,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Claude Monet" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 6,
@@ -103,6 +113,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Oceano Ártico" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 7,
@@ -120,6 +132,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "16" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 8,
@@ -137,6 +151,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "1975" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 9,
@@ -154,6 +170,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Galileu Galilei" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 10,
@@ -171,6 +189,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "400.000 km/s" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 11,
@@ -188,6 +208,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Estados Unidos" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 12,
@@ -205,6 +227,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Sombrero" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 13,
@@ -222,6 +246,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Tancredo Neves" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 14,
@@ -239,6 +265,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "América do Sul" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 15,
@@ -256,6 +284,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Rinoceronte" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 16,
@@ -273,6 +303,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Sirius" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 17,
@@ -290,6 +322,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Bangkok" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 18,
@@ -307,6 +341,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Cobre" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 19,
@@ -324,6 +360,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "CO2" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 20,
@@ -341,6 +379,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Virgílio" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 21,
@@ -358,6 +398,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Rio Mississippi" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 22,
@@ -375,6 +417,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "200°C" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 23,
@@ -392,6 +436,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Caravaggio" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 24,
@@ -409,6 +455,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "San Marino" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 25,
@@ -426,6 +474,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Flauta" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 26,
@@ -443,6 +493,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Hidrogênio" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 27,
@@ -460,6 +512,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "1950" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 28,
@@ -477,6 +531,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Cavalo" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 29,
@@ -494,6 +550,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Aconcágua" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 30,
@@ -511,6 +569,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Camilo Cienfuegos" },
     ],
     correctAlternative: 2,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 31,
@@ -528,6 +588,8 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Sol" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
   createQuestionCard({
     id: 32,
@@ -545,5 +607,7 @@ export const mockQuestionCards: QuestionCard[] = [
       { id: 4, text: "Tailândia" },
     ],
     correctAlternative: 3,
+    ownerId: undefined,
+    rentPrice: 100,
   }),
 ];

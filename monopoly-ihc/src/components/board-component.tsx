@@ -3,7 +3,8 @@ import CornerCardComponent from "./corner-card-component";
 import type { Player } from "@/interfaces/player";
 import PlayerComponent from "./player-component";
 import { useGame } from "@/contexts/game-context";
-import { useBoard, type Tile } from "@/hooks/use-board";
+import type { Tile } from "@/types/tile";
+import { useBoard } from "@/contexts/board-context";
 
 // -------------------- Row --------------------
 interface RowProps {
@@ -113,7 +114,6 @@ export default function Board() {
     <div className="flex w-fit flex-row justify-center">
       <Column
         tiles={rightColumnTiles}
-        // isRightColumn
         players={players}
         boardTiles={boardTiles}
       />
@@ -136,32 +136,6 @@ export default function Board() {
         players={players}
         boardTiles={boardTiles}
       />
-
-      {/* <Row
-        tiles={topRowTiles}
-        isTopRow
-        players={players}
-        boardTiles={boardTiles}
-      />
-
-      <div className="flex items-center justify-between">
-        <Column
-          tiles={leftColumnTiles}
-          players={players}
-          boardTiles={boardTiles}
-        />
-        <h1 className="font-titan -rotate-45 text-5xl font-bold text-white uppercase">
-          Monopoly <span className="text-red-400">IHC</span>
-        </h1>
-        <Column
-          tiles={rightColumnTiles}
-          isRightColumn
-          players={players}
-          boardTiles={boardTiles}
-        />
-      </div>
-
-      <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} /> */}
     </div>
   );
 }

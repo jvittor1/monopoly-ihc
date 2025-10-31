@@ -9,7 +9,7 @@ export interface QuestionCard extends BaseTile {
   isCorner: false;
   points: number;
   ownerId?: number;
-  rentPrice?: number;
+  rentPrice: number;
 }
 
 export type Alternative = {

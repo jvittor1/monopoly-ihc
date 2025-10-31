@@ -12,6 +12,7 @@ export function createQuestionCard(data: {
   correctAlternative: number;
   points: number;
   ownerId?: number;
+  rentPrice: number;
 }): QuestionCard {
   return {
     ...data,

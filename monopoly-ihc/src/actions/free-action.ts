@@ -1,5 +1,5 @@
-import type { Tile } from "@/hooks/use-board";
 import type { Contexts } from "@/types/contexts-type";
+import type { Tile } from "@/types/tile";
 
 export async function handleFreeAction(
   tile: Tile,

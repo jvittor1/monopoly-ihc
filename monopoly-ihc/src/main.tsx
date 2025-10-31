@@ -7,19 +7,22 @@ import { GameProvider } from "./contexts/game-context.tsx";
 import { ModalProvider } from "./contexts/modal-context.tsx";
 import { AnswerProvider } from "./contexts/answer-context.tsx";
 import { PlayerProvider } from "./contexts/player-context.tsx";
+import { BoardProvider } from "./contexts/board-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <PlayerProvider>
-      <ModalProvider>
-        <AnswerProvider>
-          <GameProvider>
-            <DiceResultProvider>
-              <App />
-            </DiceResultProvider>
-          </GameProvider>
-        </AnswerProvider>
-      </ModalProvider>
-    </PlayerProvider>
+    <BoardProvider>
+      <PlayerProvider>
+        <ModalProvider>
+          <AnswerProvider>
+            <GameProvider>
+              <DiceResultProvider>
+                <App />
+              </DiceResultProvider>
+            </GameProvider>
+          </AnswerProvider>
+        </ModalProvider>
+      </PlayerProvider>
+    </BoardProvider>
   </StrictMode>,
 );
