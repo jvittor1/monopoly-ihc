@@ -12,14 +12,14 @@ export type BoardHookReturn = {
 
 export function useBoard(): BoardHookReturn {
   const boardTiles: Tile[] = [
-    cornerTiles[0], // Canto Inferior Esquerdo (Início)
-    ...mockQuestionCards.slice(0, 4), // 4 tiles subindo
-    cornerTiles[1], // Canto Superior Esquerdo
-    ...mockQuestionCards.slice(4, 10).reverse(), // 6 tiles para a direita
-    cornerTiles[2], // Canto Superior Direito
-    ...mockQuestionCards.slice(10, 14).reverse(), // 6 tiles descendo
-    cornerTiles[3], // Canto Inferior Direito
-    ...mockQuestionCards.slice(14, 20), // 4 tiles para a esquerda
+    cornerTiles[0],
+    ...mockQuestionCards.slice(0, 4),
+    cornerTiles[1],
+    ...mockQuestionCards.slice(4, 10).reverse(),
+    cornerTiles[2],
+    ...mockQuestionCards.slice(10, 14).reverse(),
+    cornerTiles[3],
+    ...mockQuestionCards.slice(14, 20),
   ];
 
   const getTileByIndex = (index: number) => boardTiles[index];

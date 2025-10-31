@@ -26,7 +26,7 @@ const ModalsRegistry = {
     () => import("../components/modals/question-modal"),
   ) as ModalComponentForTile<QuestionCard>,
   property: React.lazy(
-    () => import("../components/modals/question-modal"),
+    () => import("../components/modals/property-modal"),
   ) as ModalComponentForTile<QuestionCard>,
 };
 export function ModalFactory<T extends Tile>(tile: T) {

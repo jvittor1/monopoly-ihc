@@ -13,7 +13,7 @@ export default function IncorrectAnswerModal({
 }: IncorrectAnswerModalProps) {
   setTimeout(() => {
     onClose();
-  }, TIME.EXTRA_LONG_DELAY);
+  }, TIME.MEDIUM_DELAY);
 
   // console.log("Renderizando IncorrectAnswerModal");
 

@@ -6,13 +6,11 @@ export function createCornerTile(
   id: number,
   text: string,
   type: TileType,
-  effect: BaseTile["effect"],
 ): CornerTile {
   return {
     id,
     text,
     type,
-    effect,
     isCorner: true,
   };
 }

@@ -1,12 +1,15 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import type { Player } from "@/interfaces/player";
 import { usePlayer } from "./player-context";
+import { TIME } from "@/constants/time";
+import { useModal } from "./modal-context";
 
 export type GameContextType = {
   players: Player[];
   currentPlayer: Player;
-  nextTurn: () => void;
+  nextTurn: (turnIndexValue: number) => void;
   round: number;
+  turnIndex: number;
   isRoundInProgress?: boolean;
   setIsRoundInProgress: (inProgress: boolean) => void;
 };
@@ -24,18 +27,44 @@ export const useGame = () => {
 };
 
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
-  const { players } = usePlayer();
+  const { addJailTurns, players } = usePlayer();
+  const { showJailTurnSkipModal } = useModal();
   const [turnIndex, setTurnIndex] = useState(0);
   const [isRoundInProgress, setIsRoundInProgress] = useState(false);
   const [round, setRound] = useState(1);
 
   const currentPlayer = players[turnIndex];
 
-  const nextTurn = () => {
+  const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+  const playersRef = useRef(players);
+  useEffect(() => {
+    playersRef.current = players;
+  }, [players]);
+
+  const nextTurn = async (turnIndexValue: number) => {
+    await sleep(TIME.SMALL_DELAY);
     setIsRoundInProgress(false);
-    setTurnIndex((prev) => (prev + 1) % players.length);
-    if (turnIndex === players.length - 1) {
-      setRound((prev) => prev + 1);
+
+    const nextIndex = (turnIndexValue + 1) % playersRef.current.length;
+    const nextPlayer = playersRef.current[nextIndex];
+
+    // check to increment round
+    if (nextIndex === 0) {
+      setRound((prevRound) => prevRound + 1);
+      console.log("New Round:", round + 1);
+    }
+
+    if (!nextPlayer.inJail) {
+      setTurnIndex(nextIndex);
+      console.log("Next Turn:", nextIndex);
+      return;
+    } else {
+      // await sleep(TIME.EXTRA_LONG_DELAY);
+      showJailTurnSkipModal(nextPlayer);
+      await addJailTurns(-1, nextPlayer.id);
+
+      return nextTurn(nextIndex);
     }
   };
 
@@ -45,6 +74,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         players,
         currentPlayer,
         nextTurn,
+        turnIndex,
         isRoundInProgress,
         setIsRoundInProgress,
         round,

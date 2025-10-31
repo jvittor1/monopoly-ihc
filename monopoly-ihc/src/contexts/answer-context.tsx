@@ -1,14 +1,18 @@
-import React, { createContext, useContext, useState, Suspense } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  Suspense,
+  useRef,
+} from "react";
 import { AnswerFactory } from "@/factories/answer-factory";
 
 export type AnswerContextType = {
   showAnswer: (
     isCorrect: boolean,
-    playerId: number,
-    tileId: number,
     tilePoints?: number,
     onClose?: () => void,
-  ) => void;
+  ) => Promise<void>;
   closeAnswer: () => void;
 };
 
@@ -25,34 +29,42 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
     null,
   );
 
-  const closeAnswer = () => setAnswerContent(null);
+  const resolveRef = useRef<(() => void) | null>(null);
+
+  const closeAnswer = () => {
+    setAnswerContent(null);
+    if (resolveRef.current) {
+      resolveRef.current();
+      resolveRef.current = null;
+    }
+  };
 
   const showAnswer = (
     isCorrect: boolean,
-    playerId: number,
-    tileId: number,
     tilePoints?: number,
-    onClose?: () => void,
-  ) => {
-    const AnswerComponent = AnswerFactory(
-      isCorrect,
-      tilePoints,
-    ) as React.ComponentType<{
-      tilePoints?: number;
-      onClose?: () => void;
-    }>;
+  ): Promise<void> => {
+    return new Promise((resolve) => {
+      resolveRef.current = resolve;
 
-    setAnswerContent(
-      <Suspense fallback={<div className="text-white">Carregando...</div>}>
-        <AnswerComponent
-          tilePoints={tilePoints}
-          onClose={() => {
-            closeAnswer();
-            onClose?.();
-          }}
-        />
-      </Suspense>,
-    );
+      const AnswerComponent = AnswerFactory(
+        isCorrect,
+        tilePoints,
+      ) as React.ComponentType<{
+        tilePoints?: number;
+        onClose?: () => void;
+      }>;
+
+      setAnswerContent(
+        <Suspense fallback={<div className="text-white">Carregando...</div>}>
+          <AnswerComponent
+            tilePoints={tilePoints}
+            onClose={() => {
+              closeAnswer();
+            }}
+          />
+        </Suspense>,
+      );
+    });
   };
 
   return (

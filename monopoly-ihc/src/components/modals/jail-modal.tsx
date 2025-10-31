@@ -10,7 +10,7 @@ type JailModalProps = BaseModalProps<CornerTile>;
 
 export default function JailModal({ onAction }: JailModalProps) {
   const handleContinue = () => {
-    if (onAction) onAction();
+    if (onAction) onAction({});
   };
 
   useEffect(() => {

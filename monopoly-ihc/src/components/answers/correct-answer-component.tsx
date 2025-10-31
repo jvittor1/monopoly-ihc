@@ -13,7 +13,7 @@ export default function CorrectAnswerModal({
 }: CorrectAnswerModalProps) {
   setTimeout(() => {
     onClose();
-  }, TIME.EXTRA_LONG_DELAY);
+  }, TIME.MEDIUM_DELAY);
 
   // console.log("Renderizando CorrectAnswerModal");
 

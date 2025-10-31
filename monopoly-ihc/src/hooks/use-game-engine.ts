@@ -20,8 +20,6 @@ export function useGameEngine() {
     const finalPosition = await player.movePlayer(value, game.currentPlayer.id);
     const tile = board.getTileByIndex(finalPosition);
 
-    console.log("Handling tile effect for tile:", tile);
-
     await ActionsByType({
       tile,
       playerId: game.currentPlayer.id,

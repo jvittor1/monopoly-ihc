@@ -1,4 +1,5 @@
 export const TIME = {
+  SMALL_DELAY: 500,
   BASIC_DELAY: 1800,
   MEDIUM_DELAY: 2200,
   LONG_DELAY: 3000,

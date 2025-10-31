@@ -1,4 +1,3 @@
-import type { BaseTile } from "@/interfaces/base-tile";
 import type { Alternative, QuestionCard } from "@/interfaces/question-card";
 import type { TileType } from "@/types/tile-type";
 
@@ -8,7 +7,6 @@ export function createQuestionCard(data: {
   question: string;
   answer: string;
   type: TileType;
-  effect: BaseTile["effect"];
   difficulty: QuestionCard["difficulty"];
   alternatives: Alternative[];
   correctAlternative: number;

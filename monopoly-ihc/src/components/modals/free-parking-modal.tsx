@@ -9,7 +9,7 @@ type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
 export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
   const handleContinue = () => {
-    if (onAction) onAction();
+    if (onAction) onAction({});
   };
 
   useEffect(() => {

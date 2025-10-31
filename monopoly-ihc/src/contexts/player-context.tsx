@@ -8,7 +8,9 @@ export type PlayerContextType = {
   movePlayer: (steps: number, playerId: number) => Promise<number>;
   addMoney: (amount: number, playerId: number) => void;
   removeMoney: (amount: number, playerId: number) => void;
-  addJailTurns: (turns: number, playerId: number) => void;
+  addJailTurns: (turns: number, playerId: number) => Promise<void>;
+  getPlayerById: (playerId: number) => Player | undefined;
+  addPropertyToPlayer: (playerId: number, propertyId: number) => void;
   movePlayerToJail: (playerId: number) => void;
 };
 
@@ -94,18 +96,30 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     console.log(`Removed ${amount} from player ${playerId}`);
   }
 
-  function addJailTurns(turns: number, playerId: number): void {
-    setPlayers((prev) => {
-      const newPlayers = [...prev];
-      const idx = newPlayers.findIndex((p) => p.id === playerId);
-      if (idx === -1) return newPlayers;
-      newPlayers[idx] = {
-        ...newPlayers[idx],
-        jailTurns: newPlayers[idx].jailTurns + turns,
-      };
-      return newPlayers;
+  async function addJailTurns(turns: number, playerId: number): Promise<void> {
+    return new Promise((resolve) => {
+      setPlayers((prev) => {
+        const newPlayers = [...prev];
+        const idx = newPlayers.findIndex((p) => p.id === playerId);
+        if (idx === -1) return newPlayers;
+
+        const newJailTurns = newPlayers[idx].jailTurns + turns;
+        newPlayers[idx] = {
+          ...newPlayers[idx],
+          jailTurns: newJailTurns,
+          inJail: newJailTurns > 0,
+        };
+
+        console.log(
+          `Player ${newPlayers[idx].name} jail turns updated to: ${newJailTurns}`,
+        );
+
+        return newPlayers;
+      });
+
+      // Espera o ciclo de renderização terminar antes de continuar
+      setTimeout(resolve, 0);
     });
-    console.log(`Added ${turns} jail turns to player ${playerId}`);
   }
 
   function movePlayerToJail(playerId: number): void {
@@ -123,6 +137,31 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     console.log(`Moved player ${playerId} to jail`);
   }
 
+  const getPlayerById = (playerId: number): Player | undefined => {
+    return players.find((p) => p.id === playerId);
+  };
+
+  async function addPropertyToPlayer(
+    playerId: number,
+    propertyId: number,
+  ): Promise<void> {
+    setPlayers((prev) => {
+      const newPlayers = [...prev];
+      const idx = newPlayers.findIndex((p) => p.id === playerId);
+      if (idx === -1) return newPlayers;
+      const player = newPlayers[idx];
+      const updatedProperties = player.properties
+        ? [...player.properties, propertyId]
+        : [propertyId];
+      newPlayers[idx] = {
+        ...player,
+        properties: updatedProperties,
+      };
+      return newPlayers;
+    });
+    console.log(`Added property ${propertyId} to player ${playerId}`);
+  }
+
   return (
     <PlayerContext.Provider
       value={{
@@ -132,6 +171,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         removeMoney,
         addJailTurns,
         movePlayerToJail,
+        getPlayerById,
+        addPropertyToPlayer,
       }}
     >
       {children}

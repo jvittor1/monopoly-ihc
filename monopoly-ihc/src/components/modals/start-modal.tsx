@@ -10,7 +10,7 @@ type StartModalProps = BaseModalProps<CornerTile>;
 
 export default function StartModal({ onAction }: StartModalProps) {
   const handleContinue = () => {
-    if (onAction) onAction();
+    if (onAction) onAction({});
   };
 
   useEffect(() => {

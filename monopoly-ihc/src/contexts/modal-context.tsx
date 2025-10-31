@@ -1,15 +1,23 @@
-import React, { createContext, useContext, useState, Suspense } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  Suspense,
+  useRef,
+} from "react";
 import { ModalFactory } from "@/factories/modals-factory";
 import type { Tile } from "@/hooks/use-board";
 import type { BaseModalProps } from "@/types/modal-type";
+import type { Player } from "@/interfaces/player";
 
 export type ModalContextType = {
   showModalForTile: (
     tile: Tile,
     playerId: number,
     options?: Pick<BaseModalProps, "onAction">,
-  ) => void;
+  ) => Promise<any>;
   closeModal: () => void;
+  showJailTurnSkipModal: (player: Player) => Promise<void>;
 };
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -25,34 +33,80 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     null,
   );
 
-  const closeModal = () => setModalContent(null);
+  const resolveRef = useRef<((value: any) => void) | null>(null);
+  const resolveJailRef = useRef<(() => void) | null>(null);
+
+  const closeJailModal = () => {
+    setModalContent(null);
+    if (resolveJailRef.current) {
+      resolveJailRef.current();
+      resolveJailRef.current = null;
+    }
+  };
+
+  const closeModal = (payload?: any) => {
+    setModalContent(null);
+    if (resolveRef.current) {
+      resolveRef.current(payload);
+      resolveRef.current = null;
+    }
+  };
 
   const showModalForTile = (
     tile: Tile,
     playerId: number,
     options?: Pick<BaseModalProps, "onAction">,
-  ) => {
-    const ModalComponent = ModalFactory(tile);
-    if (!ModalComponent) return;
+  ): Promise<any> => {
+    return new Promise((resolve) => {
+      resolveRef.current = resolve;
 
-    console.log("Showing modal for tile:", tile);
+      const ModalComponent = ModalFactory(tile);
+      if (!ModalComponent) {
+        closeModal();
+        return;
+      }
 
-    setModalContent(
-      <Suspense fallback={<div className="text-white">Carregando...</div>}>
-        <ModalComponent
-          tile={tile}
-          playerId={playerId}
-          onAction={(payload) => {
-            closeModal();
-            options?.onAction?.(payload);
-          }}
-        />
-      </Suspense>,
-    );
+      console.log("Showing modal for tile:", tile);
+
+      setModalContent(
+        <Suspense fallback={<div className="text-white">Carregando...</div>}>
+          <ModalComponent
+            tile={tile}
+            playerId={playerId}
+            onAction={async (payload: any) => {
+              await options?.onAction?.(payload);
+              closeModal(payload);
+            }}
+          />
+        </Suspense>,
+      );
+    });
+  };
+
+  const showJailTurnSkipModal = (player: Player): Promise<void> => {
+    return new Promise((resolve) => {
+      resolveJailRef.current = resolve;
+
+      const ModalComponent = React.lazy(
+        () => import("@/components/modals/jail-turn-modal"),
+      );
+      setModalContent(
+        <Suspense fallback={<div className="text-white">Carregando...</div>}>
+          <ModalComponent
+            player={player}
+            onClose={() => {
+              closeJailModal();
+            }}
+          />
+        </Suspense>,
+      );
+    });
   };
 
   return (
-    <ModalContext.Provider value={{ showModalForTile, closeModal }}>
+    <ModalContext.Provider
+      value={{ showModalForTile, closeModal, showJailTurnSkipModal }}
+    >
       {children}
       {modalContent}
     </ModalContext.Provider>
