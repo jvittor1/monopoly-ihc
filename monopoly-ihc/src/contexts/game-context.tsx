@@ -32,10 +32,24 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [turnIndex, setTurnIndex] = useState(0);
   const [isRoundInProgress, setIsRoundInProgress] = useState(false);
   const [round, setRound] = useState(1);
+  const [endGameCalled, setEndGameCalled] = useState(false);
 
   const currentPlayer = players[turnIndex];
 
   const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+  const endGame = () => {
+    console.log("Game Over! Winner:", currentPlayer);
+    setEndGameCalled(true);
+    alert(`Game Over! Winner: Player ${currentPlayer.id}`);
+  };
+
+  useEffect(() => {
+    const activePlayers = players.filter((p) => !p.bankrupt);
+    if (activePlayers.length === 1) {
+      endGame();
+    }
+  }, [players]);
 
   const playersRef = useRef(players);
   useEffect(() => {
@@ -43,6 +57,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   }, [players]);
 
   const nextTurn = async (turnIndexValue: number) => {
+    if (endGameCalled) return;
     await sleep(TIME.SMALL_DELAY);
     setIsRoundInProgress(false);
 

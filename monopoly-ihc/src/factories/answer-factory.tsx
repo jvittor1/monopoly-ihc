@@ -15,9 +15,27 @@ const AnswersRegistry = {
   ),
 };
 
+const PropertyAnswerRegistry = {
+  correct: React.lazy(
+    () => import("../components/answers/correct-property-answer-component"),
+  ),
+  incorrect: React.lazy(
+    () => import("../components/answers/incorrect-answer-component"),
+  ),
+};
+
 export function AnswerFactory(
   isCorrect: boolean,
   tilePoints?: number,
 ): AnswerComponent {
   return isCorrect ? AnswersRegistry.correct : AnswersRegistry.incorrect;
+}
+
+export function PropertyAnswerFactory(
+  isCorrect: boolean,
+  propertyName?: string,
+): AnswerComponent {
+  return isCorrect
+    ? PropertyAnswerRegistry.correct
+    : PropertyAnswerRegistry.incorrect;
 }

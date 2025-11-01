@@ -19,7 +19,7 @@ export async function handleQuestionAction(
   });
 
   if (questionPayload) {
-    await answer.showAnswer(isAnswerCorrect, tile.points!);
+    await answer.showModalPropertyAcquired(isAnswerCorrect, tile.text);
 
     if (!isAnswerCorrect) {
       player.removeMoney(tile.points!, playerId);

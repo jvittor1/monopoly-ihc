@@ -89,10 +89,12 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
       if (idx === -1) return newPlayers;
       newPlayers[idx] = {
         ...newPlayers[idx],
+        bankrupt: newPlayers[idx].money - amount < 0,
         money: newPlayers[idx].money - amount,
       };
       return newPlayers;
     });
+
     console.log(`Removed ${amount} from player ${playerId}`);
   }
 
