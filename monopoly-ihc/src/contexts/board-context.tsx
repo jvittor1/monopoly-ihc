@@ -39,16 +39,14 @@ export function BoardProvider({ children }: { children: React.ReactNode }) {
       prev.map((tile) => {
         if (tile.id !== tileId) return tile;
 
-        // se for uma carta question, adiciona ownerId e muda o tipo
         if (tile.type === "question") {
           return {
             ...tile,
-            ownerId, // adiciona o campo
-            type: "property", // muda o tipo
+            ownerId,
+            type: "property",
           };
         }
 
-        // se já for property, apenas atualiza o dono
         if (tile.type === "property") {
           return {
             ...tile,

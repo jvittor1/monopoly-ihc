@@ -3,7 +3,8 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import { useDiceResult } from "@/contexts/dice-result-overlay-context";
 import { useGame } from "@/contexts/game-context";
-
+import { motion } from "framer-motion";
+import { Dices } from "lucide-react";
 interface DiceProps {
   onDiceResult: (value: number) => void;
 }
@@ -273,13 +274,45 @@ export default function Dice({ onDiceResult }: DiceProps) {
   return (
     <div ref={containerRef} className="absolute inset-0">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <button
+
+      <motion.button
         onClick={throwDice}
-        className="absolute right-5 bottom-5 rounded-xl bg-blue-600 px-6 py-2 text-white shadow-md transition hover:bg-blue-700"
         disabled={isRoundInProgress}
+        className="group absolute right-8 bottom-8 disabled:cursor-not-allowed disabled:opacity-60"
+        whileHover={!isRoundInProgress ? { scale: 1.1 } : {}}
+        whileTap={!isRoundInProgress ? { scale: 0.9 } : {}}
       >
-        Jogar dado
-      </button>
+        <motion.div
+          className="flex flex-col items-center gap-2"
+          animate={
+            isRoundInProgress
+              ? {
+                  rotate: 360,
+                }
+              : {}
+          }
+          transition={{
+            duration: 1.4,
+            ease: "easeOut",
+          }}
+        >
+          <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 shadow-2xl ring-2 ring-slate-700/50 transition-all group-hover:brightness-110">
+            <Dices className="h-10 w-10 text-white" strokeWidth={2} />
+          </div>
+        </motion.div>
+        <motion.span
+          className="mt-2 block text-center text-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+          animate={
+            isRoundInProgress ? { opacity: [1, 0.6, 1] } : { opacity: 1 }
+          }
+          transition={{
+            duration: 0.8,
+            repeat: isRoundInProgress ? Infinity : 0,
+          }}
+        >
+          Jogar Dado
+        </motion.span>
+      </motion.button>
 
       <input
         className="absolute bottom-20 left-8 w-24 rounded border border-gray-200 bg-white/40 p-1 text-center text-white placeholder:text-white focus:border-blue-500 focus:outline-none"

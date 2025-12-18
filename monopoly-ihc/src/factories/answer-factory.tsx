@@ -20,7 +20,7 @@ const PropertyAnswerRegistry = {
     () => import("../components/answers/correct-property-answer-component"),
   ),
   incorrect: React.lazy(
-    () => import("../components/answers/incorrect-answer-component"),
+    () => import("../components/answers/incorrect-property-answer-component"),
   ),
 };
 

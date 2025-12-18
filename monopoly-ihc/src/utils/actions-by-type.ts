@@ -3,6 +3,7 @@ import { handleGoToJailAction } from "@/actions/go-to-jail-action";
 import { handleJailAction } from "@/actions/jail-action";
 import { handlePropertyAction } from "@/actions/property-action";
 import { handleQuestionAction } from "@/actions/question-action";
+import { handleRandomQuestionAction } from "@/actions/random-action";
 import { handleStartAction } from "@/actions/start-action";
 
 import type { Contexts } from "@/types/contexts-type";
@@ -19,7 +20,7 @@ export async function ActionsByType({
   playerId,
   contexts,
 }: ActionsProps) {
-  const { game, modal } = contexts;
+  const { game } = contexts;
 
   switch (tile.type) {
     case "question":
@@ -44,11 +45,7 @@ export async function ActionsByType({
       break;
 
     case "random":
-      modal.showModalForTile(tile, playerId, {
-        onAction: () => {
-          game.nextTurn(game.turnIndex);
-        },
-      });
+      await handleRandomQuestionAction(tile, playerId, contexts);
       break;
 
     case "property":

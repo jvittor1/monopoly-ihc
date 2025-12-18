@@ -6,9 +6,9 @@ import React, {
   useRef,
 } from "react";
 import { ModalFactory } from "@/factories/modals-factory";
-import type { Tile } from "@/hooks/use-board";
 import type { BaseModalProps } from "@/types/modal-type";
 import type { Player } from "@/interfaces/player";
+import type { Tile } from "@/types/tile";
 
 export type ModalContextType = {
   showModalForTile: (

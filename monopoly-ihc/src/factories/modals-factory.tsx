@@ -1,7 +1,7 @@
-import type { Tile } from "@/hooks/use-board";
 import type { CornerTile } from "@/interfaces/corner-tile";
 import type { QuestionCard } from "@/interfaces/question-card";
 import type { BaseModalProps } from "@/types/modal-type";
+import type { Tile } from "@/types/tile";
 import React from "react";
 
 type ModalComponentForTile<T extends Tile> = React.FC<BaseModalProps<T>>;
@@ -23,7 +23,7 @@ const ModalsRegistry = {
     () => import("../components/modals/go-to-jail-modal"),
   ) as ModalComponentForTile<CornerTile>,
   random: React.lazy(
-    () => import("../components/modals/question-modal"),
+    () => import("../components/modals/random-question-modal"),
   ) as ModalComponentForTile<QuestionCard>,
   property: React.lazy(
     () => import("../components/modals/property-modal"),

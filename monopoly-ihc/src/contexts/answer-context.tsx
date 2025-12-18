@@ -78,7 +78,6 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
     isCorrect: boolean,
     propertyName: string,
   ): Promise<void> => {
-    console.log("ta chegando aqui");
     return new Promise((resolve) => {
       resolveRef.current = resolve;
 

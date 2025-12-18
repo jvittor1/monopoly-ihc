@@ -1,7 +1,7 @@
 import type { Contexts } from "@/types/contexts-type";
 import type { Tile } from "@/types/tile";
 
-export async function handleQuestionAction(
+export async function handleRandomQuestionAction(
   tile: Tile,
   playerId: number,
   contexts: Contexts,
@@ -19,12 +19,12 @@ export async function handleQuestionAction(
   });
 
   if (questionPayload) {
-    await answer.showModalPropertyAcquired(isAnswerCorrect, tile.text);
+    await answer.showAnswer(isAnswerCorrect, tile.points);
 
-    if (isAnswerCorrect) {
-      // player.removeMoney(tile.points!, playerId);
-      player.addPropertyToPlayer(playerId, tile.id);
-      board.updateTile(tile.id, playerId);
+    if (!isAnswerCorrect) {
+      player.removeMoney(tile.points!, playerId);
+    } else {
+      player.addMoney(tile.points!, playerId);
     }
   }
 }
