@@ -7,14 +7,28 @@ import type { BaseModalProps } from "@/types/modal-type";
 
 type QuestionModalProps = BaseModalProps<QuestionCard>;
 
+import { gameLogic } from "@/services/game-logic";
+
 export default function RandomQuestionModal({
-  tile,
+  tile: initialTile,
   playerId,
   onAction,
 }: QuestionModalProps) {
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  
+  // State to hold the dynamically fetched card
+  const [dynamicCard, setDynamicCard] = useState<QuestionCard | null>(null);
+
+  useEffect(() => {
+    // Fetch a fresh Revés card when the modal mounts
+    const card = gameLogic.drawRevesCard();
+    setDynamicCard(card);
+  }, []);
+
+  // Use dynamicCard if available, otherwise fallback to initialTile (shouldn't happen for Revés)
+  const tile = dynamicCard || initialTile;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,7 +55,7 @@ export default function RandomQuestionModal({
     if (selected === null) setSelected(-1);
     const isCorrect = selected === tile.correctAlternative;
     if (onAction) {
-      onAction({ playerId, isCorrect });
+      onAction({ playerId, isCorrect, points: tile.points });
     }
   };
 
@@ -56,7 +70,7 @@ export default function RandomQuestionModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       >
         <motion.div
           key="modal"
@@ -64,7 +78,7 @@ export default function RandomQuestionModal({
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 50, opacity: 0, scale: 0.75 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="relative w-full max-w-2xl rounded-lg border border-purple-500/30 bg-gradient-to-br from-[#0f2027] to-[#12304d] shadow-2xl shadow-purple-500/20"
+          className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg border border-purple-500/30 bg-gradient-to-br from-[#0f2027] to-[#12304d] shadow-2xl shadow-purple-500/20 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-purple-500/20"
         >
           {/* Efeito de alerta piscante */}
           <motion.div
@@ -150,7 +164,7 @@ export default function RandomQuestionModal({
                 <AlertTriangle className="h-5 w-5 text-white" />
               </div>
               <h2 className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-xl font-bold text-transparent">
-                {tile.type}
+                {tile.type === "random" ? "Sorte ou Revés" : tile.text}
               </h2>
             </div>
 

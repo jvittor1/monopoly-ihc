@@ -56,7 +56,7 @@ export default function QuestionModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       >
         <motion.div
           key="modal"
@@ -64,7 +64,7 @@ export default function QuestionModal({
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 50, opacity: 0, scale: 0.75 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="relative w-full max-w-2xl rounded-lg border border-cyan-500/20 bg-gradient-to-br from-[#0f2027] to-[#12304d] shadow-2xl"
+          className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg border border-cyan-500/20 bg-gradient-to-br from-[#0f2027] to-[#12304d] shadow-2xl scrollbar-thin scrollbar-track-transparent scrollbar-thumb-cyan-500/20"
         >
           {/* Timer Circular - Top Right */}
           <div className="absolute -top-3 -right-3 animate-pulse rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 p-2 shadow-lg shadow-cyan-500/50">

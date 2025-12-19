@@ -6,7 +6,7 @@ export async function handleRandomQuestionAction(
   playerId: number,
   contexts: Contexts,
 ): Promise<void> {
-  const { modal, answer, player, board } = contexts;
+  const { modal, answer, player } = contexts;
 
   let isAnswerCorrect = false;
   let questionPayload: any = null;
@@ -19,12 +19,13 @@ export async function handleRandomQuestionAction(
   });
 
   if (questionPayload) {
-    await answer.showAnswer(isAnswerCorrect, tile.points);
+    const points = questionPayload.points ?? tile.points ?? 0;
+    await answer.showAnswer(isAnswerCorrect, points);
 
     if (!isAnswerCorrect) {
-      player.removeMoney(tile.points!, playerId);
+      player.removeMoney(points, playerId);
     } else {
-      player.addMoney(tile.points!, playerId);
+      player.addMoney(points, playerId);
     }
   }
 }
