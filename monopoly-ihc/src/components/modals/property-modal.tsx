@@ -1,4 +1,3 @@
-import { TIME } from "@/constants/time";
 import { usePlayer } from "@/contexts/player-context";
 import type { Player } from "@/interfaces/player";
 import type { QuestionCard } from "@/interfaces/question-card";
@@ -11,7 +10,6 @@ import {
   Coins,
   CheckCircle,
 } from "lucide-react";
-import { useEffect } from "react";
 
 type QuestionModalProps = BaseModalProps<QuestionCard>;
 
@@ -27,11 +25,6 @@ export default function PropertyRentModal({
   const handleContinue = () => {
     if (onAction) onAction({});
   };
-
-  useEffect(() => {
-    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-    return () => clearTimeout(timer);
-  }, []);
 
   const propertyName = tile.text;
   const rentAmount = tile.rentPrice || 0;
@@ -66,20 +59,7 @@ export default function PropertyRentModal({
               : "border-yellow-500/40 shadow-yellow-500/20"
           }`}
         >
-          {/* Barra de progresso */}
-          <motion.div
-            initial={{ scaleX: 1 }}
-            animate={{ scaleX: 0 }}
-            transition={{
-              duration: TIME.EXTRA_LONG_DELAY / 1000,
-              ease: "linear",
-            }}
-            className={`absolute top-0 right-0 left-0 h-1 origin-left ${
-              isOwner
-                ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                : "bg-gradient-to-r from-yellow-500 to-orange-500"
-            }`}
-          />
+
 
           <div className="p-6">
             {/* Ícone */}

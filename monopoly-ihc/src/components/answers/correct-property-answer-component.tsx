@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, CheckCircle2, Key, Sparkles } from "lucide-react";
-import { TIME } from "../../constants/time";
 
 interface PropertyAcquiredModalProps {
   onClose: () => void;
@@ -11,9 +10,6 @@ export default function PropertyAcquiredModal({
   onClose,
   propertyName,
 }: PropertyAcquiredModalProps) {
-  setTimeout(() => {
-    onClose();
-  }, TIME.EXTRA_LONG_DELAY);
 
   return (
     <AnimatePresence>

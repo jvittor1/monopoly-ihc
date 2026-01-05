@@ -12,7 +12,7 @@ export default function QuestionModal({
   playerId,
   onAction,
 }: QuestionModalProps) {
-  const TOTAL_TIME = 60;
+  const TOTAL_TIME = 600;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
 

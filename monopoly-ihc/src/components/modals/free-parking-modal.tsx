@@ -1,9 +1,7 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
 import { motion, AnimatePresence } from "framer-motion";
 import { Coffee, Sparkles, Smile } from "lucide-react";
-import { TIME } from "../../constants/time";
 import type { BaseModalProps } from "@/types/modal-type";
-import { useEffect } from "react";
 
 type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
@@ -11,11 +9,6 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
   const handleContinue = () => {
     if (onAction) onAction({});
   };
-
-  useEffect(() => {
-    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <AnimatePresence>

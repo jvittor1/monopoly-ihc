@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, XCircle, Lock, AlertTriangle } from "lucide-react";
-import { TIME } from "../../constants/time";
 
 interface PropertyFailedModalProps {
   onClose: () => void;
@@ -11,9 +10,6 @@ export default function PropertyFailedModal({
   onClose,
   propertyName,
 }: PropertyFailedModalProps) {
-  setTimeout(() => {
-    onClose();
-  }, TIME.EXTRA_LONG_DELAY);
 
   return (
     <AnimatePresence>

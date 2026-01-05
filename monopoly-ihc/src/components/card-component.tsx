@@ -1,9 +1,9 @@
 import type { QuestionCard } from "../interfaces/question-card";
 import BaseCardComponent from "./base-card-component";
-import { Home, Shuffle, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { usePlayer } from "@/contexts/player-context";
 import { BsQuestionLg } from "react-icons/bs";
+import HouseComponent from "./property-component";
 
 const colorByDifficulty = {
   easy: "bg-[#6DF282]",
@@ -18,8 +18,6 @@ interface CardComponentProps extends QuestionCard {
 
 export default function CardComponent({
   text,
-  question,
-  answer,
   difficulty,
   type,
   points,
@@ -30,66 +28,21 @@ export default function CardComponent({
   const hasOwner = ownerId !== null && ownerId !== undefined;
   const isRandomTile = type === "random";
   const { getPlayerById } = usePlayer();
-  const ownerColor = hasOwner ? getPlayerById(ownerId!)?.color : null;
+  const owner = getPlayerById(ownerId!);
+  const ownerColor = hasOwner ? owner?.color : null;
 
   return (
     <BaseCardComponent
-      className={`relative flex h-[115px] w-[105px] flex-col items-center overflow-hidden ${className}`}
+      className={`relative flex h-[115px] w-[105px] flex-col items-center ${className}`}
     >
-      {isProperty && hasOwner && ownerColor && (
-        <motion.div
-          animate={{
-            opacity: [0.15, 0.3, 0.15],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: `radial-gradient(circle at center, ${ownerColor}30 0%, transparent 70%)`,
-          }}
-        />
-      )}
-
       {!isRandomTile && (
         <div
-          className={`relative h-[30px] w-full border-b-1 border-white ${colorByDifficulty[difficulty]}`}
+          className={`relative z-50 h-[30px] w-full border-b-1 border-white ${colorByDifficulty[difficulty]}`}
         >
-          {isProperty && (
-            <div className="absolute top-1/2 left-1.5 -translate-y-1/2">
-              <div className="flex items-center justify-center rounded-full bg-white/95 p-0.5 shadow-sm">
-                <Home className="h-3 w-3 text-slate-600" strokeWidth={2.5} />
-              </div>
-            </div>
-          )}
-
           {isProperty && hasOwner && ownerColor && (
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              className="absolute top-1/2 right-1.5 -translate-y-1/2"
-            >
-              <motion.div
-                animate={{
-                  boxShadow: [
-                    `0 0 0 0px ${ownerColor}40`,
-                    `0 0 0 3px ${ownerColor}40`,
-                    `0 0 0 0px ${ownerColor}40`,
-                  ],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-md"
-                style={{ backgroundColor: ownerColor }}
-              >
-                {getPlayerById(ownerId!)?.name.charAt(0).toUpperCase()}
-              </motion.div>
-            </motion.div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50%] scale-75 transform">
+              <HouseComponent color={ownerColor} />
+            </div>
           )}
         </div>
       )}
@@ -99,11 +52,13 @@ export default function CardComponent({
 
         {isRandomTile && (
           <motion.div>
-            <BsQuestionLg size={36} color="white" />
+            <BsQuestionLg size={48} color="white" />
           </motion.div>
         )}
 
-        <span className="text-xs font-medium">{points} pontos</span>
+        <span className="text-xs font-medium">
+          {!isRandomTile ? `${points} pontos` : ""}
+        </span>
       </div>
     </BaseCardComponent>
   );

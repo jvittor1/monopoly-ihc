@@ -1,10 +1,8 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, AlertTriangle, Timer } from "lucide-react";
-import { TIME } from "../../constants/time";
 import type { BaseModalProps } from "@/types/modal-type";
 import { POINTS_VARIABLES } from "@/constants/points-variables";
-import { useEffect } from "react";
 
 type JailModalProps = BaseModalProps<CornerTile>;
 
@@ -12,11 +10,6 @@ export default function JailModal({ onAction }: JailModalProps) {
   const handleContinue = () => {
     if (onAction) onAction({});
   };
-
-  useEffect(() => {
-    const timer = setTimeout(handleContinue, TIME.EXTRA_LONG_DELAY);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <AnimatePresence>
