@@ -278,7 +278,7 @@ export default function Dice({ onDiceResult }: DiceProps) {
       <motion.button
         onClick={throwDice}
         disabled={isRoundInProgress}
-        className="group absolute right-8 bottom-8 disabled:cursor-not-allowed disabled:opacity-60"
+        className="absolute right-4 bottom-4 disabled:cursor-not-allowed disabled:opacity-60"
         whileHover={!isRoundInProgress ? { scale: 1.1 } : {}}
         whileTap={!isRoundInProgress ? { scale: 0.9 } : {}}
       >
@@ -315,13 +315,13 @@ export default function Dice({ onDiceResult }: DiceProps) {
       </motion.button>
 
       <input
-        className="absolute bottom-20 left-8 w-24 rounded border border-gray-200 bg-white/40 p-1 text-center text-white placeholder:text-white focus:border-blue-500 focus:outline-none"
+        className="absolute top-40 left-8 w-24 rounded border border-gray-200 bg-white/40 p-1 text-center text-white placeholder:text-white focus:border-blue-500 focus:outline-none"
         type="number"
         onChange={(e) => setNumberOfMoves(Number(e.target.value))}
       />
       <button
         onClick={() => onDiceResult(numberOfMoves)}
-        className="absolute bottom-5 left-5 rounded-xl bg-green-600 px-6 py-2 text-white shadow-md transition hover:bg-green-700"
+        className="absolute top-56 left-5 rounded-xl bg-green-600 px-6 py-2 text-white shadow-md transition hover:bg-green-700"
       >
         Mover X casas
       </button>

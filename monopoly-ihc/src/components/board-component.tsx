@@ -5,25 +5,7 @@ import PlayerComponent from "./player-component";
 import { useGame } from "@/contexts/game-context";
 import type { Tile } from "@/types/tile";
 import { useBoard } from "@/contexts/board-context";
-import { MousePointerClick } from "lucide-react";
 import BackgroundImage from "../assets/img-background-monopoly.png";
-
-// function BackgroundBoard() {
-//   return (
-//     <div className="rounded-xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/80 to-slate-800/80 p-6 backdrop-blur-sm">
-//       <div className="text-center">
-//         <MousePointerClick className="mx-auto mb-2 h-8 w-8 text-cyan-400" />
-//         <h1 className="font-titan mb-1 text-4xl font-bold text-white uppercase">
-//           Monopoly IHC
-//         </h1>
-//         <div className="mx-auto mb-2 h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
-//         <p className="text-xs tracking-wider text-slate-400 uppercase">
-//           Edição Acadêmica
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
 
 // -------------------- Row --------------------
 interface RowProps {
@@ -144,9 +126,9 @@ export default function Board() {
           players={players}
           boardTiles={boardTiles}
         />
-       
-          <img src={BackgroundImage} alt="" className="w-xl h-auto -rotate-15"/> 
-     
+
+        <img src={BackgroundImage} alt="" className="h-auto w-xl -rotate-15" />
+
         <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} />
       </div>
       <Column

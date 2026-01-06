@@ -1,6 +1,6 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, AlertTriangle, Timer } from "lucide-react";
+import { Lock, AlertTriangle } from "lucide-react";
 import type { BaseModalProps } from "@/types/modal-type";
 import { POINTS_VARIABLES } from "@/constants/points-variables";
 
@@ -22,183 +22,94 @@ export default function JailModal({ onAction }: JailModalProps) {
       >
         <motion.div
           key="modal"
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{
-            scale: 1,
-            opacity: 1,
-            rotate: [0, -2, 2, -2, 2, 0],
-          }}
-          exit={{ scale: 0.5, opacity: 0 }}
-          transition={{
-            scale: { type: "spring", stiffness: 300, damping: 25 },
-            rotate: { duration: 0.5 },
-          }}
-          className="relative w-full max-w-md overflow-hidden rounded-lg border border-orange-500/30 bg-gradient-to-br from-[#0f2027] to-[#12304d] shadow-2xl shadow-orange-500/20"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
+          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
         >
-          {/* Efeito de brilho animado */}
-          <motion.div
-            animate={{
-              x: ["-100%", "100%"],
+          {/* Header */}
+          <div
+            className="rounded-t bg-gradient-to-r from-orange-600 to-red-600 p-4"
+            style={{
+              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
             }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-400/10 to-transparent"
-          />
-
-          {/* Barras da prisão - decorativas */}
-          <div className="absolute inset-x-0 top-0 flex justify-around opacity-10">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ delay: i * 0.05, duration: 0.3 }}
-                className="h-full w-1 bg-orange-400"
-              />
-            ))}
-          </div>
-
-          {/* Ícone grande de cadeado */}
-          <div className="flex justify-center pt-8">
-            <motion.div
-              initial={{ scale: 0, rotate: 90 }}
-              animate={{
-                scale: 1,
-                rotate: 0,
-              }}
-              transition={{
-                delay: 0.2,
-                type: "spring",
-                stiffness: 200,
-              }}
-              className="relative"
-            >
-              <motion.div
-                animate={{
-                  y: [0, -5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="rounded-full bg-gradient-to-br from-orange-500 to-red-600 p-4 shadow-lg shadow-orange-500/50"
-              >
-                <Lock className="h-16 w-16 text-white" strokeWidth={2.5} />
-              </motion.div>
-
-              {/* Alerta triangular sobreposto */}
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.4, type: "spring" }}
-                className="absolute -top-2 -right-2 rounded-full bg-yellow-500 p-1.5 shadow-lg"
-              >
-                <AlertTriangle
-                  className="h-5 w-5 text-slate-900"
-                  strokeWidth={2.5}
-                />
-              </motion.div>
-            </motion.div>
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Lock className="h-6 w-6 text-white" />
+              <h2 className="text-xl font-bold tracking-wide text-white uppercase">
+                Prisão
+              </h2>
+            </div>
           </div>
 
           {/* Conteúdo */}
-          <div className="p-6 text-center">
-            <motion.h2
+          <div className="p-6">
+            {/* Ícone */}
+            <div className="mb-5 flex justify-center">
+              <motion.div
+                initial={{ scale: 0, rotate: 90 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, type: "spring" }}
+                className="relative rounded-full bg-gradient-to-br from-orange-500 to-red-500 p-4 shadow-lg"
+              >
+                <Lock className="h-12 w-12 text-white" />
+                {/* Badge de alerta */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.4, type: "spring" }}
+                  className="absolute -top-1 -right-1 rounded-full bg-yellow-500 p-1 shadow-lg"
+                >
+                  <AlertTriangle className="h-4 w-4 text-white" />
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Mensagem */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-2 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-3xl font-bold text-transparent"
+              className="mb-5 text-center"
             >
-              Na Prisão!
-            </motion.h2>
+              <h3 className="mb-3 text-2xl font-bold text-white">
+                Você está visitando a prisão
+              </h3>
+              <p className="mb-4 text-base text-gray-300">
+                Apenas de passagem, sem consequências
+              </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mb-6 text-sm text-orange-100"
-            >
-              Você foi preso e não pode jogar
-            </motion.p>
-
-            {/* Aviso de turnos perdidos */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-              className="mb-5 rounded-lg border border-orange-500/30 bg-gradient-to-r from-slate-800/60 to-slate-700/60 p-5 backdrop-blur-sm"
-            >
-              <div className="mb-3 flex items-center justify-center gap-2">
-                <Timer className="h-6 w-6 text-orange-400" />
-                <p className="text-sm font-semibold text-orange-300">
-                  Tempo de Prisão
-                </p>
-              </div>
-
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  delay: 0.7,
-                  type: "spring",
-                  stiffness: 300,
-                }}
+              {/* Info */}
+              <div
+                className="inline-block rounded bg-orange-600/20 px-4 py-2 backdrop-blur-sm"
+                style={{ border: "0.5px solid rgba(249, 115, 22, 0.3)" }}
               >
-                <p className="text-5xl font-bold text-orange-50">
-                  {POINTS_VARIABLES.JAIL_TURNS_QUANTITY}
+                <p className="text-sm text-gray-300">
+                  Penalidade:{" "}
+                  <span className="font-bold text-orange-400">
+                    -{POINTS_VARIABLES.JAIL_TURNS_QUANTITY}
+                  </span>{" "}
+                  turnos
                 </p>
-                <p className="mt-1 text-sm text-orange-300">
-                  {POINTS_VARIABLES.JAIL_TURNS_QUANTITY > 1
-                    ? "turnos perdidos"
-                    : "turno perdido"}
-                </p>
-              </motion.div>
-            </motion.div>
-
-            {/* Lista de consequências */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="mb-6 space-y-2"
-            >
-              <div className="rounded-lg border border-red-500/20 bg-slate-800/40 p-3 backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-red-400" />
-                  <p className="text-xs text-slate-300">
-                    Você perde sua próxima jogada
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-lg border border-yellow-500/20 bg-slate-800/40 p-3 backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-yellow-400" />
-                  <p className="text-xs text-slate-300">
-                    Outros jogadores continuam normalmente
-                  </p>
-                </div>
               </div>
             </motion.div>
 
+            {/* Botão */}
             <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="w-full transform rounded-lg border border-orange-500/50 bg-gradient-to-r from-slate-700 to-slate-600 px-6 py-3 text-sm font-semibold text-orange-50 shadow-lg transition-all duration-300 hover:scale-105 hover:border-orange-500 hover:shadow-orange-500/20"
+              className="w-full rounded bg-gradient-to-r from-orange-600 to-red-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
+              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
             >
               Entendi
             </motion.button>
           </div>
-
-          {/* Decoração de cantos */}
-          <div className="absolute top-0 left-0 h-20 w-20 rounded-tl-lg bg-gradient-to-br from-orange-500/10 to-transparent" />
-          <div className="absolute right-0 bottom-0 h-20 w-20 rounded-br-lg bg-gradient-to-tl from-red-500/10 to-transparent" />
         </motion.div>
       </motion.div>
     </AnimatePresence>

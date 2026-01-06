@@ -4,13 +4,7 @@ import { motion } from "framer-motion";
 import { usePlayer } from "@/contexts/player-context";
 import { BsQuestionLg } from "react-icons/bs";
 import HouseComponent from "./property-component";
-
-const colorByDifficulty = {
-  easy: "bg-[#6DF282]",
-  "easy-medium": "bg-[#84C7E2]",
-  medium: "bg-[#4E0062]",
-  hard: "bg-[#FF5252]",
-};
+import { DIFFICULTY_COLORS } from "@/constants/colors";
 
 interface CardComponentProps extends QuestionCard {
   className?: string;
@@ -37,7 +31,8 @@ export default function CardComponent({
     >
       {!isRandomTile && (
         <div
-          className={`relative z-50 h-[30px] w-full border-b-1 border-white ${colorByDifficulty[difficulty]}`}
+          className="relative z-50 h-[30px] w-full border-b-1 border-white"
+          style={{ backgroundColor: DIFFICULTY_COLORS[difficulty] }}
         >
           {isProperty && hasOwner && ownerColor && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50%] scale-75 transform">
