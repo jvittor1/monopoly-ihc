@@ -25,8 +25,9 @@ function Row({ tiles, isTopRow = false, players, boardTiles }: RowProps) {
         );
 
         let rotationClass = "";
+        let flexDirection = "";
         if (isTopRow && !tile.isCorner) {
-          rotationClass = "rotate-180";
+          flexDirection = "flex-col-reverse"; // Inverte a ordem: barra fica embaixo
         }
 
         return (
@@ -34,11 +35,15 @@ function Row({ tiles, isTopRow = false, players, boardTiles }: RowProps) {
             {tile.isCorner ? (
               <CornerCardComponent {...tile} />
             ) : (
-              <CardComponent {...tile} className={rotationClass} />
+              <CardComponent
+                {...tile}
+                className={`${rotationClass} ${flexDirection}`}
+                isTopRow={isTopRow}
+              />
             )}
 
             {/* Players dentro da tile */}
-            <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-wrap gap-3 p-1">
+            <div className="absolute top-1/2 left-1/2 z-[60] flex -translate-x-1/2 -translate-y-1/2 flex-wrap gap-3 p-1">
               {playersOnTile.map((player) => (
                 <PlayerComponent key={player.id} color={player.color} />
               ))}

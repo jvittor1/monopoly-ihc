@@ -8,6 +8,7 @@ import { DIFFICULTY_COLORS } from "@/constants/colors";
 
 interface CardComponentProps extends QuestionCard {
   className?: string;
+  isTopRow?: boolean;
 }
 
 export default function CardComponent({
@@ -17,6 +18,7 @@ export default function CardComponent({
   points,
   ownerId,
   className,
+  isTopRow = false,
 }: CardComponentProps) {
   const isProperty = type === "property";
   const hasOwner = ownerId !== null && ownerId !== undefined;
@@ -31,7 +33,7 @@ export default function CardComponent({
     >
       {!isRandomTile && (
         <div
-          className="relative z-50 h-[30px] w-full border-b-1 border-white"
+          className={`relative z-50 h-[30px] w-full ${isTopRow ? "border-t-1" : "border-b-1"} border-white`}
           style={{ backgroundColor: DIFFICULTY_COLORS[difficulty] }}
         >
           {isProperty && hasOwner && ownerColor && (
