@@ -29,13 +29,13 @@ export default function StartModal({ onAction }: StartModalProps) {
           exit={{ scale: 0.8, opacity: 0, y: -30 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-gradient-to-r from-green-600 to-emerald-600 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -80,7 +80,9 @@ export default function StartModal({ onAction }: StartModalProps) {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5, type: "spring" }}
                 className="inline-block rounded bg-green-600/30 px-6 py-3 backdrop-blur-sm"
-                style={{ border: "0.5px solid rgba(34, 197, 94, 0.5)" }}
+                style={{
+                  border: "0.5px solid var(--color-green-border-medium)",
+                }}
               >
                 <span className="text-3xl font-bold text-green-400">
                   +{bonusAmount}
@@ -98,7 +100,7 @@ export default function StartModal({ onAction }: StartModalProps) {
               whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
               className="w-full rounded bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar Jogando
             </motion.button>

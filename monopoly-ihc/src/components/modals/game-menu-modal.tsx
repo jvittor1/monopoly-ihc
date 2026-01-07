@@ -59,12 +59,12 @@ export default function GameMenuModal({
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-md rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-            style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+            style={{ border: "0.5px solid var(--color-border-light)" }}
           >
             <div
               className="flex items-center justify-between rounded-t bg-gray-800 p-5"
               style={{
-                borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "0.5px solid var(--color-border-light)",
               }}
             >
               <h2 className="bg-gradient-to-r text-lg font-bold tracking-wide text-blue-400 uppercase">

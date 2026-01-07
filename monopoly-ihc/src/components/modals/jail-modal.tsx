@@ -27,13 +27,13 @@ export default function JailModal({ onAction }: JailModalProps) {
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-gradient-to-r from-orange-600 to-red-600 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -84,7 +84,7 @@ export default function JailModal({ onAction }: JailModalProps) {
               {/* Info */}
               <div
                 className="inline-block rounded bg-orange-600/20 px-4 py-2 backdrop-blur-sm"
-                style={{ border: "0.5px solid rgba(249, 115, 22, 0.3)" }}
+                style={{ border: "0.5px solid var(--color-orange-border)" }}
               >
                 <p className="text-sm text-gray-300">
                   Penalidade:{" "}
@@ -105,7 +105,7 @@ export default function JailModal({ onAction }: JailModalProps) {
               whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
               className="w-full rounded bg-gradient-to-r from-orange-600 to-red-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Entendi
             </motion.button>

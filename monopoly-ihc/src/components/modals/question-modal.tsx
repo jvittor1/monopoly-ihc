@@ -2,7 +2,7 @@ import type { QuestionCard } from "@/interfaces/question-card";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
-import { DIFFICULTY_COLORS } from "@/constants/colors";
+import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
 
 import type { BaseModalProps } from "@/types/modal-type";
 
@@ -67,7 +67,7 @@ export default function QuestionModal({
           exit={{ y: 50, opacity: 0, scale: 0.85 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="relative max-h-[90vh] w-full max-w-2xl overflow-x-hidden overflow-y-auto rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Timer Circular - Top Right - Simplified */}
           <div className="absolute -top-1 -right-1 animate-pulse rounded-full p-2">
@@ -98,7 +98,7 @@ export default function QuestionModal({
           <div
             className="rounded-t bg-gray-800 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center gap-2">
@@ -116,7 +116,7 @@ export default function QuestionModal({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="relative mb-5 rounded bg-gray-800/90 bg-gradient-to-br to-gray-900/90 p-5 backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.15)" }}
+              style={{ border: "0.5px solid var(--color-border-subtle)" }}
             >
               {/* Barra lateral sutil com cor da dificuldade */}
               <div
@@ -130,7 +130,7 @@ export default function QuestionModal({
                   className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded text-sm font-bold shadow-lg"
                   style={{
                     backgroundColor: difficultyColor,
-                    border: "0.5px solid rgba(255, 255, 255, 0.3)",
+                    border: "0.5px solid var(--color-border-lighter)",
                   }}
                 >
                   ?
@@ -158,8 +158,8 @@ export default function QuestionModal({
                   style={{
                     border:
                       selected === option.id
-                        ? "0.5px solid rgba(255, 255, 255, 0.3)"
-                        : "0.5px solid rgba(255, 255, 255, 0.1)",
+                        ? "0.5px solid var(--color-border-lighter)"
+                        : "0.5px solid var(--color-border-faint)",
                   }}
                 >
                   <div className="flex items-center gap-3">
@@ -170,7 +170,7 @@ export default function QuestionModal({
                           : "bg-white/10"
                       }`}
                       style={{
-                        border: "0.5px solid rgba(255, 255, 255, 0.3)",
+                        border: "0.5px solid var(--color-border-lighter)",
                       }}
                     >
                       {option.id}
@@ -209,8 +209,8 @@ export default function QuestionModal({
                 }`}
                 style={{
                   border: selected
-                    ? "0.5px solid rgba(255, 255, 255, 0.3)"
-                    : "0.5px solid rgba(255, 255, 255, 0.1)",
+                    ? "0.5px solid var(--color-border-lighter)"
+                    : "0.5px solid var(--color-border-faint)",
                 }}
               >
                 <CheckCircle2 className="h-4 w-4" />

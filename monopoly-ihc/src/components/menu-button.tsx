@@ -24,7 +24,7 @@ export const MenuButton = ({
       onClick={onClick}
       className="group relative flex w-full cursor-pointer items-center justify-between overflow-hidden rounded bg-gray-800/60 p-4 text-left backdrop-blur-sm transition-all duration-300 hover:bg-gray-700/70"
       style={{
-        border: "0.5px solid rgba(255, 255, 255, 0.1)",
+        border: "0.5px solid var(--color-border-faint)",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-800/0 to-blue-800/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

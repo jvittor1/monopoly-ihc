@@ -46,7 +46,7 @@ export default function PropertyRentModal({
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
@@ -54,7 +54,7 @@ export default function PropertyRentModal({
               isOwner ? "bg-green-800" : "bg-yellow-800"
             }`}
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -112,7 +112,7 @@ export default function PropertyRentModal({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 }}
                   className="mb-5 rounded bg-green-600/20 p-4 text-center backdrop-blur-sm"
-                  style={{ border: "0.5px solid rgba(34, 197, 94, 0.3)" }}
+                  style={{ border: "0.5px solid var(--color-green-border)" }}
                 >
                   <div className="mb-2 flex items-center justify-center gap-2">
                     <Home className="h-5 w-5 text-green-400" />
@@ -130,7 +130,7 @@ export default function PropertyRentModal({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                   className="mb-5 rounded bg-green-600/20 p-3 backdrop-blur-sm"
-                  style={{ border: "0.5px solid rgba(34, 197, 94, 0.3)" }}
+                  style={{ border: "0.5px solid var(--color-green-border)" }}
                 >
                   <div className="flex items-center justify-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-400" />
@@ -167,7 +167,7 @@ export default function PropertyRentModal({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 }}
                   className="mb-4 rounded bg-yellow-700/20 p-3 text-center backdrop-blur-sm"
-                  style={{ border: "0.5px solid rgba(161, 98, 7, 0.3)" }}
+                  style={{ border: "0.5px solid var(--color-yellow-border)" }}
                 >
                   <div className="mb-2 flex items-center justify-center gap-2">
                     <Home className="h-4 w-4 text-yellow-400" />
@@ -241,7 +241,7 @@ export default function PropertyRentModal({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                   className="mb-5 rounded bg-red-600/20 p-3 backdrop-blur-sm"
-                  style={{ border: "0.5px solid rgba(220, 38, 38, 0.3)" }}
+                  style={{ border: "0.5px solid var(--color-red-border)" }}
                 >
                   <div className="flex items-center justify-center gap-2">
                     <TrendingDown className="h-4 w-4 text-red-400" />
@@ -261,7 +261,7 @@ export default function PropertyRentModal({
               className={`w-full rounded px-6 py-3 font-bold text-white uppercase shadow-lg transition-all ${
                 isOwner ? "bg-green-800" : "bg-yellow-800"
               }`}
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar
             </motion.button>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { usePlayer } from "@/contexts/player-context";
 import { BsQuestionLg } from "react-icons/bs";
 import HouseComponent from "./property-component";
-import { DIFFICULTY_COLORS } from "@/constants/colors";
+import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
 
 interface CardComponentProps extends QuestionCard {
   className?: string;

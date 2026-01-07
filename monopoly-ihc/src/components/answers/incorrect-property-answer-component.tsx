@@ -26,13 +26,13 @@ export default function PropertyFailedModal({
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-red-800 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -91,7 +91,7 @@ export default function PropertyFailedModal({
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="mb-5 rounded bg-red-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(220, 38, 38, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-red-border)" }}
             >
               <div className="mb-2 flex items-center justify-center gap-2">
                 <Lock className="h-5 w-5 text-red-400" />
@@ -113,7 +113,7 @@ export default function PropertyFailedModal({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               className="mb-5 rounded bg-yellow-900/30 p-3 backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(234, 179, 8, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-yellow-border)" }}
             >
               <div className="flex items-center justify-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-yellow-400" />
@@ -132,7 +132,7 @@ export default function PropertyFailedModal({
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
               className="w-full rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar
             </motion.button>

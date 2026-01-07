@@ -214,7 +214,7 @@ function darkenColor(color: string, percent: number): string {
 }
 
 function adjustColorBrightness(color: string, percent: number): string {
-  if (!color || typeof color !== "string") return "#000000";
+  if (!color || typeof color !== "string") return "var(--color-black)";
 
   const clamp = (num: number) => Math.min(Math.max(num, 0), 255);
 

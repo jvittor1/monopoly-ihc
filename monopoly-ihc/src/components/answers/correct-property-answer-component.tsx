@@ -26,13 +26,13 @@ export default function PropertyAcquiredModal({
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-cyan-800 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -91,7 +91,7 @@ export default function PropertyAcquiredModal({
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="mb-5 rounded bg-cyan-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(8, 145, 178, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-cyan-border)" }}
             >
               <div className="mb-2 flex items-center justify-center gap-2">
                 <Key className="h-5 w-5 text-cyan-400" />
@@ -111,7 +111,7 @@ export default function PropertyAcquiredModal({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               className="mb-5 rounded bg-green-600/20 p-3 backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(34, 197, 94, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-green-border)" }}
             >
               <p className="text-center text-sm text-green-300">
                 Outros jogadores pagarão aluguel quando caírem aqui
@@ -127,7 +127,7 @@ export default function PropertyAcquiredModal({
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
               className="w-full rounded bg-cyan-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar
             </motion.button>

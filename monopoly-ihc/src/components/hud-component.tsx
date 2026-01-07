@@ -23,11 +23,11 @@ const PlayerCard = ({
           ? "2px solid rgb(153, 27, 27)"
           : isCurrentPlayer
             ? "2px solid rgb(191, 219, 254)"
-            : "0.5px solid rgba(255, 255, 255, 0.2)",
+            : "0.5px solid var(--color-border-light)",
         boxShadow: player.inJail
-          ? "0 0 20px rgba(153, 27, 27, 0.4)"
+          ? "0 0 20px var(--color-red-glow)"
           : isCurrentPlayer
-            ? "0 0 20px rgba(191, 219, 254, 0.3)"
+            ? "0 0 20px var(--color-blue-glow)"
             : "none",
       }}
     >
@@ -128,7 +128,7 @@ export default function HudComponent() {
             animate={{ opacity: 1, y: 0 }}
             onClick={() => setIsGameMenuOpen(true)}
             className="flex flex-1 items-center justify-center gap-2 rounded bg-gray-900/95 px-4 py-3 backdrop-blur-sm transition-all hover:bg-gray-800/95"
-            style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+            style={{ border: "0.5px solid var(--color-border-light)" }}
           >
             <Menu className="h-5 w-5 text-white" />
             <span className="text-sm font-bold text-white">Menu</span>
@@ -139,7 +139,7 @@ export default function HudComponent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="flex items-center justify-center rounded bg-gray-900/95 px-4 py-3 backdrop-blur-sm transition-all hover:bg-gray-800/95"
-            style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+            style={{ border: "0.5px solid var(--color-border-light)" }}
           >
             <Volume2 className="h-5 w-5 text-white" />
           </motion.button>

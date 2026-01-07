@@ -66,12 +66,12 @@ export default function RulesModal({ isOpen, onClose }: RulesModalProps) {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           onClick={(e) => e.stopPropagation()}
           className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           <div
             className="sticky top-0 z-10 flex items-center justify-between rounded-t bg-gray-800 p-5"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <h2 className="bg-gradient-to-r text-lg font-bold tracking-wide text-blue-400 uppercase">
@@ -95,18 +95,18 @@ export default function RulesModal({ isOpen, onClose }: RulesModalProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   className="relative rounded bg-gray-800/60 p-5 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/80"
-                  style={{ border: "0.5px solid rgba(255, 255, 255, 0.15)" }}
+                  style={{ border: "0.5px solid var(--color-border-subtle)" }}
                 >
                   <div
                     className="absolute top-0 bottom-0 left-0 w-1 rounded-l"
-                    style={{ backgroundColor: "#60a5fa" }}
+                    style={{ backgroundColor: "var(--color-blue-primary)" }}
                   />
 
                   <div className="ml-3 flex items-start gap-4">
                     <div
                       className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded bg-blue-500/20"
                       style={{
-                        border: "0.5px solid rgba(96, 165, 250, 0.4)",
+                        border: "0.5px solid var(--color-blue-border)",
                       }}
                     >
                       <Icon className="h-5 w-5 text-blue-400" />
@@ -129,14 +129,14 @@ export default function RulesModal({ isOpen, onClose }: RulesModalProps) {
           <div
             className="sticky bottom-0 flex justify-end rounded-b bg-gray-800 p-5"
             style={{
-              borderTop: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderTop: "0.5px solid var(--color-border-light)",
             }}
           >
             <motion.button
               onClick={onClose}
               className="cursor-pointer rounded bg-blue-800 px-6 py-2.5 text-sm font-bold text-white uppercase shadow-lg transition-all duration-300 hover:bg-blue-900"
               style={{
-                border: "0.5px solid rgba(255, 255, 255, 0.3)",
+                border: "0.5px solid var(--color-border-lighter)",
               }}
             >
               Entendido

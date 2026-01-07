@@ -79,7 +79,7 @@ export default function RandomQuestionModal({
           exit={{ y: 50, opacity: 0, scale: 0.85 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="relative max-h-[90vh] w-full max-w-2xl overflow-x-hidden overflow-y-auto rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Timer Circular - Top Right */}
           <div className="rounded-ful absolute -top-1 -right-1 animate-pulse p-2">
@@ -110,7 +110,7 @@ export default function RandomQuestionModal({
           <div
             className="rounded-t bg-gray-800 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center gap-2">
@@ -144,12 +144,12 @@ export default function RandomQuestionModal({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="relative mb-5 rounded bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-5 backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.15)" }}
+              style={{ border: "0.5px solid var(--color-border-subtle)" }}
             >
               {/* Barra lateral roxa */}
               <div
                 className="absolute top-0 bottom-0 left-0 w-0.5"
-                style={{ backgroundColor: "#a855f7" }}
+                style={{ backgroundColor: "var(--color-purple-primary)" }}
               ></div>
 
               <div className="flex items-start gap-3">
@@ -157,8 +157,8 @@ export default function RandomQuestionModal({
                 <div
                   className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded text-sm font-bold shadow-lg"
                   style={{
-                    backgroundColor: "#a855f7",
-                    border: "0.5px solid rgba(255, 255, 255, 0.3)",
+                    backgroundColor: "var(--color-purple-primary)",
+                    border: "0.5px solid var(--color-border-lighter)",
                   }}
                 >
                   ?
@@ -186,8 +186,8 @@ export default function RandomQuestionModal({
                   style={{
                     border:
                       selected === option.id
-                        ? "0.5px solid rgba(255, 255, 255, 0.3)"
-                        : "0.5px solid rgba(255, 255, 255, 0.1)",
+                        ? "0.5px solid var(--color-border-lighter)"
+                        : "0.5px solid var(--color-border-faint)",
                   }}
                 >
                   <div className="flex items-center gap-3">
@@ -198,7 +198,7 @@ export default function RandomQuestionModal({
                           : "bg-white/10"
                       }`}
                       style={{
-                        border: "0.5px solid rgba(255, 255, 255, 0.3)",
+                        border: "0.5px solid var(--color-border-lighter)",
                       }}
                     >
                       {option.id}
@@ -237,8 +237,8 @@ export default function RandomQuestionModal({
                 }`}
                 style={{
                   border: selected
-                    ? "0.5px solid rgba(255, 255, 255, 0.3)"
-                    : "0.5px solid rgba(255, 255, 255, 0.1)",
+                    ? "0.5px solid var(--color-border-lighter)"
+                    : "0.5px solid var(--color-border-faint)",
                 }}
               >
                 <CheckCircle2 className="h-4 w-4" />

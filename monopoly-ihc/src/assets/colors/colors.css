@@ -1,0 +1,37 @@
+/**
+ * Cores usadas em inline styles (style={{...}})
+ * Classes Tailwind (bg-*, text-*) continuam usando o sistema padrão do Tailwind
+ */
+
+:root {
+  /* Bordas - usadas em TODOS os modais e componentes */
+  --color-border-light: rgba(255, 255, 255, 0.2);
+  --color-border-lighter: rgba(255, 255, 255, 0.3);
+  --color-border-subtle: rgba(255, 255, 255, 0.15);
+  --color-border-faint: rgba(255, 255, 255, 0.1);
+
+  /* Sombras - usadas em alguns componentes */
+  --shadow-black-30: rgba(0, 0, 0, 0.3);
+  --shadow-black-40: rgba(0, 0, 0, 0.4);
+
+  /* Glows - usadas no HUD para highlight de jogador */
+  --color-red-glow: rgba(153, 27, 27, 0.4);
+  --color-blue-glow: rgba(191, 219, 254, 0.3);
+
+  /* Cores específicas de tema - usadas em modais específicos */
+  --color-blue-primary: #60a5fa;
+  --color-blue-border: rgba(96, 165, 250, 0.4);
+  --color-purple-primary: #a855f7;
+  --color-cyan-border: rgba(8, 145, 178, 0.3);
+  --color-green-border: rgba(34, 197, 94, 0.3);
+  --color-green-border-medium: rgba(34, 197, 94, 0.5);
+  --color-red-border: rgba(220, 38, 38, 0.3);
+  --color-red-border-light: rgba(239, 68, 68, 0.3);
+  --color-red-border-medium: rgba(239, 68, 68, 0.5);
+  --color-orange-border: rgba(249, 115, 22, 0.3);
+  --color-brown-border: rgba(154, 52, 18, 0.3);
+  --color-yellow-border: rgba(234, 179, 8, 0.3);
+  --color-purple-border: rgba(168, 85, 247, 0.3);
+
+  --color-black: #000000;
+}

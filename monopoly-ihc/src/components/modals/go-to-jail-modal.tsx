@@ -26,13 +26,13 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
           exit={{ scale: 0.8, opacity: 0, y: 100 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(239, 68, 68, 0.5)" }}
+          style={{ border: "0.5px solid var(--color-red-border-medium)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-gradient-to-r from-red-600 to-orange-600 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -78,7 +78,7 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="mb-5 rounded bg-red-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(239, 68, 68, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-red-border-light)" }}
             >
               <p className="text-sm font-semibold text-red-300">
                 ⚠️ Você precisará acertar uma pergunta para sair
@@ -94,7 +94,7 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
               whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
               className="w-full rounded bg-gradient-to-r from-red-600 to-orange-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               IR PARA A PRISÃO
             </motion.button>

@@ -32,7 +32,7 @@ export default function EndGameModal({
           exit={{ y: 50, opacity: 0, scale: 0.85 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="relative w-full max-w-lg rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           <div className="absolute inset-0 overflow-hidden rounded">
             <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-transparent" />
@@ -44,7 +44,7 @@ export default function EndGameModal({
               animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl"
-              style={{ border: "3px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "3px solid var(--color-border-lighter)" }}
             >
               <Trophy className="h-12 w-12 text-white" />
             </motion.div>
@@ -68,7 +68,7 @@ export default function EndGameModal({
 
               <div
                 className="mx-auto max-w-xs rounded-lg bg-gray-800/80 p-6 backdrop-blur-sm"
-                style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+                style={{ border: "0.5px solid var(--color-border-light)" }}
               >
                 <div className="flex items-center justify-center gap-4">
                   <div

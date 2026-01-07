@@ -26,13 +26,13 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
           exit={{ scale: 0.8, opacity: 0, rotate: 5 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-gradient-to-r from-purple-600 to-pink-600 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -81,7 +81,7 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="mb-5 rounded bg-purple-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(168, 85, 247, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-purple-border)" }}
             >
               <p className="text-lg font-semibold text-purple-300">
                 💆‍♂️ Momento de pausa
@@ -100,7 +100,7 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
               whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
               className="w-full rounded bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid rgba(255, 255, 255, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar Jogando
             </motion.button>

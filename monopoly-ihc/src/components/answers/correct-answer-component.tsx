@@ -31,13 +31,13 @@ export default function CorrectAnswerModal({
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
+          style={{ border: "0.5px solid var(--color-border-light)" }}
         >
           {/* Header */}
           <div
             className="rounded-t bg-green-800 p-4"
             style={{
-              borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+              borderBottom: "0.5px solid var(--color-border-light)",
             }}
           >
             <div className="flex items-center justify-center gap-2">
@@ -83,7 +83,7 @@ export default function CorrectAnswerModal({
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="rounded bg-green-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid rgba(34, 197, 94, 0.3)" }}
+              style={{ border: "0.5px solid var(--color-green-border)" }}
             >
               <div className="flex items-center justify-center gap-2">
                 <TrendingUp className="h-6 w-6 text-green-400" />
