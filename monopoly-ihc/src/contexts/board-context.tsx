@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { cornerTiles } from "@/data/corner-cards";
 import type { Tile } from "@/types/tile";
+import { gameLogic } from "@/services/game-logic";
 
 export type BoardContextType = {
   boardTiles: Tile[];
@@ -17,15 +18,17 @@ export const useBoard = () => {
   return ctx;
 };
 
-import { gameLogic } from "@/services/game-logic";
-
 const generateBoard = (): Tile[] => {
   const questions = gameLogic.getShuffledQuestions();
   console.log("DEBUG: Total questions available:", questions.length);
   let questionIndex = 0;
 
   // Helper to create a mixed group of tiles
-  const createGroup = (size: number, revesCount: number, startIndex: number) => {
+  const createGroup = (
+    size: number,
+    revesCount: number,
+    startIndex: number,
+  ) => {
     const groupTiles: Tile[] = [];
     const questionCount = size - revesCount;
 
@@ -42,17 +45,17 @@ const generateBoard = (): Tile[] => {
         alternatives: [],
         correctAlternative: 0,
         rentPrice: 0,
-        ownerId: undefined
+        ownerId: undefined,
       } as any);
     }
 
     // Add Question tiles
     for (let i = 0; i < questionCount; i++) {
       if (questionIndex < questions.length) {
-        groupTiles.push({ 
-          ...questions[questionIndex], 
+        groupTiles.push({
+          ...questions[questionIndex],
           ownerId: undefined,
-          type: "question" // Force type to ensure correct rendering
+          type: "question", // Force type to ensure correct rendering
         });
         questionIndex++;
       } else {
@@ -68,7 +71,7 @@ const generateBoard = (): Tile[] => {
           alternatives: [],
           correctAlternative: 0,
           rentPrice: 50,
-          ownerId: undefined
+          ownerId: undefined,
         } as any);
       }
     }
@@ -79,13 +82,13 @@ const generateBoard = (): Tile[] => {
 
   // Side 1 (Right): 4 tiles between Corner 0 and Corner 1
   const side1 = createGroup(4, 1, 0);
-  
+
   // Side 2 (Top): 6 tiles between Corner 1 and Corner 2
   const side2 = createGroup(6, 1, 10);
-  
+
   // Side 3 (Left): 4 tiles between Corner 2 and Corner 3
   const side3 = createGroup(4, 1, 20);
-  
+
   // Side 4 (Bottom): 6 tiles after Corner 3
   const side4 = createGroup(6, 1, 30);
 

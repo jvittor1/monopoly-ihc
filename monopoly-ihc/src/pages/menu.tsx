@@ -1,17 +1,71 @@
 import { useNavigate } from "react-router";
+import { FaArrowRight, FaBook, FaGraduationCap } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { MenuButton } from "@/components/menu-button";
+import RulesModal from "@/components/modals/rules-modal";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
+  const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+
+  const menuOptions = [
+    {
+      label: "Iniciar Partida",
+      icon: <FaArrowRight />,
+      onClick: () => navigate("/game"),
+    },
+    {
+      label: "Regras",
+      icon: <FaBook />,
+      onClick: () => setIsRulesModalOpen(true),
+    },
+    {
+      label: "Tutorial",
+      icon: <FaGraduationCap />,
+      onClick: () => {
+        // TODO: Navigate to tutorial page
+        console.log("Tutorial clicked");
+      },
+    },
+  ];
+
   return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <h1>Menu</h1>
-      <button
-        onClick={() => {
-          navigate("/games");
-        }}
+    <>
+      <div
+        className="flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-x-hidden overflow-y-auto rounded bg-gray-900/95 p-6 text-white shadow-2xl backdrop-blur-sm"
+        style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
       >
-        Jogar
-      </button>
-    </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="-m-6 mb-0 rounded-t bg-gray-800 p-4"
+          style={{
+            borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+          }}
+        >
+          <h1 className="bg-gradient-to-r text-lg font-bold tracking-wide text-white/60 uppercase">
+            Menu Principal
+          </h1>
+        </motion.div>
+
+        <div className="flex w-full flex-col gap-3 pt-2">
+          {menuOptions.map((option, index) => (
+            <MenuButton
+              key={option.label}
+              label={option.label}
+              icon={option.icon}
+              onClick={option.onClick}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
+
+      <RulesModal
+        isOpen={isRulesModalOpen}
+        onClose={() => setIsRulesModalOpen(false)}
+      />
+    </>
   );
 };

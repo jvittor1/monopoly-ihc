@@ -5,7 +5,7 @@ import PlayerComponent from "./player-component";
 import { useGame } from "@/contexts/game-context";
 import type { Tile } from "@/types/tile";
 import { useBoard } from "@/contexts/board-context";
-import BackgroundImage from "../assets/img-background-monopoly.png";
+import BackgroundImage from "../assets/images/img-background-monopoly.png";
 
 // -------------------- Row --------------------
 interface RowProps {

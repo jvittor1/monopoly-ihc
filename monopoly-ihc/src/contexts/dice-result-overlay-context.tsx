@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import DiceResultOverlay from "@/components/dice-result-overlay-component";
+import DiceResultOverlay from "@/components/modals/dice-result-overlay-component";
 import { TIME } from "@/constants/time";
 
 interface DiceResultOverlayProps {

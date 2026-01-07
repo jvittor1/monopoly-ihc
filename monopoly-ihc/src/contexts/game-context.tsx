@@ -3,6 +3,7 @@ import type { Player } from "@/interfaces/player";
 import { usePlayer } from "./player-context";
 import { TIME } from "@/constants/time";
 import { useModal } from "./modal-context";
+import EndGameModal from "@/components/modals/end-game-modal";
 
 export type GameContextType = {
   players: Player[];
@@ -16,6 +17,7 @@ export type GameContextType = {
 
 interface GameProviderProps {
   children: React.ReactNode;
+  onBackToMenu?: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -26,22 +28,33 @@ export const useGame = () => {
   return ctx;
 };
 
-export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
+export const GameProvider: React.FC<GameProviderProps> = ({
+  children,
+  onBackToMenu,
+}) => {
   const { addJailTurns, players } = usePlayer();
   const { showJailTurnSkipModal } = useModal();
   const [turnIndex, setTurnIndex] = useState(0);
   const [isRoundInProgress, setIsRoundInProgress] = useState(false);
   const [round, setRound] = useState(1);
   const [endGameCalled, setEndGameCalled] = useState(false);
+  const [showEndGameModal, setShowEndGameModal] = useState(false);
 
   const currentPlayer = players[turnIndex];
+
+  const handleBackToMenu = () => {
+    if (onBackToMenu) {
+      onBackToMenu();
+    } else {
+      window.location.href = "/";
+    }
+  };
 
   const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   const endGame = () => {
-    console.log("Game Over! Winner:", currentPlayer);
     setEndGameCalled(true);
-    alert(`Game Over! Winner: Player ${currentPlayer.id}`);
+    setShowEndGameModal(true);
   };
 
   useEffect(() => {
@@ -64,24 +77,22 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     const nextIndex = (turnIndexValue + 1) % playersRef.current.length;
     const nextPlayer = playersRef.current[nextIndex];
 
-    // check to increment round
     if (nextIndex === 0) {
       setRound((prevRound) => prevRound + 1);
-      console.log("New Round:", round + 1);
     }
 
     if (!nextPlayer.inJail) {
       setTurnIndex(nextIndex);
-      console.log("Next Turn:", nextIndex);
       return;
     } else {
-      // await sleep(TIME.EXTRA_LONG_DELAY);
       showJailTurnSkipModal(nextPlayer);
       await addJailTurns(-1, nextPlayer.id);
 
       return nextTurn(nextIndex);
     }
   };
+
+  const winner = players.find((p) => !p.bankrupt) || players[0];
 
   return (
     <GameContext.Provider
@@ -96,6 +107,15 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
       }}
     >
       {children}
+
+      <EndGameModal
+        isOpen={showEndGameModal}
+        winner={winner}
+        onBackToMenu={() => {
+          setShowEndGameModal(false);
+          handleBackToMenu();
+        }}
+      />
     </GameContext.Provider>
   );
 };

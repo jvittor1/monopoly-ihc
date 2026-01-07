@@ -2,6 +2,9 @@ import { useGame } from "@/contexts/game-context";
 import type { Player } from "@/interfaces/player";
 import { Coins, Lock, Menu, Volume2, Dices } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import GameMenuModal from "@/components/modals/game-menu-modal";
 
 const PlayerCard = ({
   player,
@@ -43,7 +46,6 @@ const PlayerCard = ({
               </span>
             </div>
 
-            {/* Badge de status no avatar */}
             {player.inJail && (
               <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-800 shadow-lg">
                 <Lock className="h-3 w-3 text-white" />
@@ -51,13 +53,11 @@ const PlayerCard = ({
             )}
           </div>
 
-          {/* Info do jogador */}
           <div className="min-w-0 flex-1">
             <h3 className="truncate text-sm font-bold text-slate-300">
               {player.name}
             </h3>
 
-            {/* Pontos */}
             <div className="mt-0.5 flex items-center gap-1.5">
               <Coins className="h-3.5 w-3.5 text-yellow-400" />
               <span className="text-sm font-semibold text-slate-200">
@@ -66,7 +66,6 @@ const PlayerCard = ({
             </div>
           </div>
 
-          {/* Contador de prisão */}
           {player.inJail && (
             <motion.div
               initial={{ scale: 0 }}
@@ -79,7 +78,6 @@ const PlayerCard = ({
                 </span>
               </div>
 
-              {/* Ícone de cadeado pequeno no canto */}
               <div className="absolute -right-1 -bottom-1 rounded-full bg-red-950 p-0.5 ring-2 ring-red-800">
                 <Lock className="h-2.5 w-2.5 text-red-400" />
               </div>
@@ -93,14 +91,14 @@ const PlayerCard = ({
 
 export default function HudComponent() {
   const { round, currentPlayer, players } = useGame();
+  const navigate = useNavigate();
+  const [isGameMenuOpen, setIsGameMenuOpen] = useState(false);
 
-  // Divide jogadores em duas colunas
   const leftPlayers = players.slice(0, Math.ceil(players.length / 2));
   const rightPlayers = players.slice(Math.ceil(players.length / 2));
 
   return (
     <>
-      {/* HUD Esquerda - Player Cards */}
       <div className="fixed top-4 left-4 z-40 w-60 space-y-2">
         {leftPlayers.map((player) => (
           <PlayerCard
@@ -111,7 +109,6 @@ export default function HudComponent() {
         ))}
       </div>
 
-      {/* HUD Direita - Player Cards */}
       {rightPlayers.length > 0 && (
         <div className="fixed top-4 right-4 z-40 w-60 space-y-2">
           {rightPlayers.map((player) => (
@@ -124,16 +121,12 @@ export default function HudComponent() {
         </div>
       )}
 
-      {/* Botões e Card de Rodada - Bottom Left */}
       <div className="fixed bottom-4 left-4 z-40 w-60 space-y-2">
-        {/* Botões Menu e Som */}
         <div className="flex gap-2">
-          {/* Botão Menu */}
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsGameMenuOpen(true)}
             className="flex flex-1 items-center justify-center gap-2 rounded bg-gray-900/95 px-4 py-3 backdrop-blur-sm transition-all hover:bg-gray-800/95"
             style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
           >
@@ -141,13 +134,10 @@ export default function HudComponent() {
             <span className="text-sm font-bold text-white">Menu</span>
           </motion.button>
 
-          {/* Botão Som (placeholder) */}
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="flex items-center justify-center rounded bg-gray-900/95 px-4 py-3 backdrop-blur-sm transition-all hover:bg-gray-800/95"
             style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
           >
@@ -155,7 +145,6 @@ export default function HudComponent() {
           </motion.button>
         </div>
 
-        {/* Card de Rodada */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -181,6 +170,12 @@ export default function HudComponent() {
           </div>
         </motion.div>
       </div>
+
+      <GameMenuModal
+        isOpen={isGameMenuOpen}
+        onClose={() => setIsGameMenuOpen(false)}
+        onBackToMenu={() => navigate("/")}
+      />
     </>
   );
 }
