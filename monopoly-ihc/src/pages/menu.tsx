@@ -6,6 +6,7 @@ import { MenuButton } from "@/components/menu-button";
 import RulesModal from "@/components/modals/rules-modal";
 import { useGame } from "@/contexts/game-context";
 import { useBoard } from "@/contexts/board-context";
+import backgroundMenuImg from "@/assets/images/background-menu.png";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
@@ -43,6 +44,11 @@ export const MenuPage = () => {
 
   return (
     <>
+      <img
+        src={backgroundMenuImg}
+        className="absolute top-0 left-0 h-full w-full object-cover opacity-5"
+        alt=""
+      />
       <div
         className="flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-x-hidden overflow-y-auto rounded bg-gray-900/95 p-6 text-white shadow-2xl backdrop-blur-sm"
         style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
