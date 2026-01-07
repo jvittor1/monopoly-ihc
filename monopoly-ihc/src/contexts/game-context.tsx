@@ -13,6 +13,7 @@ export type GameContextType = {
   turnIndex: number;
   isRoundInProgress?: boolean;
   setIsRoundInProgress: (inProgress: boolean) => void;
+  resetGame: () => void;
 };
 
 interface GameProviderProps {
@@ -32,7 +33,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
   children,
   onBackToMenu,
 }) => {
-  const { addJailTurns, players } = usePlayer();
+  const { addJailTurns, players, resetGame: resetPlayers } = usePlayer();
   const { showJailTurnSkipModal } = useModal();
   const [turnIndex, setTurnIndex] = useState(0);
   const [isRoundInProgress, setIsRoundInProgress] = useState(false);
@@ -94,6 +95,16 @@ export const GameProvider: React.FC<GameProviderProps> = ({
 
   const winner = players.find((p) => !p.bankrupt) || players[0];
 
+  const resetGame = () => {
+    console.log("Resetting entire game...");
+    resetPlayers();
+    setTurnIndex(0);
+    setRound(1);
+    setIsRoundInProgress(false);
+    setEndGameCalled(false);
+    setShowEndGameModal(false);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -104,6 +115,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         isRoundInProgress,
         setIsRoundInProgress,
         round,
+        resetGame,
       }}
     >
       {children}

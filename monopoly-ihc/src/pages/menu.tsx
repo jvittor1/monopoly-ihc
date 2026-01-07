@@ -4,16 +4,27 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { MenuButton } from "@/components/menu-button";
 import RulesModal from "@/components/modals/rules-modal";
+import { useGame } from "@/contexts/game-context";
+import { useBoard } from "@/contexts/board-context";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
   const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+  const { resetGame } = useGame();
+  const { resetBoard } = useBoard();
+
+  const handleStartGame = () => {
+    console.log("Starting new game - resetting state...");
+    resetGame();
+    resetBoard();
+    navigate("/game");
+  };
 
   const menuOptions = [
     {
       label: "Iniciar Partida",
       icon: <FaArrowRight />,
-      onClick: () => navigate("/game"),
+      onClick: handleStartGame,
     },
     {
       label: "Regras",

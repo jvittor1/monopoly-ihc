@@ -12,6 +12,7 @@ export type PlayerContextType = {
   getPlayerById: (playerId: number) => Player | undefined;
   addPropertyToPlayer: (playerId: number, propertyId: number) => void;
   movePlayerToJail: (playerId: number) => void;
+  resetGame: () => void;
 };
 
 interface PlayerProviderProps {
@@ -164,6 +165,11 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     console.log(`Added property ${propertyId} to player ${playerId}`);
   }
 
+  function resetGame(): void {
+    console.log("Resetting game to initial state...");
+    setPlayers(playerMock.map((p) => ({ ...p })));
+  }
+
   return (
     <PlayerContext.Provider
       value={{
@@ -175,6 +181,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         movePlayerToJail,
         getPlayerById,
         addPropertyToPlayer,
+        resetGame,
       }}
     >
       {children}
