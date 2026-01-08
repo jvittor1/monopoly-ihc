@@ -278,9 +278,8 @@ export default function Dice({ onDiceResult }: DiceProps) {
       <motion.button
         onClick={throwDice}
         disabled={isRoundInProgress}
-        className="absolute right-4 bottom-4 disabled:cursor-not-allowed disabled:opacity-60"
-        whileHover={!isRoundInProgress ? { scale: 1.1 } : {}}
-        whileTap={!isRoundInProgress ? { scale: 0.9 } : {}}
+        className="absolute right-4 bottom-4 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+        whileHover={!isRoundInProgress ? { scale: 1.05 } : {}}
       >
         <motion.div
           className="flex flex-col items-center gap-2"
@@ -296,7 +295,7 @@ export default function Dice({ onDiceResult }: DiceProps) {
             ease: "easeOut",
           }}
         >
-          <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 shadow-2xl ring-2 ring-slate-700/50 transition-all group-hover:brightness-110">
+          <div className="rounded-sm bg-gradient-to-br from-slate-800 to-slate-900 p-4 shadow-2xl ring-2 ring-slate-700/50 transition-all group-hover:brightness-110">
             <Dices className="h-10 w-10 text-white" strokeWidth={2} />
           </div>
         </motion.div>

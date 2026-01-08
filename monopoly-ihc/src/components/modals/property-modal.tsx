@@ -255,11 +255,11 @@ export default function PropertyRentModal({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: isOwner ? 0.6 : 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className={`w-full rounded px-6 py-3 font-bold text-white uppercase shadow-lg transition-all ${
-                isOwner ? "bg-green-800" : "bg-yellow-800"
+              className={`w-full cursor-pointer rounded px-6 py-3 font-bold text-white uppercase shadow-lg transition-all ${
+                isOwner
+                  ? "bg-green-800 hover:bg-green-900"
+                  : "bg-yellow-800 hover:bg-yellow-900"
               }`}
               style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >

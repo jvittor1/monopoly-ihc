@@ -96,11 +96,9 @@ export default function StartModal({ onAction }: StartModalProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="w-full rounded bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid var(--color-border-lighter)" }}
+              className="w-full cursor-pointer rounded bg-green-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-green-900"
+              style={{ border: "0.5px solid var(--color-green-border-medium)" }}
             >
               Continuar Jogando
             </motion.button>

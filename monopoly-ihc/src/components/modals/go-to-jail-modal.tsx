@@ -81,7 +81,7 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
               style={{ border: "0.5px solid var(--color-red-border-light)" }}
             >
               <p className="text-sm font-semibold text-red-300">
-                ⚠️ Você precisará acertar uma pergunta para sair
+                Você precisará acertar uma pergunta para sair
               </p>
             </motion.div>
 
@@ -90,11 +90,9 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="w-full rounded bg-gradient-to-r from-red-600 to-orange-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-              style={{ border: "0.5px solid var(--color-border-lighter)" }}
+              className="w-full cursor-pointer rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-red-900"
+              style={{ border: "0.5px solid var(--color-red-border-light)" }}
             >
               IR PARA A PRISÃO
             </motion.button>

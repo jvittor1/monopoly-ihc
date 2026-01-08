@@ -226,13 +226,11 @@ export default function RandomQuestionModal({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                whileHover={selected ? { scale: 1.05 } : {}}
-                whileTap={selected ? { scale: 0.95 } : {}}
                 disabled={!selected}
                 onClick={submitAnswer}
-                className={`flex items-center gap-2 rounded px-6 py-2.5 text-sm font-bold uppercase transition-all duration-300 ${
+                className={`flex cursor-pointer items-center gap-2 rounded px-6 py-2.5 text-sm font-bold uppercase transition-all duration-300 ${
                   selected
-                    ? "bg-purple-800 text-white shadow-lg"
+                    ? "bg-purple-800 text-white shadow-lg hover:bg-purple-900"
                     : "cursor-not-allowed bg-gray-700/50 text-gray-400"
                 }`}
                 style={{

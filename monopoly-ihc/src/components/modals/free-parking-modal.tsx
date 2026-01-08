@@ -84,7 +84,7 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
               style={{ border: "0.5px solid var(--color-purple-border)" }}
             >
               <p className="text-lg font-semibold text-purple-300">
-                💆‍♂️ Momento de pausa
+                Momento de pausa
               </p>
               <p className="mt-1 text-sm text-gray-300">
                 Aproveite para respirar fundo
@@ -96,10 +96,8 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="w-full rounded bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
+              className="w-full cursor-pointer rounded bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
               style={{ border: "0.5px solid var(--color-border-lighter)" }}
             >
               Continuar Jogando
