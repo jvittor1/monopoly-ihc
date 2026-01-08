@@ -1,8 +1,8 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { X, Play, Book, Home } from "lucide-react";
 import { useState } from "react";
 import RulesModal from "./rules-modal";
 import { MenuButton } from "@/components/menu-button";
+import ModalWrapper from "./modal-wrapper";
 
 interface GameMenuModalProps {
   isOpen: boolean;
@@ -42,57 +42,37 @@ export default function GameMenuModal({
 
   return (
     <>
-      <AnimatePresence>
-        <motion.div
-          key="backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-4"
+      <ModalWrapper isOpen={isOpen} onClose={onClose} maxWidth="md">
+        <div
+          className="flex items-center justify-between rounded-t bg-gray-800 p-5"
+          style={{
+            borderBottom: "0.5px solid var(--color-border-light)",
+          }}
         >
-          <motion.div
-            key="modal"
-            initial={{ y: 50, opacity: 0, scale: 0.85 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 50, opacity: 0, scale: 0.85 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-md rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-            style={{ border: "0.5px solid var(--color-border-light)" }}
+          <h2 className="bg-gradient-to-r text-lg font-bold tracking-wide text-blue-400 uppercase">
+            Menu do Jogo
+          </h2>
+          <button
+            onClick={onClose}
+            className="rounded p-2 transition-all duration-200 hover:bg-white/10"
           >
-            <div
-              className="flex items-center justify-between rounded-t bg-gray-800 p-5"
-              style={{
-                borderBottom: "0.5px solid var(--color-border-light)",
-              }}
-            >
-              <h2 className="bg-gradient-to-r text-lg font-bold tracking-wide text-blue-400 uppercase">
-                Menu do Jogo
-              </h2>
-              <button
-                onClick={onClose}
-                className="rounded p-2 transition-all duration-200 hover:bg-white/10"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
+            <X className="h-6 w-6" />
+          </button>
+        </div>
 
-            <div className="space-y-3 p-6">
-              {menuOptions.map((option, index) => (
-                <MenuButton
-                  key={option.label}
-                  label={option.label}
-                  icon={option.icon}
-                  onClick={option.onClick}
-                  index={index}
-                  description={option.description}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
+        <div className="space-y-3 p-6">
+          {menuOptions.map((option, index) => (
+            <MenuButton
+              key={option.label}
+              label={option.label}
+              icon={option.icon}
+              onClick={option.onClick}
+              index={index}
+              description={option.description}
+            />
+          ))}
+        </div>
+      </ModalWrapper>
 
       <RulesModal
         isOpen={isRulesModalOpen}
