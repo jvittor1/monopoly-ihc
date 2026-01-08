@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { MenuButton } from "@/components/menu-button";
 import RulesModal from "@/components/modals/rules-modal";
+import GameSetupModal from "@/components/modals/game-setup-modal";
 import { useGame } from "@/contexts/game-context";
 import { useBoard } from "@/contexts/board-context";
 import backgroundMenuImg from "@/assets/images/background-menu.png";
@@ -11,11 +12,21 @@ import backgroundMenuImg from "@/assets/images/background-menu.png";
 export const MenuPage = () => {
   const navigate = useNavigate();
   const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+  const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
   const { resetGame } = useGame();
   const { resetBoard } = useBoard();
 
   const handleStartGame = () => {
-    console.log("Starting new game - resetting state...");
+    setIsSetupModalOpen(true);
+  };
+
+  const handleGameStart = (config: {
+    playerName: string;
+    playerColor: string;
+    botDifficulty: string;
+  }) => {
+    console.log("Starting new game with config:", config);
+    setIsSetupModalOpen(false);
     resetGame();
     resetBoard();
     navigate("/game");
@@ -82,6 +93,12 @@ export const MenuPage = () => {
       <RulesModal
         isOpen={isRulesModalOpen}
         onClose={() => setIsRulesModalOpen(false)}
+      />
+
+      <GameSetupModal
+        isOpen={isSetupModalOpen}
+        onClose={() => setIsSetupModalOpen(false)}
+        onStartGame={handleGameStart}
       />
     </>
   );
