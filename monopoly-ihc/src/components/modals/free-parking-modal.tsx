@@ -4,17 +4,35 @@ import { Coffee, Smile } from "lucide-react";
 import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
 import ButtonModal from "../button-modal";
+import { usePlayer } from "@/contexts/player-context";
+import { BotService } from "@/services/bot-service";
+import { useEffect } from "react";
 
 type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
-export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
+export default function FreeParkingModal({
+  onAction,
+  playerId,
+}: FreeParkingModalProps) {
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
+
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const autoClick = async () => {
+        await BotService.thinkingDelay();
+        handleContinue();
+      };
+      autoClick();
+    }
+  }, [currentPlayer?.isBot]);
+
   const handleContinue = () => {
     if (onAction) onAction({});
   };
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
-      {/* Header */}
       <div
         className="rounded-t bg-gradient-to-r from-purple-600 to-pink-600 p-4"
         style={{
@@ -75,6 +93,7 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
 
         <ButtonModal
           onClick={handleContinue}
+          disabled={currentPlayer?.isBot}
           className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
         >
           Continuar Jogando

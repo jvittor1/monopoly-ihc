@@ -116,6 +116,7 @@ export default function PropertyFailedModal({
 
         <ButtonModal
           onClick={onClose}
+          disabled={currentPlayer?.isBot}
           className="w-full bg-gradient-to-r from-red-600 to-gray-600 text-white shadow-lg"
         >
           Continuar

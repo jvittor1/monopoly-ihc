@@ -4,17 +4,32 @@ import { Lock, AlertTriangle } from "lucide-react";
 import type { BaseModalProps } from "@/types/modal-type";
 import { POINTS_VARIABLES } from "@/constants/points-variables";
 import ModalWrapper from "./modal-wrapper";
+import { usePlayer } from "@/contexts/player-context";
+import { BotService } from "@/services/bot-service";
+import { useEffect } from "react";
 
 type JailModalProps = BaseModalProps<CornerTile>;
 
-export default function JailModal({ onAction }: JailModalProps) {
+export default function JailModal({ onAction, playerId }: JailModalProps) {
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
+
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const autoClick = async () => {
+        await BotService.thinkingDelay();
+        handleContinue();
+      };
+      autoClick();
+    }
+  }, [currentPlayer?.isBot]);
+
   const handleContinue = () => {
     if (onAction) onAction({});
   };
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
-      {/* Header */}
       <div
         className="rounded-t bg-gradient-to-r from-orange-600 to-red-600 p-4"
         style={{
@@ -29,9 +44,7 @@ export default function JailModal({ onAction }: JailModalProps) {
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="p-6">
-        {/* Ícone */}
         <div className="mb-5 flex justify-center">
           <motion.div
             initial={{ scale: 0, rotate: 90 }}
@@ -40,7 +53,7 @@ export default function JailModal({ onAction }: JailModalProps) {
             className="relative rounded-full bg-gradient-to-br from-orange-500 to-red-500 p-4 shadow-lg"
           >
             <Lock className="h-12 w-12 text-white" />
-            {/* Badge de alerta */}
+
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -52,7 +65,6 @@ export default function JailModal({ onAction }: JailModalProps) {
           </motion.div>
         </div>
 
-        {/* Mensagem */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -66,7 +78,6 @@ export default function JailModal({ onAction }: JailModalProps) {
             Apenas de passagem, sem consequências
           </p>
 
-          {/* Info */}
           <div
             className="inline-block rounded bg-orange-600/20 px-4 py-2 backdrop-blur-sm"
             style={{ border: "0.5px solid var(--color-orange-border)" }}
@@ -81,13 +92,13 @@ export default function JailModal({ onAction }: JailModalProps) {
           </div>
         </motion.div>
 
-        {/* Botão */}
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           onClick={handleContinue}
-          className="w-full cursor-pointer rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-red-900"
+          disabled={currentPlayer?.isBot}
+          className="w-full cursor-pointer rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-50"
           style={{ border: "0.5px solid var(--color-red-border-light)" }}
         >
           Entendi

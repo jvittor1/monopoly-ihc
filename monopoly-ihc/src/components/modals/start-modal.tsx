@@ -5,10 +5,26 @@ import { motion } from "framer-motion";
 import { TrendingUp, Coins } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
 import ButtonModal from "../button-modal";
+import { usePlayer } from "@/contexts/player-context";
+import { BotService } from "@/services/bot-service";
+import { useEffect } from "react";
 
 type StartModalProps = BaseModalProps<CornerTile>;
 
-export default function StartModal({ onAction }: StartModalProps) {
+export default function StartModal({ onAction, playerId }: StartModalProps) {
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
+
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const autoClick = async () => {
+        await BotService.thinkingDelay();
+        handleContinue();
+      };
+      autoClick();
+    }
+  }, [currentPlayer?.isBot]);
+
   const handleContinue = () => {
     if (onAction) onAction({});
   };
@@ -74,6 +90,7 @@ export default function StartModal({ onAction }: StartModalProps) {
 
         <ButtonModal
           onClick={handleContinue}
+          disabled={currentPlayer?.isBot}
           className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg"
         >
           Continuar Jogando

@@ -114,6 +114,7 @@ export default function PropertyAcquiredModal({
 
         <ButtonModal
           onClick={onClose}
+          disabled={currentPlayer?.isBot}
           className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg"
         >
           Continuar

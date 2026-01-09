@@ -14,6 +14,7 @@ export type GameContextType = {
   isRoundInProgress?: boolean;
   setIsRoundInProgress: (inProgress: boolean) => void;
   resetGame: () => void;
+  endGameCalled: boolean;
 };
 
 interface GameProviderProps {
@@ -22,9 +23,6 @@ interface GameProviderProps {
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
-
-// Export context for use in custom hooks
-export { GameContext };
 
 export const useGame = () => {
   const ctx = useContext(GameContext);
@@ -146,6 +144,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         setIsRoundInProgress,
         round,
         resetGame,
+        endGameCalled,
       }}
     >
       {children}
@@ -161,3 +160,5 @@ export const GameProvider: React.FC<GameProviderProps> = ({
     </GameContext.Provider>
   );
 };
+
+export { GameContext };

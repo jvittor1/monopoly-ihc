@@ -4,10 +4,29 @@ import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
 import ButtonModal from "../button-modal";
 import { GiHandcuffs } from "react-icons/gi";
+import { usePlayer } from "@/contexts/player-context";
+import { BotService } from "@/services/bot-service";
+import { useEffect } from "react";
 
 type GoToJailModalProps = BaseModalProps<CornerTile>;
 
-export default function GoToJailModal({ onAction }: GoToJailModalProps) {
+export default function GoToJailModal({
+  onAction,
+  playerId,
+}: GoToJailModalProps) {
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
+
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const autoClick = async () => {
+        await BotService.thinkingDelay();
+        handleContinue();
+      };
+      autoClick();
+    }
+  }, [currentPlayer?.isBot]);
+
   const handleContinue = () => {
     if (onAction) onAction({});
   };
@@ -66,6 +85,7 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
 
         <ButtonModal
           onClick={handleContinue}
+          disabled={currentPlayer?.isBot}
           className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg"
         >
           Ir para a Prisão

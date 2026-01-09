@@ -12,7 +12,12 @@ interface DiceProps {
 
 export default function Dice({ onDiceResult }: DiceProps) {
   const { showDiceResult } = useDiceResult();
-  const { isRoundInProgress, setIsRoundInProgress, currentPlayer } = useGame();
+  const {
+    isRoundInProgress,
+    setIsRoundInProgress,
+    currentPlayer,
+    endGameCalled,
+  } = useGame();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cubeBodyRef = useRef<CANNON.Body | null>(null);
@@ -274,14 +279,14 @@ export default function Dice({ onDiceResult }: DiceProps) {
   };
 
   useEffect(() => {
-    if (currentPlayer?.isBot && !isRoundInProgress) {
+    if (currentPlayer?.isBot && !isRoundInProgress && !endGameCalled) {
       const autoBotRoll = async () => {
         await BotService.thinkingDelay();
         throwDice();
       };
       autoBotRoll();
     }
-  }, [currentPlayer?.isBot, isRoundInProgress]);
+  }, [currentPlayer?.isBot, isRoundInProgress, endGameCalled]);
 
   return (
     <div ref={containerRef} className="absolute inset-0">
