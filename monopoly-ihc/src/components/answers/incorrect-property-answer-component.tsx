@@ -1,142 +1,126 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Home, XCircle, Lock, AlertTriangle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Home, XCircle, AlertTriangle } from "lucide-react";
+import ModalWrapper from "../modals/modal-wrapper";
+import ButtonModal from "../button-modal";
+import { BotService } from "@/services/bot-service";
+import { usePlayer } from "@/contexts/player-context";
+import { useEffect } from "react";
 
 interface PropertyFailedModalProps {
   onClose: () => void;
   propertyName?: string;
+  playerId: number;
 }
 
 export default function PropertyFailedModal({
   onClose,
   propertyName,
+  playerId,
 }: PropertyFailedModalProps) {
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
+
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const autoClose = async () => {
+        await BotService.thinkingDelay();
+        onClose();
+      };
+      autoClose();
+    }
+  }, [currentPlayer?.isBot, onClose]);
+
   return (
-    <AnimatePresence>
-      <motion.div
-        key="backdrop"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4"
+    <ModalWrapper
+      isOpen={true}
+      onClose={onClose}
+      maxWidth="md"
+      disableBackdropClick
+    >
+      <div
+        className="rounded-t bg-red-800 p-4"
+        style={{
+          borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+        }}
       >
-        <motion.div
-          key="modal"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid var(--color-border-light)" }}
-        >
-          {/* Header */}
-          <div
-            className="rounded-t bg-red-800 p-4"
-            style={{
-              borderBottom: "0.5px solid var(--color-border-light)",
-            }}
+        <div className="flex items-center justify-center gap-2">
+          <XCircle className="h-6 w-6 text-white" />
+          <h2 className="text-xl font-bold tracking-wide text-white uppercase">
+            Resposta Incorreta
+          </h2>
+        </div>
+      </div>
+
+      <div className="p-6">
+        <div className="mb-5 flex justify-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring" }}
+            className="relative"
           >
-            <div className="flex items-center justify-center gap-2">
-              <Home className="h-6 w-6 text-white" />
-              <h2 className="text-xl font-bold tracking-wide text-white uppercase">
-                Propriedade Não Adquirida
-              </h2>
-            </div>
-          </div>
-
-          {/* Conteúdo */}
-          <div className="p-6">
-            {/* Ícone */}
-            <div className="mb-5 flex justify-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-                className="relative"
-              >
-                <div className="rounded-full bg-red-800 p-4 shadow-lg">
-                  <Home className="h-12 w-12 text-white" />
-                </div>
-
-                {/* X vermelho sobreposto */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.4, type: "spring" }}
-                  className="absolute -top-2 -right-2 rounded-full bg-red-600 p-1.5 shadow-lg"
-                  style={{ border: "2px solid rgb(17, 24, 39)" }}
-                >
-                  <XCircle className="h-5 w-5 text-white" />
-                </motion.div>
-              </motion.div>
+            <div className="rounded-full bg-gradient-to-br from-gray-700 to-gray-800 p-4 shadow-lg">
+              <Home className="h-12 w-12 text-white" />
             </div>
 
-            {/* Mensagem */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-5 text-center"
-            >
-              <h3 className="mb-3 text-2xl font-bold text-white">
-                Não foi dessa vez
-              </h3>
-              <p className="text-base text-gray-300">
-                Você errou e não conseguiu a propriedade
-              </p>
-            </motion.div>
-
-            {/* Card da propriedade perdida */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.5, type: "spring" }}
-              className="mb-5 rounded bg-red-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid var(--color-red-border)" }}
+              transition={{ delay: 0.4, type: "spring" }}
+              className="absolute -right-1 -bottom-1 rounded-full bg-red-500 p-1 shadow-lg"
             >
-              <div className="mb-2 flex items-center justify-center gap-2">
-                <Lock className="h-5 w-5 text-red-400" />
-                <p className="text-sm font-semibold text-red-300">
-                  Propriedade Bloqueada
-                </p>
-              </div>
-              <h3 className="text-xl font-bold text-red-100 line-through decoration-2">
-                {propertyName}
-              </h3>
-              <p className="mt-2 text-xs text-gray-400">
-                Esta propriedade continua disponível
-              </p>
+              <XCircle className="h-6 w-6 text-white" />
             </motion.div>
+          </motion.div>
+        </div>
 
-            {/* Informação */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="mb-5 rounded bg-yellow-900/30 p-3 backdrop-blur-sm"
-              style={{ border: "0.5px solid var(--color-yellow-border)" }}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                <p className="text-sm text-yellow-300">
-                  Outros jogadores ainda podem conquistá-la
-                </p>
-              </div>
-            </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-4 text-center"
+        >
+          <h3 className="mb-2 text-xl font-bold text-red-400">
+            Que pena! Resposta Errada
+          </h3>
+          <p className="text-sm leading-relaxed text-gray-300">
+            Você não conseguiu adquirir a propriedade desta vez.
+          </p>
+        </motion.div>
 
-            {/* Botão */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              onClick={onClose}
-              className="w-full cursor-pointer rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-red-900"
-              style={{ border: "0.5px solid var(--color-red-border-medium)" }}
-            >
-              Continuar
-            </motion.button>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5, type: "spring" }}
+          className="mb-4 rounded bg-gradient-to-r from-red-900/50 to-gray-900/50 p-4 backdrop-blur-sm"
+          style={{ border: "0.5px solid rgba(239, 68, 68, 0.3)" }}
+        >
+          <p className="text-center text-lg font-bold text-gray-300">
+            {propertyName}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="mb-4 rounded bg-yellow-900/30 p-3 backdrop-blur-sm"
+        >
+          <div className="flex items-start gap-2 text-yellow-300">
+            <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+            <p className="text-sm">
+              A propriedade continua disponível para tentativas futuras
+            </p>
           </div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+
+        <ButtonModal
+          onClick={onClose}
+          className="w-full bg-gradient-to-r from-red-600 to-gray-600 text-white shadow-lg"
+        >
+          Continuar
+        </ButtonModal>
+      </div>
+    </ModalWrapper>
   );
 }

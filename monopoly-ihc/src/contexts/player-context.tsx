@@ -1,5 +1,4 @@
 import { TIME } from "@/constants/time";
-import { playerMock } from "@/data/player-mock";
 import type { Player } from "@/interfaces/player";
 import { createContext, useContext, useState } from "react";
 
@@ -13,6 +12,7 @@ export type PlayerContextType = {
   addPropertyToPlayer: (playerId: number, propertyId: number) => void;
   movePlayerToJail: (playerId: number) => void;
   resetGame: () => void;
+  initializePlayers: (players: Player[]) => void;
 };
 
 interface PlayerProviderProps {
@@ -28,7 +28,8 @@ export const usePlayer = () => {
 };
 
 export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
-  const [players, setPlayers] = useState<Player[]>(playerMock);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [initialPlayers, setInitialPlayers] = useState<Player[]>([]);
   const boardLength = 24;
 
   function movePlayer(steps: number, playerId: number): Promise<number> {
@@ -167,7 +168,13 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
 
   function resetGame(): void {
     console.log("Resetting game to initial state...");
-    setPlayers(playerMock.map((p) => ({ ...p })));
+    setPlayers(initialPlayers.map((p) => ({ ...p })));
+  }
+
+  function initializePlayers(newPlayers: Player[]): void {
+    console.log("Initializing players:", newPlayers);
+    setPlayers(newPlayers);
+    setInitialPlayers(newPlayers);
   }
 
   return (
@@ -182,6 +189,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         getPlayerById,
         addPropertyToPlayer,
         resetGame,
+        initializePlayers,
       }}
     >
       {children}

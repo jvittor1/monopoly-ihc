@@ -19,10 +19,14 @@ export async function handleQuestionAction(
   });
 
   if (questionPayload) {
-    await answer.showModalPropertyAcquired(isAnswerCorrect, tile.text);
+    await answer.showModalPropertyAcquired(
+      isAnswerCorrect,
+      tile.text,
+      playerId,
+    );
 
     if (isAnswerCorrect) {
-      // player.removeMoney(tile.points!, playerId);
+      player.removeMoney(tile.points!, playerId);
       player.addPropertyToPlayer(playerId, tile.id);
       board.updateTile(tile.id, playerId);
     }

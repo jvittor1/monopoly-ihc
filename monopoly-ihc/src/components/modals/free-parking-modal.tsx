@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Coffee, Smile } from "lucide-react";
 import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
+import ButtonModal from "../button-modal";
 
 type FreeParkingModalProps = BaseModalProps<CornerTile>;
 
@@ -28,9 +29,7 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="p-6">
-        {/* Ícone de relaxamento */}
         <div className="mb-5 flex justify-center">
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
@@ -42,7 +41,6 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
           </motion.div>
         </div>
 
-        {/* Mensagem */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +58,6 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
           </p>
         </motion.div>
 
-        {/* Caixa de destaque */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -76,17 +73,12 @@ export default function FreeParkingModal({ onAction }: FreeParkingModalProps) {
           </p>
         </motion.div>
 
-        {/* Botão */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+        <ButtonModal
           onClick={handleContinue}
-          className="w-full cursor-pointer rounded bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all"
-          style={{ border: "0.5px solid var(--color-border-lighter)" }}
+          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
         >
           Continuar Jogando
-        </motion.button>
+        </ButtonModal>
       </div>
     </ModalWrapper>
   );

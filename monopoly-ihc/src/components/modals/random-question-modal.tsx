@@ -9,6 +9,8 @@ type QuestionModalProps = BaseModalProps<QuestionCard>;
 
 import { gameLogic } from "@/services/game-logic";
 import ModalWrapper from "./modal-wrapper";
+import { BotService } from "@/services/bot-service";
+import { usePlayer } from "@/contexts/player-context";
 
 export default function RandomQuestionModal({
   tile: initialTile,
@@ -18,17 +20,16 @@ export default function RandomQuestionModal({
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
 
-  // State to hold the dynamically fetched card
   const [dynamicCard, setDynamicCard] = useState<QuestionCard | null>(null);
 
   useEffect(() => {
-    // Fetch a fresh Revés card when the modal mounts
     const card = gameLogic.drawRevesCard();
     setDynamicCard(card);
   }, []);
 
-  // Use dynamicCard if available, otherwise fallback to initialTile
   const tile = dynamicCard || initialTile;
 
   useEffect(() => {
@@ -52,6 +53,28 @@ export default function RandomQuestionModal({
     }
   }, [timeLeft]);
 
+  useEffect(() => {
+    if (currentPlayer?.isBot && dynamicCard) {
+      const playBotTurn = async () => {
+        await BotService.thinkingDelay();
+
+        const answer = BotService.chooseAnswer(
+          dynamicCard,
+          currentPlayer.botDifficulty,
+        );
+        setSelected(answer);
+
+        await BotService.submitDelay();
+        const isCorrect = answer === dynamicCard.correctAlternative;
+        if (onAction) {
+          onAction({ playerId, isCorrect, points: dynamicCard.points });
+        }
+      };
+
+      playBotTurn();
+    }
+  }, [currentPlayer?.isBot, dynamicCard, playerId, onAction]);
+
   const submitAnswer = () => {
     if (selected === null) setSelected(-1);
     const isCorrect = selected === tile.correctAlternative;
@@ -67,7 +90,6 @@ export default function RandomQuestionModal({
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="2xl">
       <div className="relative max-h-[90vh] w-full overflow-x-hidden overflow-y-auto">
-        {/* Timer Circular - Top Right */}
         <div className="rounded-ful absolute -top-1 -right-1 animate-pulse p-2">
           <div className="relative flex h-12 w-12 items-center justify-center">
             <svg className="h-12 w-12 -rotate-90 transform">
@@ -92,7 +114,6 @@ export default function RandomQuestionModal({
           </div>
         </div>
 
-        {/* Header */}
         <div
           className="rounded-t bg-gray-800 p-4"
           style={{
@@ -106,9 +127,7 @@ export default function RandomQuestionModal({
           </div>
         </div>
 
-        {/* Conteúdo */}
         <div className="p-6">
-          {/* Aviso de Consequências */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,7 +143,6 @@ export default function RandomQuestionModal({
             </div>
           </motion.div>
 
-          {/* Pergunta */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,14 +150,12 @@ export default function RandomQuestionModal({
             className="relative mb-5 rounded bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-5 backdrop-blur-sm"
             style={{ border: "0.5px solid var(--color-border-subtle)" }}
           >
-            {/* Barra lateral roxa */}
             <div
               className="absolute top-0 bottom-0 left-0 w-0.5"
               style={{ backgroundColor: "var(--color-purple-primary)" }}
             ></div>
 
             <div className="flex items-start gap-3">
-              {/* Ícone de pergunta */}
               <div
                 className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded text-sm font-bold shadow-lg"
                 style={{
@@ -155,7 +171,6 @@ export default function RandomQuestionModal({
             </div>
           </motion.div>
 
-          {/* Alternativas com cor roxa/rosa */}
           <div className="mb-5 space-y-2.5">
             {tile.alternatives.map((option, index) => (
               <motion.button
@@ -164,7 +179,8 @@ export default function RandomQuestionModal({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
                 onClick={() => setSelected(option.id)}
-                className={`w-full rounded p-3.5 text-left transition-all duration-300 hover:scale-[1.01] ${
+                disabled={currentPlayer?.isBot}
+                className={`w-full rounded p-3.5 text-left transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 ${
                   selected === option.id
                     ? "bg-purple-800 shadow-lg"
                     : "bg-gray-800/60 backdrop-blur-sm hover:bg-gray-700/70"
@@ -206,23 +222,23 @@ export default function RandomQuestionModal({
             ))}
           </div>
 
-          {/* Botão Confirmar com cor roxa/rosa */}
           <div className="flex justify-end">
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              disabled={!selected}
+              disabled={!selected || currentPlayer?.isBot}
               onClick={submitAnswer}
               className={`flex cursor-pointer items-center gap-2 rounded px-6 py-2.5 text-sm font-bold uppercase transition-all duration-300 ${
-                selected
+                selected && !currentPlayer?.isBot
                   ? "bg-purple-800 text-white shadow-lg hover:bg-purple-900"
                   : "cursor-not-allowed bg-gray-700/50 text-gray-400"
               }`}
               style={{
-                border: selected
-                  ? "0.5px solid var(--color-border-lighter)"
-                  : "0.5px solid var(--color-border-faint)",
+                border:
+                  selected && !currentPlayer?.isBot
+                    ? "0.5px solid var(--color-border-lighter)"
+                    : "0.5px solid var(--color-border-faint)",
               }}
             >
               <CheckCircle2 className="h-4 w-4" />

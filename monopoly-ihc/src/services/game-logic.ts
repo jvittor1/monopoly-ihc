@@ -10,7 +10,6 @@ class GameLogicService {
     this.initializeRevesDeck();
   }
 
-  // Fisher-Yates Shuffle
   public shuffle<T>(array: T[]): T[] {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -20,12 +19,9 @@ class GameLogicService {
     return shuffled;
   }
 
-  // Returns a shuffled list of questions for the board initialization
   public getShuffledQuestions(): QuestionCard[] {
     return this.shuffle(questionsPool);
   }
-
-  // --- Revés Logic ---
 
   private initializeRevesDeck() {
     this.revesDeck = this.shuffle([...revesPool]);
@@ -46,7 +42,6 @@ class GameLogicService {
 
   private recycleRevesDeck() {
     if (this.revesDiscardPile.length === 0) {
-      // Should only happen if pool is empty initially
       this.revesDeck = this.shuffle([...revesPool]);
       return;
     }
@@ -54,10 +49,11 @@ class GameLogicService {
     const lastCard = this.revesDiscardPile[this.revesDiscardPile.length - 1];
     let newDeck = this.shuffle([...this.revesDiscardPile]);
 
-    // Anti-repeat: Ensure first card of new deck != last card of old deck
     if (newDeck.length > 1 && newDeck[newDeck.length - 1].id === lastCard.id) {
-      // Swap top with bottom
-      [newDeck[newDeck.length - 1], newDeck[0]] = [newDeck[0], newDeck[newDeck.length - 1]];
+      [newDeck[newDeck.length - 1], newDeck[0]] = [
+        newDeck[0],
+        newDeck[newDeck.length - 1],
+      ];
     }
 
     this.revesDeck = newDeck;

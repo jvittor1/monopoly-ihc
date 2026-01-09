@@ -1,8 +1,9 @@
 import type { CornerTile } from "@/interfaces/corner-tile";
 import { motion } from "framer-motion";
-import { ShieldAlert, Lock } from "lucide-react";
 import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
+import ButtonModal from "../button-modal";
+import { GiHandcuffs } from "react-icons/gi";
 
 type GoToJailModalProps = BaseModalProps<CornerTile>;
 
@@ -13,7 +14,6 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
-      {/* Header */}
       <div
         className="rounded-t bg-gradient-to-r from-red-600 to-orange-600 p-4"
         style={{
@@ -21,16 +21,14 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
         }}
       >
         <div className="flex items-center justify-center gap-2">
-          <ShieldAlert className="h-6 w-6 text-white" />
+          <GiHandcuffs className="h-6 w-6 text-white" />
           <h2 className="text-xl font-bold tracking-wide text-white uppercase">
             VÁ PARA A PRISÃO!
           </h2>
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="p-6">
-        {/* Ícone */}
         <div className="mb-5 flex justify-center">
           <motion.div
             initial={{ scale: 0, rotate: 90 }}
@@ -38,11 +36,10 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
             transition={{ delay: 0.2, type: "spring" }}
             className="rounded-full bg-gradient-to-br from-red-500 to-orange-500 p-4 shadow-lg"
           >
-            <Lock className="h-12 w-12 text-white" />
+            <GiHandcuffs className="h-12 w-12 text-white" />
           </motion.div>
         </div>
 
-        {/* Mensagem */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +52,6 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
           </p>
         </motion.div>
 
-        {/* Aviso */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -68,17 +64,12 @@ export default function GoToJailModal({ onAction }: GoToJailModalProps) {
           </p>
         </motion.div>
 
-        {/* Botão */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+        <ButtonModal
           onClick={handleContinue}
-          className="w-full cursor-pointer rounded bg-red-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-red-900"
-          style={{ border: "0.5px solid var(--color-red-border-light)" }}
+          className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg"
         >
-          IR PARA A PRISÃO
-        </motion.button>
+          Ir para a Prisão
+        </ButtonModal>
       </div>
     </ModalWrapper>
   );

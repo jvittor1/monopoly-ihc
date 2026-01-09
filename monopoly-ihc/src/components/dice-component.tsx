@@ -3,6 +3,7 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import { useDiceResult } from "@/contexts/dice-result-overlay-context";
 import { useGame } from "@/contexts/game-context";
+import { BotService } from "@/services/bot-service";
 import { motion } from "framer-motion";
 import { Dices } from "lucide-react";
 interface DiceProps {
@@ -11,7 +12,7 @@ interface DiceProps {
 
 export default function Dice({ onDiceResult }: DiceProps) {
   const { showDiceResult } = useDiceResult();
-  const { isRoundInProgress, setIsRoundInProgress } = useGame();
+  const { isRoundInProgress, setIsRoundInProgress, currentPlayer } = useGame();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cubeBodyRef = useRef<CANNON.Body | null>(null);
@@ -19,8 +20,9 @@ export default function Dice({ onDiceResult }: DiceProps) {
 
   const [diceNumber, setDiceNumber] = useState<number | null>(null);
 
-  // debug: input para mover o jogador X casas
   const [numberOfMoves, setNumberOfMoves] = useState(0);
+
+  const isBotTurn = currentPlayer?.isBot || false;
 
   // Detecta a face que está para cima
   const detectTopFace = (body: CANNON.Body) => {
@@ -271,15 +273,25 @@ export default function Dice({ onDiceResult }: DiceProps) {
     }, 100);
   };
 
+  useEffect(() => {
+    if (currentPlayer?.isBot && !isRoundInProgress) {
+      const autoBotRoll = async () => {
+        await BotService.thinkingDelay();
+        throwDice();
+      };
+      autoBotRoll();
+    }
+  }, [currentPlayer?.isBot, isRoundInProgress]);
+
   return (
     <div ref={containerRef} className="absolute inset-0">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
       <motion.button
         onClick={throwDice}
-        disabled={isRoundInProgress}
+        disabled={isRoundInProgress || isBotTurn}
         className="absolute right-4 bottom-4 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
-        whileHover={!isRoundInProgress ? { scale: 1.05 } : {}}
+        whileHover={!isRoundInProgress && !isBotTurn ? { scale: 1.05 } : {}}
       >
         <motion.div
           className="flex flex-col items-center gap-2"
@@ -312,6 +324,12 @@ export default function Dice({ onDiceResult }: DiceProps) {
           Jogar Dado
         </motion.span>
       </motion.button>
+
+      {isBotTurn && (
+        <div className="absolute right-4 bottom-32 animate-pulse rounded-md border border-gray-200 bg-white/20 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-sm">
+          Bot está jogando...
+        </div>
+      )}
 
       <input
         className="absolute top-40 left-8 w-24 rounded border border-gray-200 bg-white/40 p-1 text-center text-white placeholder:text-white focus:border-blue-500 focus:outline-none"

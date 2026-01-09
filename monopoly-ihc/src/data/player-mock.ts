@@ -12,6 +12,7 @@ export const playerMock: Player[] = [
     getOutOfJailFreeCards: 0,
     bankrupt: false,
     color: "#457B9D",
+    isBot: false,
   },
 
   {
@@ -25,11 +26,6 @@ export const playerMock: Player[] = [
     getOutOfJailFreeCards: 0,
     bankrupt: false,
     color: "#E63946",
+    isBot: false,
   },
 ];
-// '#E63946', // Vermelho
-//     '#457B9D', // Azul
-//     '#2A9D8F', // Verde água
-//     '#F4A261', // Laranja
-//     '#9D4EDD', // Roxo
-//     '#06FFA5', // Verde neon

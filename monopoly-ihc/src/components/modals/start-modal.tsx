@@ -4,6 +4,7 @@ import type { BaseModalProps } from "@/types/modal-type";
 import { motion } from "framer-motion";
 import { TrendingUp, Coins } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
+import ButtonModal from "../button-modal";
 
 type StartModalProps = BaseModalProps<CornerTile>;
 
@@ -16,7 +17,6 @@ export default function StartModal({ onAction }: StartModalProps) {
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
-      {/* Header */}
       <div
         className="rounded-t bg-gradient-to-r from-green-600 to-emerald-600 p-4"
         style={{
@@ -31,9 +31,7 @@ export default function StartModal({ onAction }: StartModalProps) {
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="p-6">
-        {/* Ícone de moedas */}
         <div className="mb-5 flex justify-center">
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
@@ -45,7 +43,6 @@ export default function StartModal({ onAction }: StartModalProps) {
           </motion.div>
         </div>
 
-        {/* Mensagem */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +56,6 @@ export default function StartModal({ onAction }: StartModalProps) {
             Receba seu bônus por completar a volta
           </p>
 
-          {/* Valor do bônus */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -76,17 +72,12 @@ export default function StartModal({ onAction }: StartModalProps) {
           </motion.div>
         </motion.div>
 
-        {/* Botão */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+        <ButtonModal
           onClick={handleContinue}
-          className="w-full cursor-pointer rounded bg-green-800 px-6 py-3 font-bold text-white uppercase shadow-lg transition-all hover:bg-green-900"
-          style={{ border: "0.5px solid var(--color-green-border-medium)" }}
+          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg"
         >
           Continuar Jogando
-        </motion.button>
+        </ButtonModal>
       </div>
     </ModalWrapper>
   );

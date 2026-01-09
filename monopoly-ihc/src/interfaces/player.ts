@@ -9,4 +9,6 @@ export interface Player {
   getOutOfJailFreeCards: number;
   bankrupt: boolean;
   color: string;
+  isBot: boolean;
+  botDifficulty?: "easy" | "medium" | "hard" | "master";
 }

@@ -23,6 +23,9 @@ interface GameProviderProps {
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
+// Export context for use in custom hooks
+export { GameContext };
+
 export const useGame = () => {
   const ctx = useContext(GameContext);
   if (!ctx) throw new Error("useGame must be used within a GameProvider");
@@ -41,7 +44,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
   const [endGameCalled, setEndGameCalled] = useState(false);
   const [showEndGameModal, setShowEndGameModal] = useState(false);
 
-  const currentPlayer = players[turnIndex];
+  const currentPlayer = players[turnIndex] || players[0];
 
   const handleBackToMenu = () => {
     if (onBackToMenu) {

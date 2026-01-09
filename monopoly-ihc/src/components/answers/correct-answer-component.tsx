@@ -1,100 +1,81 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { CheckCircle2, TrendingUp } from "lucide-react";
 import { TIME } from "../../constants/time";
+import ModalWrapper from "../modals/modal-wrapper";
 
 interface CorrectAnswerModalProps {
   onClose: () => void;
-  tilePoints?: number;
+  points?: number;
 }
 
 export default function CorrectAnswerModal({
   onClose,
-  tilePoints,
+  points,
 }: CorrectAnswerModalProps) {
-  setTimeout(() => {
-    onClose();
-  }, TIME.EXTRA_LONG_DELAY);
+  setTimeout(onClose, TIME.EXTRA_LONG_DELAY);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key="backdrop"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4"
+    <ModalWrapper
+      isOpen={true}
+      onClose={() => {}}
+      maxWidth="md"
+      disableBackdropClick
+    >
+      <div
+        className="rounded-t bg-green-800 p-4"
+        style={{
+          borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
+        }}
       >
-        <motion.div
-          key="modal"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className="relative w-full max-w-md overflow-hidden rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm"
-          style={{ border: "0.5px solid var(--color-border-light)" }}
-        >
-          {/* Header */}
-          <div
-            className="rounded-t bg-green-800 p-4"
-            style={{
-              borderBottom: "0.5px solid var(--color-border-light)",
-            }}
+        <div className="flex items-center justify-center gap-2">
+          <CheckCircle2 className="h-6 w-6 text-white" />
+          <h2 className="text-xl font-bold tracking-wide text-white uppercase">
+            Resposta Correta!
+          </h2>
+        </div>
+      </div>
+
+      <div className="p-6">
+        <div className="mb-5 flex justify-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+            className="rounded-full bg-gradient-to-br from-green-500 to-emerald-500 p-4 shadow-lg"
           >
-            <div className="flex items-center justify-center gap-2">
-              <CheckCircle2 className="h-6 w-6 text-white" />
-              <h2 className="text-xl font-bold tracking-wide text-white uppercase">
-                Resposta Correta
-              </h2>
-            </div>
-          </div>
+            <CheckCircle2 className="h-12 w-12 text-white" />
+          </motion.div>
+        </div>
 
-          {/* Conteúdo */}
-          <div className="p-6">
-            {/* Ícone */}
-            <div className="mb-5 flex justify-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-                className="rounded-full bg-green-800 p-4 shadow-lg"
-              >
-                <CheckCircle2 className="h-12 w-12 text-white" />
-              </motion.div>
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-4 text-center"
+        >
+          <h3 className="mb-2 text-xl font-bold text-green-400">
+            Parabéns! Você acertou!
+          </h3>
+          <p className="text-sm leading-relaxed text-gray-300">
+            Continue assim e domine o jogo!
+          </p>
+        </motion.div>
 
-            {/* Mensagem */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-5 text-center"
-            >
-              <h3 className="mb-3 text-2xl font-bold text-white">
-                Você acertou!
-              </h3>
-              <p className="text-base text-gray-300">
-                Continue assim e domine o tabuleiro
-              </p>
-            </motion.div>
-
-            {/* Caixa de pontos */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5, type: "spring" }}
-              className="rounded bg-green-600/20 p-4 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid var(--color-green-border)" }}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <TrendingUp className="h-6 w-6 text-green-400" />
-                <p className="text-xl font-bold text-green-300">
-                  +{tilePoints} pontos
-                </p>
-              </div>
-            </motion.div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.4, type: "spring" }}
+          className="rounded bg-gradient-to-r from-green-900/50 to-emerald-900/50 p-4 backdrop-blur-sm"
+          style={{ border: "0.5px solid rgba(34, 197, 94, 0.3)" }}
+        >
+          <div className="flex items-center justify-center gap-2">
+            <TrendingUp className="h-5 w-5 text-green-400" />
+            <p className="text-2xl font-bold text-green-300">
+              +{points} pontos
+            </p>
           </div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </ModalWrapper>
   );
 }

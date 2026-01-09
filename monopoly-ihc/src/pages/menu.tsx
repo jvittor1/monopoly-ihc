@@ -4,30 +4,32 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { MenuButton } from "@/components/menu-button";
 import RulesModal from "@/components/modals/rules-modal";
-import GameSetupModal from "@/components/modals/game-setup-modal";
-import { useGame } from "@/contexts/game-context";
+import GameSetupModal, {
+  type GameConfig,
+} from "@/components/modals/game-setup-modal";
 import { useBoard } from "@/contexts/board-context";
+import { usePlayer } from "@/contexts/player-context";
+import { createPlayers } from "@/services/player-factory";
 import backgroundMenuImg from "@/assets/images/background-menu.png";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
   const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
-  const { resetGame } = useGame();
   const { resetBoard } = useBoard();
+  const { initializePlayers } = usePlayer();
 
   const handleStartGame = () => {
     setIsSetupModalOpen(true);
   };
 
-  const handleGameStart = (config: {
-    playerName: string;
-    playerColor: string;
-    botDifficulty: string;
-  }) => {
+  const handleGameStart = (config: GameConfig) => {
     console.log("Starting new game with config:", config);
     setIsSetupModalOpen(false);
-    resetGame();
+
+    const players = createPlayers(config);
+    initializePlayers(players);
+
     resetBoard();
     navigate("/game");
   };
@@ -47,7 +49,6 @@ export const MenuPage = () => {
       label: "Tutorial",
       icon: <FaGraduationCap />,
       onClick: () => {
-        // TODO: Navigate to tutorial page
         console.log("Tutorial clicked");
       },
     },

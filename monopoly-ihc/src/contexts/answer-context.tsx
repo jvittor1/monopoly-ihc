@@ -19,6 +19,7 @@ export type AnswerContextType = {
   showModalPropertyAcquired: (
     isCorrect: boolean,
     propertyName: string,
+    playerId: number,
   ) => Promise<void>;
   closeAnswer: () => void;
 };
@@ -57,14 +58,16 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
         isCorrect,
         tilePoints,
       ) as React.ComponentType<{
-        tilePoints?: number;
+        points?: number;
+        playerId: number;
         onClose?: () => void;
       }>;
 
       setAnswerContent(
         <Suspense fallback={<div className="text-white">Carregando...</div>}>
           <AnswerComponent
-            tilePoints={tilePoints}
+            points={tilePoints}
+            playerId={0}
             onClose={() => {
               closeAnswer();
             }}
@@ -77,6 +80,7 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
   const showModalPropertyAcquired = (
     isCorrect: boolean,
     propertyName: string,
+    playerId: number,
   ): Promise<void> => {
     return new Promise((resolve) => {
       resolveRef.current = resolve;
@@ -86,6 +90,7 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
         propertyName,
       ) as React.ComponentType<{
         propertyName: string;
+        playerId: number;
         onClose?: () => void;
       }>;
 
@@ -93,6 +98,7 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
         <Suspense fallback={<div className="text-white">Carregando...</div>}>
           <AnswerComponent
             propertyName={propertyName}
+            playerId={playerId}
             onClose={() => {
               closeAnswer();
             }}

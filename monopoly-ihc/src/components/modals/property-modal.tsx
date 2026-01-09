@@ -11,6 +11,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
+import ButtonModal from "../button-modal";
 
 type QuestionModalProps = BaseModalProps<QuestionCard>;
 
@@ -174,14 +175,12 @@ export default function PropertyRentModal({
               </div>
             </motion.div>
 
-            {/* Pagamento */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               className="mb-4 flex items-center justify-center gap-3"
             >
-              {/* Jogador atual */}
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-full font-bold text-white shadow-lg"
                 style={{
@@ -196,7 +195,6 @@ export default function PropertyRentModal({
 
               <ArrowRight className="h-5 w-5 text-red-400" />
 
-              {/* Valor */}
               <div className="flex items-center gap-1.5 rounded-full bg-red-700 px-3 py-1 shadow-lg">
                 <Coins className="h-3.5 w-3.5 text-white" />
                 <span className="text-sm font-bold text-white">
@@ -206,7 +204,6 @@ export default function PropertyRentModal({
 
               <ArrowRight className="h-5 w-5 text-red-400" />
 
-              {/* Proprietário */}
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-full font-bold text-white shadow-lg"
                 style={{
@@ -220,7 +217,6 @@ export default function PropertyRentModal({
               </div>
             </motion.div>
 
-            {/* Resumo */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -236,20 +232,16 @@ export default function PropertyRentModal({
           </>
         )}
 
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: isOwner ? 0.6 : 0.7 }}
+        <ButtonModal
           onClick={handleContinue}
-          className={`w-full cursor-pointer rounded px-6 py-3 font-bold text-white uppercase shadow-lg transition-all ${
+          className={`w-full text-white shadow-lg ${
             isOwner
               ? "bg-green-800 hover:bg-green-900"
               : "bg-yellow-800 hover:bg-yellow-900"
           }`}
-          style={{ border: "0.5px solid var(--color-border-lighter)" }}
         >
           Continuar
-        </motion.button>
+        </ButtonModal>
       </div>
     </ModalWrapper>
   );

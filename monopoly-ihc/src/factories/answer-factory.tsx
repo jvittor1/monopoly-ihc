@@ -2,6 +2,9 @@ import React from "react";
 
 type AnswerComponentProps = {
   onClose: () => void;
+  propertyName?: string;
+  playerId: number;
+  points?: number;
 };
 
 type AnswerComponent = React.FC<AnswerComponentProps>;
@@ -26,7 +29,7 @@ const PropertyAnswerRegistry = {
 
 export function AnswerFactory(
   isCorrect: boolean,
-  tilePoints?: number,
+  points?: number,
 ): AnswerComponent {
   return isCorrect ? AnswersRegistry.correct : AnswersRegistry.incorrect;
 }

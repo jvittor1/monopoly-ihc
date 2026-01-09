@@ -20,6 +20,7 @@ export async function handleRandomQuestionAction(
 
   if (questionPayload) {
     const points = questionPayload.points ?? tile.points ?? 0;
+    console.log("removendo pontos do jogador ", points);
     await answer.showAnswer(isAnswerCorrect, points);
 
     if (!isAnswerCorrect) {

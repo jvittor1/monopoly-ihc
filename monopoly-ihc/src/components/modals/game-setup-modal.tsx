@@ -105,7 +105,12 @@ export default function GameSetupModal({
   };
 
   return (
-    <ModalWrapper isOpen={isOpen} onClose={onClose} maxWidth="md">
+    <ModalWrapper
+      isOpen={isOpen}
+      onClose={onClose}
+      maxWidth="md"
+      disableBackdropClick
+    >
       <div
         className="flex items-center justify-between rounded-t bg-gray-800 p-5"
         style={{

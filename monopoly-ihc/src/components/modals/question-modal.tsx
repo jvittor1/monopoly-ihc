@@ -5,6 +5,8 @@ import { CheckCircle2 } from "lucide-react";
 import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
 import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
+import { BotService } from "@/services/bot-service";
+import { usePlayer } from "@/contexts/player-context";
 
 type QuestionModalProps = BaseModalProps<QuestionCard>;
 
@@ -16,6 +18,8 @@ export default function QuestionModal({
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  const { getPlayerById } = usePlayer();
+  const currentPlayer = getPlayerById(playerId);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -38,6 +42,26 @@ export default function QuestionModal({
     }
   }, [timeLeft]);
 
+  useEffect(() => {
+    if (currentPlayer?.isBot) {
+      const playBotTurn = async () => {
+        await BotService.thinkingDelay();
+        const answer = BotService.chooseAnswer(
+          tile,
+          currentPlayer.botDifficulty,
+        );
+        setSelected(answer);
+        await BotService.submitDelay();
+        const isCorrect = answer === tile.correctAlternative;
+        if (onAction) {
+          onAction({ playerId, isCorrect });
+        }
+      };
+
+      playBotTurn();
+    }
+  }, [currentPlayer?.isBot, playerId, tile, onAction]);
+
   const submitAnswer = () => {
     if (selected === null) setSelected(-1);
     const isCorrect = selected === tile.correctAlternative;
@@ -54,7 +78,6 @@ export default function QuestionModal({
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="2xl">
       <div className="relative max-h-[90vh] w-full overflow-x-hidden overflow-y-auto">
-        {/* Timer Circular - Top Right - Simplified */}
         <div className="absolute -top-1 -right-1 animate-pulse rounded-full p-2">
           <div className="relative flex h-12 w-12 items-center justify-center">
             <svg className="h-12 w-12 -rotate-90 transform">
@@ -79,7 +102,6 @@ export default function QuestionModal({
           </div>
         </div>
 
-        {/* Header - Sem cor da dificuldade */}
         <div
           className="rounded-t bg-gray-800 p-4"
           style={{
@@ -93,9 +115,7 @@ export default function QuestionModal({
           </div>
         </div>
 
-        {/* Conteúdo */}
         <div className="p-6">
-          {/* Pergunta */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,14 +123,12 @@ export default function QuestionModal({
             className="relative mb-5 rounded bg-gray-800/90 bg-gradient-to-br to-gray-900/90 p-5 backdrop-blur-sm"
             style={{ border: "0.5px solid var(--color-border-subtle)" }}
           >
-            {/* Barra lateral sutil com cor da dificuldade */}
             <div
               className="absolute top-0 bottom-0 left-0 w-0.5 rounded-l-md"
               style={{ backgroundColor: difficultyColor }}
             ></div>
 
             <div className="flex items-start gap-3">
-              {/* Ícone de pergunta */}
               <div
                 className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded text-sm font-bold shadow-lg"
                 style={{
@@ -126,7 +144,6 @@ export default function QuestionModal({
             </div>
           </motion.div>
 
-          {/* Alternativas com cor padrão verde */}
           <div className="mb-5 space-y-2.5">
             {tile.alternatives.map((option, index) => (
               <motion.button
@@ -135,7 +152,8 @@ export default function QuestionModal({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + index * 0.1 }}
                 onClick={() => setSelected(option.id)}
-                className={`w-full rounded p-3.5 text-left transition-all duration-300 hover:scale-[1.01] ${
+                disabled={currentPlayer?.isBot}
+                className={`w-full rounded p-3.5 text-left transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 ${
                   selected === option.id
                     ? "bg-blue-800 bg-gradient-to-r shadow-lg"
                     : "bg-gray-800/60 backdrop-blur-sm hover:bg-gray-700/70"
@@ -177,23 +195,23 @@ export default function QuestionModal({
             ))}
           </div>
 
-          {/* Botão Confirmar com cor padrão verde */}
           <div className="flex justify-end">
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              disabled={!selected}
+              disabled={!selected || currentPlayer?.isBot}
               onClick={submitAnswer}
               className={`flex cursor-pointer items-center gap-2 rounded px-6 py-2.5 text-sm font-bold uppercase transition-all duration-300 ${
-                selected
+                selected && !currentPlayer?.isBot
                   ? "bg-blue-800 text-white shadow-lg hover:bg-blue-900"
                   : "cursor-not-allowed bg-gray-700/50 text-gray-400"
               }`}
               style={{
-                border: selected
-                  ? "0.5px solid var(--color-blue-border-medium)"
-                  : "0.5px solid var(--color-border-faint)",
+                border:
+                  selected && !currentPlayer?.isBot
+                    ? "0.5px solid var(--color-blue-border-medium)"
+                    : "0.5px solid var(--color-border-faint)",
               }}
             >
               <CheckCircle2 className="h-4 w-4" />
