@@ -1,6 +1,6 @@
 import { TIME } from "@/constants/time";
 import type { Player } from "@/interfaces/player";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export type PlayerContextType = {
   players: Player[];
@@ -31,6 +31,30 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [initialPlayers, setInitialPlayers] = useState<Player[]>([]);
   const boardLength = 24;
+
+  // Tentar restaurar jogadores do localStorage ao montar
+  useEffect(() => {
+    try {
+      const savedPlayers = localStorage.getItem("players");
+      if (savedPlayers) {
+        const parsedPlayers = JSON.parse(savedPlayers) as Player[];
+        if (parsedPlayers.length > 0) {
+          console.log("Restaurando jogadores do localStorage:", parsedPlayers);
+          setPlayers(parsedPlayers);
+          setInitialPlayers(parsedPlayers);
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao restaurar jogadores do localStorage:", error);
+      localStorage.removeItem("players");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (players.length > 0) {
+      localStorage.setItem("players", JSON.stringify(players));
+    }
+  }, [players]);
 
   function movePlayer(steps: number, playerId: number): Promise<number> {
     return new Promise<number>((resolve) => {
@@ -169,6 +193,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
   function resetGame(): void {
     console.log("Resetting game to initial state...");
     setPlayers(initialPlayers.map((p) => ({ ...p })));
+    localStorage.removeItem("players");
   }
 
   function initializePlayers(newPlayers: Player[]): void {

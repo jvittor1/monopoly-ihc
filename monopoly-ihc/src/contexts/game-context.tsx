@@ -44,6 +44,32 @@ export const GameProvider: React.FC<GameProviderProps> = ({
   const [endGameCalled, setEndGameCalled] = useState(false);
   const [showEndGameModal, setShowEndGameModal] = useState(false);
 
+  useEffect(() => {
+    try {
+      const savedGameState = localStorage.getItem("monopoly_game_state");
+      if (savedGameState) {
+        const { turnIndex: savedTurn, round: savedRound } =
+          JSON.parse(savedGameState);
+        console.log("Restaurando estado do jogo:", {
+          turnIndex: savedTurn,
+          round: savedRound,
+        });
+        setTurnIndex(savedTurn);
+        setRound(savedRound);
+      }
+    } catch (error) {
+      console.error("Erro ao restaurar estado do jogo:", error);
+      localStorage.removeItem("monopoly_game_state");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (players.length > 0) {
+      const gameState = { turnIndex, round };
+      localStorage.setItem("monopoly_game_state", JSON.stringify(gameState));
+    }
+  }, [turnIndex, round, players.length]);
+
   const currentPlayer = players[turnIndex] || players[0];
 
   const handleBackToMenu = () => {
@@ -106,6 +132,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
     setIsRoundInProgress(false);
     setEndGameCalled(false);
     setShowEndGameModal(false);
+    localStorage.removeItem("monopoly_game_state");
   };
 
   return (

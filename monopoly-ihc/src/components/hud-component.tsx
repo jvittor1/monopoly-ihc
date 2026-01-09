@@ -33,7 +33,6 @@ const PlayerCard = ({
     >
       <div className="relative p-3">
         <div className="flex items-center gap-2.5">
-          {/* Avatar */}
           <div className="relative">
             <div
               className={`flex h-11 w-11 items-center justify-center rounded-full font-bold text-white shadow-lg ${
@@ -93,6 +92,10 @@ export default function HudComponent() {
   const { round, currentPlayer, players } = useGame();
   const navigate = useNavigate();
   const [isGameMenuOpen, setIsGameMenuOpen] = useState(false);
+
+  if (!players || players.length === 0 || !currentPlayer) {
+    return null;
+  }
 
   const leftPlayers = players.slice(0, Math.ceil(players.length / 2));
   const rightPlayers = players.slice(Math.ceil(players.length / 2));
