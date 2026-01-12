@@ -31,7 +31,7 @@ export default function ButtonModal({
 
   return (
     <motion.button
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       disabled={disabled || isBotTurn}

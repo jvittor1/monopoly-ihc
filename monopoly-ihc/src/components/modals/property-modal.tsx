@@ -61,7 +61,7 @@ export default function PropertyRentModal({
         >
           <div
             className={`rounded-full p-3 shadow-lg ${
-              isOwner ? "bg-green-800" : "bg-yellow-800"
+              isOwner ? "bg-green-900" : "bg-red-900"
             }`}
           >
             {isOwner ? (
@@ -110,21 +110,6 @@ export default function PropertyRentModal({
                 Valor do aluguel: {rentAmount} pts
               </p>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mb-5 rounded bg-green-600/20 p-3 backdrop-blur-sm"
-              style={{ border: "0.5px solid var(--color-green-border)" }}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <p className="text-sm text-green-300">
-                  Nenhum pagamento necessário
-                </p>
-              </div>
-            </motion.div>
           </>
         ) : (
           // Versão quando tem que pagar aluguel
@@ -152,7 +137,7 @@ export default function PropertyRentModal({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
-              className="mb-4 rounded bg-yellow-700/20 p-3 text-center backdrop-blur-sm"
+              className="mb-4 rounded bg-yellow-900/20 p-3 text-center backdrop-blur-sm"
               style={{ border: "0.5px solid var(--color-yellow-border)" }}
             >
               <div className="mb-2 flex items-center justify-center gap-2">
@@ -193,16 +178,16 @@ export default function PropertyRentModal({
                 </span>
               </div>
 
-              <ArrowRight className="h-5 w-5 text-red-400" />
+              <ArrowRight className="h-5 w-5 text-red-700" />
 
-              <div className="flex items-center gap-1.5 rounded-full bg-red-700 px-3 py-1 shadow-lg">
+              <div className="flex items-center gap-1.5 rounded-full bg-red-900 px-3 py-1 shadow-lg">
                 <Coins className="h-3.5 w-3.5 text-white" />
                 <span className="text-sm font-bold text-white">
                   {rentAmount}
                 </span>
               </div>
 
-              <ArrowRight className="h-5 w-5 text-red-400" />
+              <ArrowRight className="h-5 w-5 text-red-700" />
 
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-full font-bold text-white shadow-lg"
@@ -221,12 +206,12 @@ export default function PropertyRentModal({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mb-5 rounded bg-red-600/20 p-3 backdrop-blur-sm"
+              className="mb-5 rounded bg-red-900/20 p-3 backdrop-blur-sm"
               style={{ border: "0.5px solid var(--color-red-border)" }}
             >
               <div className="flex items-center justify-center gap-2">
-                <TrendingDown className="h-4 w-4 text-red-400" />
-                <p className="text-sm text-red-300">-{rentAmount} pontos</p>
+                <TrendingDown className="h-4 w-4 text-red-700" />
+                <p className="text-sm text-red-700">-{rentAmount} pontos</p>
               </div>
             </motion.div>
           </>
@@ -237,7 +222,7 @@ export default function PropertyRentModal({
           className={`w-full text-white shadow-lg ${
             isOwner
               ? "bg-green-800 hover:bg-green-900"
-              : "bg-yellow-800 hover:bg-yellow-900"
+              : "bg-red-800 hover:bg-red-900"
           }`}
         >
           Continuar

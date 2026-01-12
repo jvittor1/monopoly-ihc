@@ -38,7 +38,7 @@ export default function PropertyAcquiredModal({
       disableBackdropClick
     >
       <div
-        className="rounded-t bg-cyan-800 p-4"
+        className="rounded-t bg-cyan-900 p-4"
         style={{
           borderBottom: "0.5px solid rgba(255, 255, 255, 0.2)",
         }}
@@ -83,16 +83,16 @@ export default function PropertyAcquiredModal({
           <h3 className="mb-2 text-xl font-bold text-cyan-400">
             Parabéns! Você é o novo proprietário!
           </h3>
-          <p className="text-sm leading-relaxed text-gray-300">
+          {/* <p className="text-sm leading-relaxed text-gray-300">
             Resposta correta! A propriedade agora é sua.
-          </p>
+          </p> */}
         </motion.div>
 
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="mb-4 rounded bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-4 backdrop-blur-sm"
+          className="mb-4 rounded bg-cyan-900/30 p-4 backdrop-blur-sm"
           style={{ border: "0.5px solid rgba(34, 211, 238, 0.3)" }}
         >
           <p className="text-center text-lg font-bold text-cyan-300">
@@ -104,10 +104,10 @@ export default function PropertyAcquiredModal({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mb-4 rounded bg-cyan-900/30 p-3 backdrop-blur-sm"
+          className="mb-4 rounded bg-green-900/30 p-3 backdrop-blur-sm"
         >
-          <p className="flex items-center justify-center gap-2 text-center text-sm text-gray-300">
-            <Key className="h-4 w-4 text-cyan-400" />
+          <p className="flex items-center justify-center gap-2 text-center text-sm text-green-300">
+            <Key className="h-4 w-4 text-green-400" />
             Agora você cobra aluguel de quem cair aqui!
           </p>
         </motion.div>
@@ -115,7 +115,7 @@ export default function PropertyAcquiredModal({
         <ButtonModal
           onClick={onClose}
           disabled={currentPlayer?.isBot}
-          className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg"
+          className="w-full bg-cyan-900/70 text-white shadow-lg hover:bg-cyan-900/90"
         >
           Continuar
         </ButtonModal>

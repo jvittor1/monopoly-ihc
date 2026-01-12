@@ -6,7 +6,7 @@ import ButtonModal from "../button-modal";
 import { GiHandcuffs } from "react-icons/gi";
 import { usePlayer } from "@/contexts/player-context";
 import { BotService } from "@/services/bot-service";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type GoToJailModalProps = BaseModalProps<CornerTile>;
 
@@ -17,19 +17,22 @@ export default function GoToJailModal({
   const { getPlayerById } = usePlayer();
   const currentPlayer = getPlayerById(playerId);
 
+  const hasAutoClicked = useRef(false);
+
+  const handleContinue = () => {
+    if (onAction) onAction({});
+  };
+
   useEffect(() => {
-    if (currentPlayer?.isBot) {
+    if (currentPlayer?.isBot && !hasAutoClicked.current) {
+      hasAutoClicked.current = true;
       const autoClick = async () => {
         await BotService.thinkingDelay();
         handleContinue();
       };
       autoClick();
     }
-  }, [currentPlayer?.isBot]);
-
-  const handleContinue = () => {
-    if (onAction) onAction({});
-  };
+  }, [currentPlayer?.isBot, handleContinue]);
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
