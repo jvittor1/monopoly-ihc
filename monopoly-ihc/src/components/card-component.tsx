@@ -27,6 +27,9 @@ export default function CardComponent({
   const owner = getPlayerById(ownerId!);
   const ownerColor = hasOwner ? owner?.color : null;
 
+  // Mapeia dificuldade diretamente para cor
+  const barColor = DIFFICULTY_COLORS[difficulty];
+
   return (
     <BaseCardComponent
       className={`relative flex h-[115px] w-[105px] flex-col items-center ${className}`}
@@ -34,7 +37,7 @@ export default function CardComponent({
       {!isRandomTile && (
         <div
           className={`relative z-50 h-[30px] w-full ${isTopRow ? "border-t-1" : "border-b-1"} border-white`}
-          style={{ backgroundColor: DIFFICULTY_COLORS[difficulty] }}
+          style={{ backgroundColor: barColor }}
         >
           {isProperty && hasOwner && ownerColor && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50%] scale-75 transform">

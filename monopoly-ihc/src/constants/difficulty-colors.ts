@@ -1,8 +1,8 @@
 export const DIFFICULTY_COLORS = {
-  easy: "#6DF282",
-  "easy-medium": "#84C7E2",
-  medium: "#4E0062",
-  hard: "#FF5252",
+  easy: "#4CAF50", // Verde - Fácil (20 pts)
+  "easy-medium": "#FF9800", // Laranja - Médio-Fácil (30 pts)
+  medium: "#2196F3", // Azul - Médio (40 pts)
+  hard: "#FF5252", // Vermelho - Difícil (80 pts)
 } as const;
 
 export type Difficulty = keyof typeof DIFFICULTY_COLORS;

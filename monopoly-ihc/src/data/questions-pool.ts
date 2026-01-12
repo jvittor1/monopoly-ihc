@@ -46,9 +46,9 @@ export const questionsPool: QuestionCard[] = [
     text: "Usabilidade",
     question: "O que significa consistência em interfaces?",
     answer: "Uniformidade de elementos e comportamentos",
-    difficulty: "easy",
+    difficulty: "easy-medium",
     type: "question",
-    points: 20,
+    points: 30,
     alternatives: [
       { id: 1, text: "Cada tela com cores diferentes" },
       { id: 2, text: "Uniformidade de elementos e comportamentos" },
@@ -57,7 +57,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 2,
     ownerId: undefined,
-    rentPrice: 100,
+    rentPrice: 150,
   }),
   createQuestionCard({
     id: 6,
@@ -83,9 +83,9 @@ export const questionsPool: QuestionCard[] = [
     text: "Design de Interface",
     question: "Qual cor é geralmente associada a botões de ação principal?",
     answer: "Azul",
-    difficulty: "easy",
+    difficulty: "medium",
     type: "question",
-    points: 20,
+    points: 40,
     alternatives: [
       { id: 1, text: "Vermelho" },
       { id: 2, text: "Verde" },
@@ -94,7 +94,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 3,
     ownerId: undefined,
-    rentPrice: 100,
+    rentPrice: 200,
   }),
 
   createQuestionCard({
@@ -102,9 +102,9 @@ export const questionsPool: QuestionCard[] = [
     text: "Design de Interface",
     question: "O que é hierarquia visual?",
     answer: "Organização que indica importância de elementos",
-    difficulty: "easy",
+    difficulty: "hard",
     type: "question",
-    points: 20,
+    points: 80,
     alternatives: [
       { id: 1, text: "Organização aleatória de elementos" },
       { id: 2, text: "Organização que indica importância de elementos" },
@@ -113,7 +113,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 2,
     ownerId: undefined,
-    rentPrice: 100,
+    rentPrice: 400,
   }),
 
   // ==== MÉDIO (10 perguntas: 5 Acessibilidade + 5 Interação) ====
@@ -135,7 +135,6 @@ export const questionsPool: QuestionCard[] = [
     ownerId: undefined,
     rentPrice: 200,
   }),
-
 
   createQuestionCard({
     id: 13,
@@ -180,9 +179,9 @@ export const questionsPool: QuestionCard[] = [
     text: "Interação",
     question: "O que é feedback imediato?",
     answer: "Resposta instantânea ao usuário sobre sua ação",
-    difficulty: "medium",
+    difficulty: "easy-medium",
     type: "question",
-    points: 40,
+    points: 30,
     alternatives: [
       { id: 1, text: "Esperar 1 minuto para responder" },
       { id: 2, text: "Resposta instantânea ao usuário sobre sua ação" },
@@ -191,7 +190,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 2,
     ownerId: undefined,
-    rentPrice: 200,
+    rentPrice: 150,
   }),
 
   createQuestionCard({
@@ -213,16 +212,15 @@ export const questionsPool: QuestionCard[] = [
     rentPrice: 200,
   }),
 
-
   // ==== DIFÍCIL (10 perguntas: 3 Usabilidade + 3 Design de Interface + 4 Interação) ====
   createQuestionCard({
     id: 21,
     text: "Usabilidade",
     question: "Qual metodologia foca em testes com usuários reais?",
     answer: "Testes de usabilidade",
-    difficulty: "hard",
+    difficulty: "easy-medium",
     type: "question",
-    points: 80,
+    points: 30,
     alternatives: [
       { id: 1, text: "Brainstorming" },
       { id: 2, text: "Design Thinking" },
@@ -231,7 +229,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 3,
     ownerId: undefined,
-    rentPrice: 400,
+    rentPrice: 150,
   }),
 
   createQuestionCard({
@@ -258,9 +256,9 @@ export const questionsPool: QuestionCard[] = [
     text: "Design de Interface",
     question: "O que é design centrado no usuário?",
     answer: "Processo que prioriza necessidades e expectativas do usuário",
-    difficulty: "hard",
+    difficulty: "easy-medium",
     type: "question",
-    points: 80,
+    points: 30,
     alternatives: [
       { id: 1, text: "Priorizar beleza estética" },
       {
@@ -272,7 +270,7 @@ export const questionsPool: QuestionCard[] = [
     ],
     correctAlternative: 2,
     ownerId: undefined,
-    rentPrice: 400,
+    rentPrice: 150,
   }),
 
   createQuestionCard({
@@ -315,5 +313,4 @@ export const questionsPool: QuestionCard[] = [
     ownerId: undefined,
     rentPrice: 400,
   }),
-
 ];

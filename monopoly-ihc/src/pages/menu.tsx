@@ -11,6 +11,7 @@ import { useBoard } from "@/contexts/board-context";
 import { usePlayer } from "@/contexts/player-context";
 import { createPlayers } from "@/services/player-factory";
 import backgroundMenuImg from "@/assets/images/background-menu.png";
+import { useGame } from "@/contexts/game-context";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export const MenuPage = () => {
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
   const { resetBoard } = useBoard();
   const { initializePlayers } = usePlayer();
+  const { resetGame } = useGame();
 
   const handleStartGame = () => {
     setIsSetupModalOpen(true);
@@ -28,8 +30,9 @@ export const MenuPage = () => {
     setIsSetupModalOpen(false);
 
     const players = createPlayers(config);
-    initializePlayers(players);
 
+    resetGame();
+    initializePlayers(players);
     resetBoard();
     navigate("/game");
   };
