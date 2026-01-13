@@ -26,9 +26,8 @@ export default function JailTurnSkipModal({
 
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="sm">
-      {/* Header */}
       <div
-        className="rounded-t bg-orange-800 p-4"
+        className="rounded-t bg-red-900 p-4"
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -42,7 +41,6 @@ export default function JailTurnSkipModal({
       </div>
 
       <div className="p-6 text-center">
-        {/* Ícone e Avatar */}
         <div className="mb-4 flex justify-center">
           <motion.div
             initial={{ scale: 0 }}
@@ -50,11 +48,10 @@ export default function JailTurnSkipModal({
             transition={{ delay: 0.1, type: "spring" }}
             className="relative"
           >
-            <div className="rounded-full bg-orange-800 p-3 shadow-lg">
+            <div className="rounded-full bg-red-900 p-3 shadow-lg">
               <Lock className="h-10 w-10 text-white" />
             </div>
 
-            {/* Avatar do jogador */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -76,7 +73,6 @@ export default function JailTurnSkipModal({
           </motion.div>
         </div>
 
-        {/* Mensagem */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -90,20 +86,17 @@ export default function JailTurnSkipModal({
           </p>
         </motion.div>
 
-        {/* Contador */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="inline-flex items-center gap-3 rounded bg-orange-800/20 px-6 py-3 backdrop-blur-sm"
-          style={{ border: "0.5px solid var(--color-brown-border)" }}
+          className="inline-flex items-center gap-3 rounded bg-red-900/20 px-6 py-3 backdrop-blur-sm"
+          style={{ border: "0.5px solid var(--color-red-border)" }}
         >
-          <Lock className="h-5 w-5 text-orange-400" />
+          <Lock className="h-5 w-5 text-red-400" />
           <div className="text-left">
-            <p className="text-xs font-medium text-orange-300">
-              Preso por mais
-            </p>
-            <p className="text-2xl font-bold text-orange-50">
+            <p className="text-xs font-medium text-red-300">Preso por mais</p>
+            <p className="text-2xl font-bold text-red-50">
               {turnsRemaining} {turnsRemaining === 1 ? "turno" : "turnos"}
             </p>
           </div>

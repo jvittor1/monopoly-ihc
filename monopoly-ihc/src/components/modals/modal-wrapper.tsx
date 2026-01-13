@@ -50,7 +50,7 @@ export default function ModalWrapper({
           exit={{ y: 50, opacity: 0, scale: 0.85 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           onClick={(e) => e.stopPropagation()}
-          className={`relative w-full ${maxWidthClasses[maxWidth]} rounded bg-gray-900/95 text-white shadow-2xl backdrop-blur-sm`}
+          className={`relative w-full ${maxWidthClasses[maxWidth]} rounded bg-gray-900/70 text-white shadow-2xl backdrop-blur-sm`}
           style={{ border: "0.5px solid rgba(255, 255, 255, 0.2)" }}
         >
           {children}

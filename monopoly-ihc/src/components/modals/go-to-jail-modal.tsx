@@ -37,7 +37,7 @@ export default function GoToJailModal({
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
       <div
-        className="rounded-t bg-gradient-to-r from-red-600 to-orange-600 p-4"
+        className="rounded-t bg-red-900 p-4"
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -56,7 +56,7 @@ export default function GoToJailModal({
             initial={{ scale: 0, rotate: 90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="rounded-full bg-gradient-to-br from-red-500 to-orange-500 p-4 shadow-lg"
+            className="rounded-full bg-red-900 p-4 shadow-lg"
           >
             <GiHandcuffs className="h-12 w-12 text-white" />
           </motion.div>
@@ -78,10 +78,10 @@ export default function GoToJailModal({
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.5, type: "spring" }}
-          className="mb-5 rounded bg-red-600/20 p-4 text-center backdrop-blur-sm"
+          className="mb-5 rounded bg-red-700/20 p-4 text-center backdrop-blur-sm"
           style={{ border: "0.5px solid var(--color-red-border-light)" }}
         >
-          <p className="text-sm font-semibold text-red-300">
+          <p className="text-sm font-semibold text-red-400">
             Você precisará acertar uma pergunta para sair
           </p>
         </motion.div>
@@ -89,7 +89,7 @@ export default function GoToJailModal({
         <ButtonModal
           onClick={handleContinue}
           disabled={currentPlayer?.isBot}
-          className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg"
+          className="w-full bg-red-900 text-white shadow-lg"
         >
           Ir para a Prisão
         </ButtonModal>

@@ -34,7 +34,7 @@ export default function FreeParkingModal({
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
       <div
-        className="rounded-t bg-gradient-to-r from-purple-600 to-pink-600 p-4"
+        className="rounded-t bg-purple-900 p-4"
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -53,7 +53,7 @@ export default function FreeParkingModal({
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-4 shadow-lg"
+            className="rounded-full bg-purple-900 p-4 shadow-lg"
           >
             <Smile className="h-12 w-12 text-white" />
           </motion.div>
@@ -71,16 +71,16 @@ export default function FreeParkingModal({
           <p className="mb-2 text-base text-gray-300">
             Você está no estacionamento livre
           </p>
-          <p className="text-sm text-gray-400">
+          {/* <p className="text-sm text-gray-400">
             Sem perguntas, sem aluguel. Apenas relaxe!
-          </p>
+          </p> */}
         </motion.div>
 
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.5, type: "spring" }}
-          className="mb-5 rounded bg-purple-600/20 p-4 text-center backdrop-blur-sm"
+          className="mb-5 rounded bg-purple-800/20 p-4 text-center backdrop-blur-sm"
           style={{ border: "0.5px solid var(--color-purple-border)" }}
         >
           <p className="text-lg font-semibold text-purple-300">
@@ -94,7 +94,7 @@ export default function FreeParkingModal({
         <ButtonModal
           onClick={handleContinue}
           disabled={currentPlayer?.isBot}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
+          className="w-full bg-purple-900 text-white shadow-lg"
         >
           Continuar Jogando
         </ButtonModal>

@@ -34,7 +34,7 @@ export default function JailModal({ onAction, playerId }: JailModalProps) {
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
       <div
-        className="rounded-t bg-gradient-to-r from-orange-600 to-red-600 p-4"
+        className="rounded-t bg-red-900 p-4"
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -53,7 +53,7 @@ export default function JailModal({ onAction, playerId }: JailModalProps) {
             initial={{ scale: 0, rotate: 90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="relative rounded-full bg-gradient-to-br from-orange-500 to-red-500 p-4 shadow-lg"
+            className="relative rounded-full bg-red-900 p-4 shadow-lg"
           >
             <Lock className="h-12 w-12 text-white" />
 
@@ -82,12 +82,12 @@ export default function JailModal({ onAction, playerId }: JailModalProps) {
           </p>
 
           <div
-            className="inline-block rounded bg-orange-600/20 px-4 py-2 backdrop-blur-sm"
-            style={{ border: "0.5px solid var(--color-orange-border)" }}
+            className="inline-block rounded bg-red-600/20 px-4 py-2 backdrop-blur-sm"
+            style={{ border: "0.5px solid var(--color-red-border)" }}
           >
             <p className="text-sm text-gray-300">
               Penalidade:{" "}
-              <span className="font-bold text-orange-400">
+              <span className="font-bold text-red-400">
                 -{POINTS_VARIABLES.JAIL_TURNS_QUANTITY}
               </span>{" "}
               turnos

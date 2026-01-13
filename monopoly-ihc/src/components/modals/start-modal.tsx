@@ -34,7 +34,7 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
       <div
-        className="rounded-t bg-gradient-to-r from-green-600 to-emerald-600 p-4"
+        className="rounded-t bg-green-900 p-4"
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -53,7 +53,7 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 p-4 shadow-lg"
+            className="rounded-full bg-yellow-600 p-4 shadow-lg"
           >
             <Coins className="h-12 w-12 text-white" />
           </motion.div>
@@ -76,7 +76,7 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, type: "spring" }}
-            className="inline-block rounded bg-green-600/30 px-6 py-3 backdrop-blur-sm"
+            className="inline-block rounded bg-green-900/20 px-6 py-3 backdrop-blur-sm"
             style={{
               border: "0.5px solid var(--color-green-border-medium)",
             }}
@@ -91,7 +91,7 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
         <ButtonModal
           onClick={handleContinue}
           disabled={currentPlayer?.isBot}
-          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg"
+          className="w-full bg-green-900 text-white shadow-lg"
         >
           Continuar Jogando
         </ButtonModal>

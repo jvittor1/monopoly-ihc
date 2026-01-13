@@ -36,9 +36,7 @@ export default function PropertyRentModal({
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="md">
       {/* Header */}
       <div
-        className={`rounded-t p-4 ${
-          isOwner ? "bg-green-800" : "bg-yellow-800"
-        }`}
+        className={`rounded-t p-4 ${isOwner ? "bg-green-900" : "bg-red-900"}`}
         style={{
           borderBottom: "0.5px solid var(--color-border-light)",
         }}
@@ -137,12 +135,12 @@ export default function PropertyRentModal({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
-              className="mb-4 rounded bg-yellow-900/20 p-3 text-center backdrop-blur-sm"
-              style={{ border: "0.5px solid var(--color-yellow-border)" }}
+              className="mb-4 rounded bg-red-900/20 p-3 text-center backdrop-blur-sm"
+              style={{ border: "0.5px solid var(--color-red-border)" }}
             >
               <div className="mb-2 flex items-center justify-center gap-2">
-                <Home className="h-4 w-4 text-yellow-400" />
-                <h3 className="text-base font-bold text-yellow-50">
+                <Home className="h-4 w-4 text-red-400" />
+                <h3 className="text-base font-bold text-red-50">
                   {propertyName}
                 </h3>
               </div>
@@ -210,8 +208,8 @@ export default function PropertyRentModal({
               style={{ border: "0.5px solid var(--color-red-border)" }}
             >
               <div className="flex items-center justify-center gap-2">
-                <TrendingDown className="h-4 w-4 text-red-700" />
-                <p className="text-sm text-red-700">-{rentAmount} pontos</p>
+                <TrendingDown className="h-4 w-4 text-red-400" />
+                <p className="text-sm text-red-400">-{rentAmount} pontos</p>
               </div>
             </motion.div>
           </>
