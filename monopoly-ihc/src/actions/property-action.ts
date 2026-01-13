@@ -14,8 +14,11 @@ export async function handlePropertyAction(
 
   await modal.showModalForTile(tile, playerId, {
     onAction: async () => {
-      if (tile.ownerId !== playerId)
+      if (tile.ownerId === undefined) return;
+      if (tile.ownerId !== playerId) {
         player.removeMoney(tile.rentPrice!, playerId);
+        player.addMoney(tile.rentPrice!, tile.ownerId);
+      }
     },
   });
 }

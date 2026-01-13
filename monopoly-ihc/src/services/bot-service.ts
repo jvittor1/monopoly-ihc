@@ -34,7 +34,7 @@ export class BotService {
   }
 
   static async thinkingDelay(): Promise<void> {
-    const delay = 2000 + Math.random() * 2000;
+    const delay = 3000 + Math.random() * 3000;
     return new Promise((resolve) => setTimeout(resolve, delay));
   }
 

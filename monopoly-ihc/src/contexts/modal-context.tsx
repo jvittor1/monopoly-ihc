@@ -94,6 +94,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         <Suspense fallback={<div className="text-white">Carregando...</div>}>
           <ModalComponent
             player={player}
+            playerId={player.id}
             onClose={() => {
               closeJailModal();
             }}
