@@ -1,8 +1,9 @@
-import { Home, TrendingDown, ArrowRight, Coins } from "lucide-react";
+import { Home, TrendingDown, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import InfoModal from "../modals/info-modal";
 import type { Player } from "@/interfaces/player";
 import type { ReactNode } from "react";
+import { GiMoneyStack } from "react-icons/gi";
 
 interface PayRentModalProps {
   propertyName: string;
@@ -69,7 +70,7 @@ export default function PayRentModal({
         <ArrowRight className="h-5 w-5 text-red-700" />
 
         <div className="flex items-center gap-1.5 rounded-full bg-red-900 px-3 py-1 shadow-lg">
-          <Coins className="h-3.5 w-3.5 text-white" />
+          <GiMoneyStack className="h-3.5 w-3.5 text-white" />
           <span className="text-sm font-bold text-white">{rentPrice}</span>
         </div>
 

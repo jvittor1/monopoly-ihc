@@ -2,8 +2,9 @@ import { POINTS_VARIABLES } from "@/constants/points-variables";
 import type { CornerTile } from "@/interfaces/corner-tile";
 import type { BaseModalProps } from "@/types/modal-type";
 import { motion } from "framer-motion";
-import { TrendingUp, Coins } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import InfoModal from "./info-modal";
+import { GiMoneyStack } from "react-icons/gi";
 
 type StartModalProps = BaseModalProps<CornerTile>;
 
@@ -15,7 +16,7 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ delay: 0.5, type: "spring" }}
-      className="inline-block rounded bg-green-900/20 px-6 py-3 backdrop-blur-sm"
+      className="inline-block w-full rounded bg-green-900/20 px-6 py-3 text-center backdrop-blur-sm"
       style={{
         border: "0.5px solid var(--color-green-border-medium)",
       }}
@@ -30,8 +31,8 @@ export default function StartModal({ onAction, playerId }: StartModalProps) {
       headerColor="bg-green-900"
       headerIcon={TrendingUp}
       headerTitle="Início"
-      mainIcon={Coins}
-      mainIconColor="bg-yellow-600"
+      mainIcon={GiMoneyStack}
+      mainIconColor="bg-green-800"
       title="Você passou pelo Início!"
       description="Receba seu bônus por completar a volta"
       infoCard={infoCard}
