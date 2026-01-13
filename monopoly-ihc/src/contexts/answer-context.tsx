@@ -5,10 +5,19 @@ import React, {
   Suspense,
   useRef,
 } from "react";
-import {
-  AnswerFactory,
-  PropertyAnswerFactory,
-} from "@/factories/answer-factory";
+
+const CorrectAnswerModal = React.lazy(
+  () => import("@/components/answers/correct-answer-component"),
+);
+const IncorrectAnswerModal = React.lazy(
+  () => import("@/components/answers/incorrect-answer-component"),
+);
+const PropertyAcquiredModal = React.lazy(
+  () => import("@/components/answers/correct-property-answer-component"),
+);
+const PropertyFailedModal = React.lazy(
+  () => import("@/components/answers/incorrect-property-answer-component"),
+);
 
 export type AnswerContextType = {
   showAnswer: (
@@ -54,24 +63,23 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
     return new Promise((resolve) => {
       resolveRef.current = resolve;
 
-      const AnswerComponent = AnswerFactory(
-        isCorrect,
-        tilePoints,
-      ) as React.ComponentType<{
-        points?: number;
-        playerId: number;
-        onClose?: () => void;
-      }>;
-
       setAnswerContent(
         <Suspense fallback={<div className="text-white">Carregando...</div>}>
-          <AnswerComponent
-            points={tilePoints}
-            playerId={0}
-            onClose={() => {
-              closeAnswer();
-            }}
-          />
+          {isCorrect ? (
+            <CorrectAnswerModal
+              points={tilePoints}
+              onClose={() => {
+                closeAnswer();
+              }}
+            />
+          ) : (
+            <IncorrectAnswerModal
+              points={tilePoints}
+              onClose={() => {
+                closeAnswer();
+              }}
+            />
+          )}
         </Suspense>,
       );
     });
@@ -85,24 +93,25 @@ export function AnswerProvider({ children }: { children: React.ReactNode }) {
     return new Promise((resolve) => {
       resolveRef.current = resolve;
 
-      const AnswerComponent = PropertyAnswerFactory(
-        isCorrect,
-        propertyName,
-      ) as React.ComponentType<{
-        propertyName: string;
-        playerId: number;
-        onClose?: () => void;
-      }>;
-
       setAnswerContent(
         <Suspense fallback={<div className="text-white">Carregando...</div>}>
-          <AnswerComponent
-            propertyName={propertyName}
-            playerId={playerId}
-            onClose={() => {
-              closeAnswer();
-            }}
-          />
+          {isCorrect ? (
+            <PropertyAcquiredModal
+              propertyName={propertyName}
+              playerId={playerId}
+              onClose={() => {
+                closeAnswer();
+              }}
+            />
+          ) : (
+            <PropertyFailedModal
+              propertyName={propertyName}
+              playerId={playerId}
+              onClose={() => {
+                closeAnswer();
+              }}
+            />
+          )}
         </Suspense>,
       );
     });

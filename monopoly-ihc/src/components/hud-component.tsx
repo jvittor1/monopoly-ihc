@@ -1,10 +1,11 @@
 import { useGame } from "@/contexts/game-context";
 import type { Player } from "@/interfaces/player";
-import { Coins, Lock, Menu, Volume2, Dices } from "lucide-react";
+import { Lock, Menu, Volume2, Dices } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import GameMenuModal from "@/components/modals/game-menu-modal";
+import { GiMoneyStack } from "react-icons/gi";
 
 const PlayerCard = ({
   player,
@@ -58,7 +59,7 @@ const PlayerCard = ({
             </h3>
 
             <div className="mt-0.5 flex items-center gap-1.5">
-              <Coins className="h-3.5 w-3.5 text-yellow-400" />
+              <GiMoneyStack className="h-4 w-4 -rotate-12 text-green-400" />
               <span className="text-sm font-semibold text-slate-200">
                 {player.money}
               </span>
