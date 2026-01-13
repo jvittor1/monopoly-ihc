@@ -113,9 +113,10 @@ export const GameProvider: React.FC<GameProviderProps> = ({
       setTurnIndex(nextIndex);
       return;
     } else {
-      showJailTurnSkipModal(nextPlayer);
       await addJailTurns(-1, nextPlayer.id);
+      setTurnIndex(nextIndex);
 
+      await showJailTurnSkipModal(nextPlayer);
       return nextTurn(nextIndex);
     }
   };
