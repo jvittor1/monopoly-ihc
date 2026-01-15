@@ -8,19 +8,22 @@ import { ModalProvider } from "./contexts/modal-context.tsx";
 import { AnswerProvider } from "./contexts/answer-context.tsx";
 import { PlayerProvider } from "./contexts/player-context.tsx";
 import { BoardProvider } from "./contexts/board-context.tsx";
+import { SoundProvider } from "./contexts/sound-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BoardProvider>
-      <PlayerProvider>
-        <ModalProvider>
-          <AnswerProvider>
-            <DiceResultProvider>
-              <RouterProvider router={router} />
-            </DiceResultProvider>
-          </AnswerProvider>
-        </ModalProvider>
-      </PlayerProvider>
-    </BoardProvider>
+    <SoundProvider>
+      <BoardProvider>
+        <PlayerProvider>
+          <ModalProvider>
+            <AnswerProvider>
+              <DiceResultProvider>
+                <RouterProvider router={router} />
+              </DiceResultProvider>
+            </AnswerProvider>
+          </ModalProvider>
+        </PlayerProvider>
+      </BoardProvider>
+    </SoundProvider>
   </StrictMode>,
 );

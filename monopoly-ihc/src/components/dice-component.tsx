@@ -279,7 +279,12 @@ export default function Dice({ onDiceResult }: DiceProps) {
   };
 
   useEffect(() => {
-    if (currentPlayer?.isBot && !isRoundInProgress && !endGameCalled) {
+    if (
+      currentPlayer?.isBot &&
+      !isRoundInProgress &&
+      !endGameCalled &&
+      currentPlayer.jailTurns === 0
+    ) {
       const autoBotRoll = async () => {
         await BotService.thinkingDelay();
         throwDice();

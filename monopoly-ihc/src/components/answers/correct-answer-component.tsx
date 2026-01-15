@@ -6,10 +6,18 @@ interface CorrectAnswerModalProps {
   points?: number;
 }
 
+import { useEffect } from "react";
+import { useSound } from "@/contexts/sound-context";
+
 export default function CorrectAnswerModal({
   onClose,
   points,
 }: CorrectAnswerModalProps) {
+  const { playSound } = useSound();
+
+  useEffect(() => {
+    playSound("success");
+  }, []);
   return (
     <AnswerFeedbackModal
       type="success"

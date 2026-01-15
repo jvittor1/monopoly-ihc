@@ -7,11 +7,19 @@ interface PropertyFailedModalProps {
   playerId: number;
 }
 
+import { useEffect } from "react";
+import { useSound } from "@/contexts/sound-context";
+
 export default function PropertyFailedModal({
   onClose,
   propertyName,
   playerId,
 }: PropertyFailedModalProps) {
+  const { playSound } = useSound();
+
+  useEffect(() => {
+    playSound("error");
+  }, []);
   const infoMessage = (
     <>
       <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />

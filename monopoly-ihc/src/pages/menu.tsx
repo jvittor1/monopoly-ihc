@@ -11,6 +11,7 @@ import { useBoard } from "@/contexts/board-context";
 import { usePlayer } from "@/contexts/player-context";
 import { createPlayers } from "@/services/player-factory";
 import backgroundMenuImg from "@/assets/images/background-menu.png";
+import { useSound } from "@/contexts/sound-context";
 import { useGame } from "@/contexts/game-context";
 
 export const MenuPage = () => {
@@ -20,6 +21,7 @@ export const MenuPage = () => {
   const { resetBoard } = useBoard();
   const { initializePlayers } = usePlayer();
   const { resetGame } = useGame();
+  const { startBackgroundMusic } = useSound();
 
   const handleStartGame = () => {
     setIsSetupModalOpen(true);
@@ -34,6 +36,7 @@ export const MenuPage = () => {
     resetGame();
     initializePlayers(players);
     resetBoard();
+    startBackgroundMusic();
     navigate("/game");
   };
 

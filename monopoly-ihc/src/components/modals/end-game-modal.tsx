@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Trophy, Home } from "lucide-react";
 import type { Player } from "@/interfaces/player";
@@ -10,11 +11,26 @@ interface EndGameModalProps {
   onBackToMenu: () => void;
 }
 
+import { useSound } from "@/contexts/sound-context";
+
 export default function EndGameModal({
   isOpen,
   winner,
   onBackToMenu,
 }: EndGameModalProps) {
+  const { playSound, stopBackgroundMusic } = useSound();
+
+  const handleBackToMenu = () => {
+    stopBackgroundMusic();
+    onBackToMenu();
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      playSound("win");
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -81,7 +97,7 @@ export default function EndGameModal({
           <MenuButton
             label="Voltar ao Menu"
             icon={<Home />}
-            onClick={onBackToMenu}
+            onClick={handleBackToMenu}
             index={0}
           />
         </motion.div>

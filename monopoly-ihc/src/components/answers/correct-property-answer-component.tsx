@@ -7,11 +7,19 @@ interface PropertyAcquiredModalProps {
   playerId: number;
 }
 
+import { useEffect } from "react";
+import { useSound } from "@/contexts/sound-context";
+
 export default function PropertyAcquiredModal({
   onClose,
   propertyName,
   playerId,
 }: PropertyAcquiredModalProps) {
+  const { playSound } = useSound();
+
+  useEffect(() => {
+    playSound("purchase");
+  }, []);
   const infoMessage = (
     <>
       <Key className="h-4 w-4 text-green-400" />

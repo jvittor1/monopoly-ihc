@@ -10,12 +10,20 @@ interface GameMenuModalProps {
   onBackToMenu: () => void;
 }
 
+import { useSound } from "@/contexts/sound-context";
+
 export default function GameMenuModal({
   isOpen,
   onClose,
   onBackToMenu,
 }: GameMenuModalProps) {
   const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+  const { stopBackgroundMusic } = useSound();
+
+  const handleBackToMenu = () => {
+    stopBackgroundMusic();
+    onBackToMenu();
+  };
 
   if (!isOpen) return null;
 
@@ -35,7 +43,7 @@ export default function GameMenuModal({
     {
       label: "Menu Principal",
       icon: <Home />,
-      onClick: () => onBackToMenu(),
+      onClick: handleBackToMenu,
       description: "Sair e voltar ao menu",
     },
   ];

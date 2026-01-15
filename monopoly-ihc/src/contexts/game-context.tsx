@@ -113,6 +113,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
       setTurnIndex(nextIndex);
       return;
     } else {
+      setIsRoundInProgress(true);
       await addJailTurns(-1, nextPlayer.id);
       setTurnIndex(nextIndex);
 

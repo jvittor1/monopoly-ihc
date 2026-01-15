@@ -1,9 +1,10 @@
 import { useGame } from "@/contexts/game-context";
 import type { Player } from "@/interfaces/player";
-import { Lock, Menu, Volume2, Dices } from "lucide-react";
+import { Lock, Menu, Volume2, VolumeX, Dices } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useSound } from "@/contexts/sound-context";
 import GameMenuModal from "@/components/modals/game-menu-modal";
 import { GiMoneyStack } from "react-icons/gi";
 
@@ -91,6 +92,7 @@ const PlayerCard = ({
 
 export default function HudComponent() {
   const { round, currentPlayer, players } = useGame();
+  const { isMuted, toggleMute } = useSound();
   const navigate = useNavigate();
   const [isGameMenuOpen, setIsGameMenuOpen] = useState(false);
 
@@ -142,10 +144,15 @@ export default function HudComponent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
+            onClick={toggleMute}
             className="flex items-center justify-center rounded bg-gray-900/95 px-4 py-3 backdrop-blur-sm transition-all hover:bg-gray-800/95"
             style={{ border: "0.5px solid var(--color-border-light)" }}
           >
-            <Volume2 className="h-5 w-5 text-white" />
+            {isMuted ? (
+              <VolumeX className="h-5 w-5 text-red-400" />
+            ) : (
+              <Volume2 className="h-5 w-5 text-white" />
+            )}
           </motion.button>
         </div>
 
