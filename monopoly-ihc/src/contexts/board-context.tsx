@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import type { Tile } from "@/types/tile";
 import { fixedBoardConfig } from "@/data/board-config";
 
@@ -19,6 +19,27 @@ export const useBoard = () => {
 
 export function BoardProvider({ children }: { children: React.ReactNode }) {
   const [boardTiles, setBoardTiles] = useState<Tile[]>(fixedBoardConfig);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    try {
+      const savedBoard = localStorage.getItem("monopoly_board");
+      if (savedBoard) {
+        const parsedBoard = JSON.parse(savedBoard) as Tile[];
+        setBoardTiles(parsedBoard);
+      }
+    } catch (error) {
+      console.error("Erro ao restaurar tabuleiro do localStorage:", error);
+      localStorage.removeItem("monopoly_board");
+    }
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem("monopoly_board", JSON.stringify(boardTiles));
+    }
+  }, [boardTiles, isInitialized]);
 
   const getTileByIndex = (index: number): Tile => boardTiles[index];
 
@@ -52,6 +73,7 @@ export function BoardProvider({ children }: { children: React.ReactNode }) {
 
   const resetBoard = () => {
     setBoardTiles(fixedBoardConfig);
+    localStorage.removeItem("monopoly_board");
   };
 
   return (

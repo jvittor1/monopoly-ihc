@@ -83,6 +83,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
   const endGame = () => {
     setEndGameCalled(true);
     setShowEndGameModal(true);
+    localStorage.removeItem("monopoly_game_state");
   };
 
   useEffect(() => {

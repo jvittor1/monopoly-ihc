@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useSound } from "../contexts/sound-context";
 
 interface MenuButtonProps {
   label: string;
@@ -16,12 +17,19 @@ export const MenuButton = ({
   index,
   description,
 }: MenuButtonProps) => {
+  const { playSound } = useSound();
+
+  const handleClick = () => {
+    playSound("click");
+    onClick();
+  };
+
   return (
     <motion.button
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.1 + index * 0.1 }}
-      onClick={onClick}
+      onClick={handleClick}
       className="group relative flex w-full cursor-pointer items-center justify-between overflow-hidden rounded bg-gray-800/60 p-4 text-left backdrop-blur-sm transition-all duration-300 hover:bg-gray-700/70"
       style={{
         border: "0.5px solid var(--color-border-faint)",
