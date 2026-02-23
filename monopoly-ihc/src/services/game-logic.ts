@@ -1,5 +1,5 @@
-import { questionsPool } from "@/data/questions-pool";
-import { revesPool } from "@/data/reves-pool";
+import { questionsPool } from "@/data/questions/questions-pool";
+import { revesPool } from "@/data/questions/reves-pool";
 import type { QuestionCard } from "@/interfaces/question-card";
 
 class GameLogicService {

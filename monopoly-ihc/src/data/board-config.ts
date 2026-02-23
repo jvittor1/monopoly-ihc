@@ -1,5 +1,5 @@
 import { cornerTiles } from "./corner-cards";
-import { questionsPool } from "./questions-pool";
+import { questionsPool } from "./questions/questions-pool";
 import type { Tile } from "@/types/tile";
 
 function createRevesCard(id: number): Tile {

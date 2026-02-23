@@ -1,6 +1,6 @@
 import type { QuestionCard } from "@/interfaces/question-card";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
 
 import type { BaseModalProps } from "@/types/modal-type";
@@ -20,8 +20,10 @@ export default function RandomQuestionModal({
   const TOTAL_TIME = 60;
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  const hasSubmitted = useRef(false);
   const { getPlayerById } = usePlayer();
   const currentPlayer = getPlayerById(playerId);
+  const isBot = currentPlayer?.isBot ?? false;
 
   const [dynamicCard, setDynamicCard] = useState<QuestionCard | null>(null);
 
@@ -33,6 +35,8 @@ export default function RandomQuestionModal({
   const tile = dynamicCard || initialTile;
 
   useEffect(() => {
+    if (isBot) return;
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -44,7 +48,7 @@ export default function RandomQuestionModal({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isBot]);
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -54,28 +58,35 @@ export default function RandomQuestionModal({
   }, [timeLeft]);
 
   useEffect(() => {
-    if (currentPlayer?.isBot && dynamicCard) {
-      const playBotTurn = async () => {
-        await BotService.thinkingDelay();
+    if (!isBot || !dynamicCard) return;
 
-        const answer = BotService.chooseAnswer(
-          dynamicCard,
-          currentPlayer.botDifficulty,
-        );
-        setSelected(answer);
+    const playBotTurn = async () => {
+      await BotService.thinkingDelay();
 
-        await BotService.submitDelay();
-        const isCorrect = answer === dynamicCard.correctAlternative;
-        if (onAction) {
-          onAction({ playerId, isCorrect, points: dynamicCard.points });
-        }
-      };
+      const answer = BotService.chooseAnswer(
+        dynamicCard,
+        currentPlayer!.botDifficulty,
+      );
+      setSelected(answer);
 
-      playBotTurn();
-    }
-  }, [currentPlayer?.isBot, dynamicCard, playerId, onAction]);
+      await BotService.submitDelay();
+
+      if (hasSubmitted.current) return;
+      hasSubmitted.current = true;
+
+      const isCorrect = answer === dynamicCard.correctAlternative;
+      if (onAction) {
+        onAction({ playerId, isCorrect, points: dynamicCard.points });
+      }
+    };
+
+    playBotTurn();
+  }, [isBot, dynamicCard, playerId, onAction]);
 
   const submitAnswer = () => {
+    if (hasSubmitted.current) return;
+    hasSubmitted.current = true;
+
     if (selected === null) setSelected(-1);
     const isCorrect = selected === tile.correctAlternative;
     if (onAction) {
@@ -90,7 +101,9 @@ export default function RandomQuestionModal({
   return (
     <ModalWrapper isOpen={true} disableBackdropClick maxWidth="2xl">
       <div className="relative max-h-[90vh] w-full overflow-x-hidden overflow-y-auto">
-        <div className="rounded-ful absolute -top-1 -right-1 animate-pulse p-2">
+        <div
+          className={`rounded-ful absolute -top-1 -right-1 animate-pulse p-2 ${isBot ? "hidden" : ""}`}
+        >
           <div className="relative flex h-12 w-12 items-center justify-center">
             <svg className="h-12 w-12 -rotate-90 transform">
               <circle
@@ -179,7 +192,7 @@ export default function RandomQuestionModal({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
                 onClick={() => setSelected(option.id)}
-                disabled={currentPlayer?.isBot}
+                disabled={isBot}
                 className={`w-full rounded p-3.5 text-left transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 ${
                   selected === option.id
                     ? "bg-purple-800 shadow-lg"
@@ -227,16 +240,16 @@ export default function RandomQuestionModal({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              disabled={!selected || currentPlayer?.isBot}
+              disabled={!selected || isBot}
               onClick={submitAnswer}
               className={`flex cursor-pointer items-center gap-2 rounded px-6 py-2.5 text-sm font-bold uppercase transition-all duration-300 ${
-                selected && !currentPlayer?.isBot
+                selected && !isBot
                   ? "bg-purple-800 text-white shadow-lg hover:bg-purple-900"
                   : "cursor-not-allowed bg-gray-700/50 text-gray-400"
               }`}
               style={{
                 border:
-                  selected && !currentPlayer?.isBot
+                  selected && !isBot
                     ? "0.5px solid var(--color-border-lighter)"
                     : "0.5px solid var(--color-border-faint)",
               }}
