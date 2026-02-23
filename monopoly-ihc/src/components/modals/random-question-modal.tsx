@@ -1,7 +1,8 @@
 import type { QuestionCard } from "@/interfaces/question-card";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { CheckCircle2, AlertTriangle } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Star } from "lucide-react";
+import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
 
 import type { BaseModalProps } from "@/types/modal-type";
 
@@ -94,6 +95,9 @@ export default function RandomQuestionModal({
     }
   };
 
+  const difficultyColor = DIFFICULTY_COLORS[tile.difficulty];
+  const starCount =
+    { easy: 1, "easy-medium": 2, medium: 3, hard: 4 }[tile.difficulty] ?? 1;
   const percentage = (timeLeft / TOTAL_TIME) * 100;
   const circumference = 2 * Math.PI * 16;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -137,6 +141,14 @@ export default function RandomQuestionModal({
             <h2 className="text-xl font-bold tracking-wide text-purple-400 uppercase">
               {tile.type === "random" ? "Sorte ou Revés" : tile.text}
             </h2>
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: starCount }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-4 w-4 fill-yellow-200 text-yellow-200"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -165,14 +177,14 @@ export default function RandomQuestionModal({
           >
             <div
               className="absolute top-0 bottom-0 left-0 w-0.5"
-              style={{ backgroundColor: "var(--color-purple-primary)" }}
+              style={{ backgroundColor: difficultyColor }}
             ></div>
 
             <div className="flex items-start gap-3">
               <div
                 className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded text-sm font-bold shadow-lg"
                 style={{
-                  backgroundColor: "var(--color-purple-primary)",
+                  backgroundColor: difficultyColor,
                   border: "0.5px solid var(--color-border-lighter)",
                 }}
               >

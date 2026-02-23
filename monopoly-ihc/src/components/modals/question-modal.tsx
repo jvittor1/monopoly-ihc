@@ -1,7 +1,7 @@
 import type { QuestionCard } from "@/interfaces/question-card";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Star } from "lucide-react";
 import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
 import type { BaseModalProps } from "@/types/modal-type";
 import ModalWrapper from "./modal-wrapper";
@@ -82,6 +82,8 @@ export default function QuestionModal({
   };
 
   const difficultyColor = DIFFICULTY_COLORS[tile.difficulty];
+  const starCount =
+    { easy: 1, "easy-medium": 2, medium: 3, hard: 4 }[tile.difficulty] ?? 1;
   const percentage = (timeLeft / TOTAL_TIME) * 100;
   const circumference = 2 * Math.PI * 16;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -125,6 +127,14 @@ export default function QuestionModal({
             <h2 className="bg-gradient-to-r text-xl font-bold tracking-wide text-blue-400 uppercase">
               {tile.type}
             </h2>
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: starCount }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-4 w-4 fill-yellow-200 text-yellow-200"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
