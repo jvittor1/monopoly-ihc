@@ -14,7 +14,7 @@
       { "id": 4, "text": "Inovação em Hardware e Computação" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 100,
+    "rentPrice": 30,
     "isCorner": false
   },
   {
@@ -32,7 +32,7 @@
       { "id": 4, "text": "Banco de Dados" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 100,
+    "rentPrice": 30,
     "isCorner": false
   },
   {
@@ -50,7 +50,7 @@
       { "id": 4, "text": "Layouts diferentes em cada página" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 150,
+    "rentPrice": 50,
     "isCorner": false
   },
   {
@@ -68,7 +68,7 @@
       { "id": 4, "text": "Banco de dados" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 100,
+    "rentPrice": 30,
     "isCorner": false
   },
   {
@@ -86,7 +86,7 @@
       { "id": 4, "text": "Amarelo" }
     ],
     "correctAlternative": 3,
-    "rentPrice": 200,
+    "rentPrice": 70,
     "isCorner": false
   },
   {
@@ -104,7 +104,7 @@
       { "id": 4, "text": "Fonte única em todo o site" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 400,
+    "rentPrice": 100,
     "isCorner": false
   },
   {
@@ -122,7 +122,7 @@
       { "id": 4, "text": "Web Computer Access Guidelines" }
     ],
     "correctAlternative": 1,
-    "rentPrice": 200,
+    "rentPrice": 70,
     "isCorner": false
   },
   {
@@ -140,7 +140,7 @@
       { "id": 4, "text": "Cor de fundo da interface" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 200,
+    "rentPrice": 70,
     "isCorner": false
   },
   {
@@ -161,7 +161,7 @@
       { "id": 4, "text": "Usar atalhos no software" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 200,
+    "rentPrice": 70,
     "isCorner": false
   },
   {
@@ -179,7 +179,7 @@
       { "id": 4, "text": "Enviar e-mail de confirmação" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 150,
+    "rentPrice": 50,
     "isCorner": false
   },
   {
@@ -197,7 +197,7 @@
       { "id": 4, "text": "Menus aleatórios" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 200,
+    "rentPrice": 70,
     "isCorner": false
   },
   {
@@ -215,7 +215,7 @@
       { "id": 4, "text": "Análise heurística" }
     ],
     "correctAlternative": 3,
-    "rentPrice": 150,
+    "rentPrice": 50,
     "isCorner": false
   },
   {
@@ -233,7 +233,7 @@
       { "id": 4, "text": "Avaliação estética" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 400,
+    "rentPrice": 100,
     "isCorner": false
   },
   {
@@ -254,7 +254,7 @@
       { "id": 4, "text": "Desenvolvimento rápido" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 150,
+    "rentPrice": 50,
     "isCorner": false
   },
   {
@@ -275,7 +275,7 @@
       { "id": 4, "text": "Interface minimalista" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 400,
+    "rentPrice": 100,
     "isCorner": false
   },
   {
@@ -296,7 +296,7 @@
       { "id": 4, "text": "Reduzir elementos visuais" }
     ],
     "correctAlternative": 2,
-    "rentPrice": 400,
+    "rentPrice": 100,
     "isCorner": false
   }
 ]

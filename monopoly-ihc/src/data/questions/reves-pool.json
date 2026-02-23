@@ -6,7 +6,7 @@
     "answer": "Informar o usuário e tentar reconectar",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Culpar o estagiário" },
       { "id": 2, "text": "Informar o usuário e tentar reconectar" },
@@ -24,7 +24,7 @@
     "answer": "Alta - corrigir imediatamente",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Baixa - deixar para depois" },
       { "id": 2, "text": "Alta - corrigir imediatamente" },
@@ -42,7 +42,7 @@
     "answer": "Refazer o design seguindo as diretrizes WCAG",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Publicar mesmo assim" },
       { "id": 2, "text": "Refazer o design seguindo as diretrizes WCAG" },
@@ -60,7 +60,7 @@
     "answer": "Avaliar o impacto e negociar prazo",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Aceitar sem questionar" },
       { "id": 2, "text": "Avaliar o impacto e negociar prazo" },
@@ -78,7 +78,7 @@
     "answer": "Salvar frequentemente e usar versionamento",
     "difficulty": "easy",
     "type": "random",
-    "points": 20,
+    "points": 40,
     "alternatives": [
       { "id": 1, "text": "Nunca mais usar computador" },
       { "id": 2, "text": "Salvar frequentemente e usar versionamento" },
@@ -96,7 +96,7 @@
     "answer": "Problema de affordance/significado",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "O usuário é leigo" },
       { "id": 2, "text": "Problema de affordance/significado" },
@@ -114,7 +114,7 @@
     "answer": "Facilidade de uso",
     "difficulty": "easy",
     "type": "random",
-    "points": 20,
+    "points": 40,
     "alternatives": [
       { "id": 1, "text": "Design bonito" },
       { "id": 2, "text": "Alta complexidade" },
@@ -132,7 +132,7 @@
     "answer": "Retorno de informação ao usuário",
     "difficulty": "easy",
     "type": "random",
-    "points": 20,
+    "points": 40,
     "alternatives": [
       { "id": 1, "text": "Botão que não funciona" },
       { "id": 2, "text": "Retorno de informação ao usuário" },
@@ -150,7 +150,7 @@
     "answer": "Planejar a estrutura da interface",
     "difficulty": "easy",
     "type": "random",
-    "points": 20,
+    "points": 40,
     "alternatives": [
       { "id": 1, "text": "Testar desempenho do sistema" },
       { "id": 2, "text": "Planejar a estrutura da interface" },
@@ -168,7 +168,7 @@
     "answer": "Adaptar-se a diferentes tamanhos de tela",
     "difficulty": "easy",
     "type": "random",
-    "points": 20,
+    "points": 40,
     "alternatives": [
       { "id": 1, "text": "Ter botões grandes" },
       { "id": 2, "text": "Adaptar-se a diferentes tamanhos de tela" },
@@ -186,7 +186,7 @@
     "answer": "Diferença suficiente entre cores de texto e fundo",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Usar muitas cores" },
       { "id": 2, "text": "Diferença suficiente entre cores de texto e fundo" },
@@ -204,7 +204,7 @@
     "answer": "WAVE",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Photoshop" },
       { "id": 2, "text": "WAVE" },
@@ -222,7 +222,7 @@
     "answer": "Indicação de como um elemento pode ser usado",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Cor do botão" },
       { "id": 2, "text": "Indicação de como um elemento pode ser usado" },
@@ -240,7 +240,7 @@
     "answer": "Aprendizado intuitivo",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Design complexo" },
       { "id": 2, "text": "Aprendizado intuitivo" },
@@ -258,7 +258,7 @@
     "answer": "Indicar transições e mudanças de estado",
     "difficulty": "medium",
     "type": "random",
-    "points": 40,
+    "points": 60,
     "alternatives": [
       { "id": 1, "text": "Deixar o site mais bonito" },
       { "id": 2, "text": "Indicar transições e mudanças de estado" },
@@ -276,7 +276,7 @@
     "answer": "Mensagens de erro informativas",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Consistência" },
       { "id": 2, "text": "Mensagens de erro informativas" },
@@ -294,7 +294,7 @@
     "answer": "Mockup é visual, protótipo funcional simula interações",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Mockup tem código, protótipo não" },
       {
@@ -315,7 +315,7 @@
     "answer": "Comparar duas versões para medir desempenho",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Testar cores do site" },
       { "id": 2, "text": "Comparar duas versões para medir desempenho" },
@@ -333,7 +333,7 @@
     "answer": "Interface que ajuda a identificar e corrigir erros",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "Não mostrar erros" },
       { "id": 2, "text": "Interface que ajuda a identificar e corrigir erros" },
@@ -351,7 +351,7 @@
     "answer": "O usuário entende como o elemento pode ser usado",
     "difficulty": "hard",
     "type": "random",
-    "points": 80,
+    "points": 100,
     "alternatives": [
       { "id": 1, "text": "O designer sabe como o elemento funciona" },
       { "id": 2, "text": "O usuário entende como o elemento pode ser usado" },
