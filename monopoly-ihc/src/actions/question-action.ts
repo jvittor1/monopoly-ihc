@@ -1,5 +1,7 @@
+import type { QuestionCard } from "@/interfaces/question-card";
 import type { Contexts } from "@/types/contexts-type";
 import type { Tile } from "@/types/tile";
+import { ANSWER_COST_BY_DIFFICULTY } from "@/constants/cost-by-difficulty";
 
 export async function handleQuestionAction(
   tile: Tile,
@@ -8,26 +10,32 @@ export async function handleQuestionAction(
 ): Promise<void> {
   const { modal, answer, player, board } = contexts;
 
-  let isAnswerCorrect = false;
-  let questionPayload: any = null;
+  const questionTile = tile as QuestionCard;
+  const cost = ANSWER_COST_BY_DIFFICULTY[questionTile.difficulty] ?? 15;
 
-  await modal.showModalForTile(tile, playerId, {
+  let wantsToAnswer = false;
+  await modal.showChoiceModal(questionTile, playerId, {
     onAction: (payload: any) => {
-      isAnswerCorrect = payload.isCorrect;
-      questionPayload = payload;
+      wantsToAnswer = payload.wantsToAnswer;
     },
   });
 
-  if (questionPayload) {
-    await answer.showModalPropertyAcquired(
-      isAnswerCorrect,
-      tile.text,
-      playerId,
-    );
+  if (!wantsToAnswer) {
+    return;
+  }
 
-    if (isAnswerCorrect) {
-      player.addPropertyToPlayer(playerId, tile.id);
-      board.updateTile(tile.id, playerId);
-    }
+  player.removeMoney(cost, playerId);
+
+  let isAnswerCorrect = false;
+  await modal.showModalForTile(tile, playerId, {
+    onAction: (payload: any) => {
+      isAnswerCorrect = payload.isCorrect;
+    },
+  });
+
+  await answer.showModalPropertyAcquired(isAnswerCorrect, tile.text, playerId);
+  if (isAnswerCorrect) {
+    player.addPropertyToPlayer(playerId, tile.id);
+    board.updateTile(tile.id, playerId);
   }
 }

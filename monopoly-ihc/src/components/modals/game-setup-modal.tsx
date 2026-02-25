@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, User, Palette, Brain, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import ModalWrapper from "./modal-wrapper";
+import { AVAILABLE_COLORS } from "@/constants/available-colors";
 
 interface GameSetupModalProps {
   isOpen: boolean;
@@ -14,15 +15,6 @@ export interface GameConfig {
   playerColor: string;
   botDifficulty: "easy" | "medium" | "hard" | "master";
 }
-
-const AVAILABLE_COLORS = [
-  { name: "Azul", value: "#457B9D" },
-  { name: "Vermelho", value: "#E63946" },
-  { name: "Branco", value: "#FFFFFF" },
-  { name: "Laranja", value: "#F4A261" },
-  { name: "Roxo", value: "#9D4EDD" },
-  { name: "Verde Neon", value: "#06FFA5" },
-];
 
 const BOT_DIFFICULTIES = [
   { id: "easy", label: "Fácil", description: "30% de acerto", color: "green" },

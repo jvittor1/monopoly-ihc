@@ -1,29 +1,23 @@
 import type { Player } from "@/interfaces/player";
 import type { GameConfig } from "@/components/modals/game-setup-modal";
-
-const AVAILABLE_COLORS = [
-  "#457B9D", // Azul
-  "#E63946", // Vermelho
-  "#FFFFFF", // Branco
-  "#F4A261", // Laranja
-  "#9D4EDD", // Roxo
-  "#06FFA5", // Verde Neon
-];
+import { AVAILABLE_COLORS } from "@/constants/available-colors";
+import { POINTS_VARIABLES } from "@/constants/points-variables";
 
 export function createPlayers(config: GameConfig): Player[] {
   const { playerName, playerColor, botDifficulty } = config;
 
   const availableColorsForBot = AVAILABLE_COLORS.filter(
-    (c) => c !== playerColor,
+    (c) => c.value !== playerColor,
   );
   const randomIndex = Math.floor(Math.random() * availableColorsForBot.length);
-  const botColor = availableColorsForBot[randomIndex] || AVAILABLE_COLORS[1];
+  const botColor =
+    availableColorsForBot[randomIndex]?.value || AVAILABLE_COLORS[1].value;
 
   const humanPlayer: Player = {
     id: 1,
     name: playerName,
     position: 0,
-    money: 500,
+    money: POINTS_VARIABLES.INITIAL_MONEY,
     properties: [],
     inJail: false,
     jailTurns: 0,
@@ -37,7 +31,7 @@ export function createPlayers(config: GameConfig): Player[] {
     id: 2,
     name: "Bot",
     position: 0,
-    money: 500,
+    money: POINTS_VARIABLES.INITIAL_MONEY,
     properties: [],
     inJail: false,
     jailTurns: 0,

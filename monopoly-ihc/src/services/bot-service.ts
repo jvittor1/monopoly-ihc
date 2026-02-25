@@ -41,4 +41,18 @@ export class BotService {
   static async submitDelay(): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, 1000));
   }
+
+  static shouldAnswerProperty(difficulty: Player["botDifficulty"]): boolean {
+    if (!difficulty) return false;
+
+    const responseProbability: Record<string, number> = {
+      easy: 0.4,
+      medium: 0.6,
+      hard: 0.8,
+      master: 0.95,
+    };
+
+    const probability = responseProbability[difficulty] ?? 0.5;
+    return Math.random() < probability;
+  }
 }

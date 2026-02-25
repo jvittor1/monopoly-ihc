@@ -1,4 +1,4 @@
-import type { Tile } from "@/hooks/use-board";
+import type { Tile } from "@/types/tile";
 
 export interface BaseModalProps<T extends Tile = Tile> {
   tile: T;

@@ -5,6 +5,7 @@ import { usePlayer } from "@/contexts/player-context";
 import { BsQuestionLg } from "react-icons/bs";
 import HouseComponent from "./property-component";
 import { DIFFICULTY_COLORS } from "@/constants/difficulty-colors";
+import { MdAttachMoney } from "react-icons/md";
 
 interface CardComponentProps extends QuestionCard {
   className?: string;
@@ -15,7 +16,7 @@ export default function CardComponent({
   text,
   difficulty,
   type,
-  points,
+  rentPrice,
   ownerId,
   className,
   isTopRow = false,
@@ -57,7 +58,14 @@ export default function CardComponent({
         )}
 
         <span className="text-xs font-medium">
-          {!isRandomTile ? `${points} pontos` : ""}
+          {!isRandomTile ? (
+            <div className="-gap-1 flex items-center">
+              <MdAttachMoney size={16} color="white" />
+              <p className="text-xs font-medium">{rentPrice}</p>
+            </div>
+          ) : (
+            <></>
+          )}
         </span>
       </div>
     </BaseCardComponent>

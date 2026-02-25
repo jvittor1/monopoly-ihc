@@ -9,10 +9,20 @@ import { ModalFactory } from "@/factories/modals-factory";
 import type { BaseModalProps } from "@/types/modal-type";
 import type { Player } from "@/interfaces/player";
 import type { Tile } from "@/types/tile";
+import type { QuestionCard } from "@/interfaces/question-card";
+
+const ChoiceModal = React.lazy(
+  () => import("@/components/modals/choice-modal"),
+);
 
 export type ModalContextType = {
   showModalForTile: (
     tile: Tile,
+    playerId: number,
+    options?: Pick<BaseModalProps, "onAction">,
+  ) => Promise<any>;
+  showChoiceModal: (
+    tile: QuestionCard,
     playerId: number,
     options?: Pick<BaseModalProps, "onAction">,
   ) => Promise<any>;
@@ -83,6 +93,29 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const showChoiceModal = (
+    tile: QuestionCard,
+    playerId: number,
+    options?: Pick<BaseModalProps, "onAction">,
+  ): Promise<any> => {
+    return new Promise((resolve) => {
+      resolveRef.current = resolve;
+
+      setModalContent(
+        <Suspense fallback={<div className="text-white">Carregando...</div>}>
+          <ChoiceModal
+            tile={tile}
+            playerId={playerId}
+            onAction={async (payload: any) => {
+              await options?.onAction?.(payload);
+              closeModal(payload);
+            }}
+          />
+        </Suspense>,
+      );
+    });
+  };
+
   const showJailTurnSkipModal = (player: Player): Promise<void> => {
     return new Promise((resolve) => {
       resolveJailRef.current = resolve;
@@ -106,7 +139,12 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ModalContext.Provider
-      value={{ showModalForTile, closeModal, showJailTurnSkipModal }}
+      value={{
+        showModalForTile,
+        showChoiceModal,
+        closeModal,
+        showJailTurnSkipModal,
+      }}
     >
       {children}
       {modalContent}
