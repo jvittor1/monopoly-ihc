@@ -5,7 +5,6 @@ import PlayerComponent from "./player-component";
 import { useGame } from "@/contexts/game-context";
 import type { Tile } from "@/types/tile";
 import { useBoard } from "@/contexts/board-context";
-import BackgroundImage from "../assets/images/img-background-monopoly.png";
 
 // -------------------- Row --------------------
 interface RowProps {
@@ -132,7 +131,11 @@ export default function Board() {
           boardTiles={boardTiles}
         />
 
-        <img src={BackgroundImage} alt="" className="h-auto w-xl -rotate-15" />
+        <img
+          src="/assets/images/img-background-monopoly.png"
+          alt=""
+          className="h-auto w-xl -rotate-15"
+        />
 
         <Row tiles={bottomRowTiles} players={players} boardTiles={boardTiles} />
       </div>

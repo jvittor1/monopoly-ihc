@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { BaseModalProps } from "@/types/modal-type";
 import InfoModal from "./info-modal";
 import { GiHandcuffs } from "react-icons/gi";
+import { POINTS_VARIABLES } from "@/constants/points-variables";
 
 type GoToJailModalProps = BaseModalProps<CornerTile>;
 
@@ -19,7 +20,7 @@ export default function GoToJailModal({
       style={{ border: "0.5px solid var(--color-red-border-light)" }}
     >
       <p className="text-sm font-semibold text-red-400">
-        Você precisará acertar uma pergunta para sair
+        Você ficará preso por {POINTS_VARIABLES.JAIL_TURNS_QUANTITY} rodadas
       </p>
     </motion.div>
   );

@@ -10,9 +10,10 @@ import GameSetupModal, {
 import { useBoard } from "@/contexts/board-context";
 import { usePlayer } from "@/contexts/player-context";
 import { createPlayers } from "@/services/player-factory";
-import backgroundMenuImg from "@/assets/images/background-menu.png";
+
 import { useSound } from "@/contexts/sound-context";
 import { useGame } from "@/contexts/game-context";
+import { TutorialComponent } from "@/components/tutorial-component";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const MenuPage = () => {
   const { initializePlayers } = usePlayer();
   const { resetGame } = useGame();
   const { startBackgroundMusic } = useSound();
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
 
   const handleStartGame = () => {
     setIsSetupModalOpen(true);
@@ -54,16 +56,14 @@ export const MenuPage = () => {
     {
       label: "Tutorial",
       icon: <FaGraduationCap />,
-      onClick: () => {
-        console.log("Tutorial clicked");
-      },
+      onClick: () => setIsTutorialOpen(true),
     },
   ];
 
   return (
     <>
       <img
-        src={backgroundMenuImg}
+        src="/assets/images/background-menu.png"
         className="absolute top-0 left-0 h-full w-full object-cover opacity-5"
         alt=""
       />
@@ -106,6 +106,11 @@ export const MenuPage = () => {
         isOpen={isSetupModalOpen}
         onClose={() => setIsSetupModalOpen(false)}
         onStartGame={handleGameStart}
+      />
+
+      <TutorialComponent
+        isOpen={isTutorialOpen}
+        onClose={() => setIsTutorialOpen(false)}
       />
     </>
   );
