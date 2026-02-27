@@ -1,6 +1,8 @@
+import { POINTS_VARIABLES } from "@/constants/points-variables";
 import { TIME } from "@/constants/time";
 import type { Player } from "@/interfaces/player";
 import { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export type PlayerContextType = {
   players: Player[];
@@ -59,6 +61,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
   function movePlayer(steps: number, playerId: number): Promise<number> {
     return new Promise<number>((resolve) => {
       let step = 0;
+      let passedStart = false;
 
       // pega a posição inicial do jogador pelo ID
       const startingPlayer = players.find((p) => p.id === playerId);
@@ -73,6 +76,10 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         if (step < steps) {
           newPosition = (newPosition + 1) % boardLength;
 
+          if (newPosition === 0) {
+            passedStart = true;
+          }
+
           // atualiza o estado do jogador pelo ID
           setPlayers((prev) => {
             const newPlayers = [...prev];
@@ -86,6 +93,25 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
           setTimeout(moveStep, 750);
         } else {
           resolve(newPosition);
+
+          if (passedStart && newPosition !== 0) {
+            const playerName =
+              players.find((p) => p.id === playerId)?.name ?? "Jogador";
+            addMoney(POINTS_VARIABLES.START, playerId);
+            toast.success(
+              `${playerName} recebeu $${POINTS_VARIABLES.START} por passar pelo Início!`,
+              {
+                style: {
+                  background: "linear-gradient(135deg, #0f2027, #12304d)",
+                  border: "1px solid rgba(255, 255, 255, 0.25)",
+                  fontFamily: "'Titan One', sans-serif",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.8px",
+                },
+              },
+            );
+            passedStart = false;
+          }
         }
       }
 

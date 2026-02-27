@@ -9,6 +9,8 @@ import { AnswerProvider } from "./contexts/answer-context.tsx";
 import { PlayerProvider } from "./contexts/player-context.tsx";
 import { BoardProvider } from "./contexts/board-context.tsx";
 import { SoundProvider } from "./contexts/sound-context.tsx";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,6 +21,12 @@ createRoot(document.getElementById("root")!).render(
             <AnswerProvider>
               <DiceResultProvider>
                 <RouterProvider router={router} />
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  theme="dark"
+                  transition={Slide}
+                />
               </DiceResultProvider>
             </AnswerProvider>
           </ModalProvider>
